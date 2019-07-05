@@ -82,10 +82,11 @@ function fibonacci(n) {
     queue.dequeue();
     return queue.head();
 }
+
 console.log(fibonacci(16));
 
 // 2.3、用栈实现队列，实现队列的push/pop/和top方法(hard)
-function QueueStack () {
+function QueueStack() {
     var queue_1 = new Queue();
     var queue_2 = new Queue();
     var data_queue = null;  //存放有数据的队列
@@ -93,7 +94,7 @@ function QueueStack () {
 
     // 把data_queue指向有数据的队列
     // 把empty_queue指向没有数据的队列
-    function init_queue () {
+    function init_queue() {
         if (queue_1.isEmpty()) {
             data_queue = queue_2;
             empty_queue = queue_1;
@@ -127,6 +128,7 @@ function QueueStack () {
         return data_queue.dequeue();
     }
 }
+
 var queue_stack = new QueueStack()
 queue_stack.push(1);
 queue_stack.push(2);
@@ -134,5 +136,39 @@ queue_stack.push('hello world');
 console.log(queue_stack.pop());
 console.log(queue_stack.top());
 
-//
+//2.4、打印杨辉三角
+// i代表行数，j代表第几个数
+// f[i][j] = f[i-1][j-1] + f[i-1][j],如果j=0或j=i，则f[i][j]=1
+
+// 1
+// 1 1
+// 1 2 1
+// 1 3 3 1
+// 1 4 6 4 1
+
+function print_yanghui(n) {
+    var queue = new Queue();
+    // 往队列的第一行压入"1"
+    queue.enqueue(1);
+
+    // 定义两个循环
+    // 第一个循环遍历层数
+    for (var i = 1; i <= n; i++) {
+        var line = '';  //存储每一层的数据
+        var prev = 0;   //在遍历每一层时，假设第一个数前面有个数字0
+        // 第二个循环遍历每一层数字的个数
+        for (var j = 0; j < i; j++) {
+            var item = queue.dequeue();
+            
+            var value = item + prev;
+            prev = item;
+            queue.enqueue(value)
+        }
+        queue.enqueue(1);
+
+
+    }
+
+}
+
 
