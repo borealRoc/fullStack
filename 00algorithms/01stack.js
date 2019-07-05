@@ -1,10 +1,13 @@
-// 栈的方法
+// 栈：只允许在栈的尾部删除和添加元素，即先进后出，后进先出
+// 现实例子：羽毛球筒
+
+// 1、栈的方法
 function Stack () {
 
 	var items = []; //存储数据
 	// 上面为什么不写this.items = []?
-	// 因为如果这么写，items这个属性就会暴露出去[items应该作为Stack类的私有属性]，
-	// 即后面新建的继承Stack的对象可以在外部操作这个属性，不安全
+	// 因为如果这么写，items这个属性就会暴露出去，即后面新建的继承Stack的对象可以在外部操作这个属性，不安全。
+	// items应该作为Stack类的私有属性
 
 	// 压栈
 	this.push = function (item) {
@@ -35,8 +38,9 @@ function Stack () {
 	
 }
 
+// 2、栈的方法
 // 思考：栈的底层实现就是数组，即栈能做的事情，数组也能做，那为什么要创造栈这种数据结构？
-// 应用1: “合法括号”【“(”成对“)”出现，而且必须是“(”先出现】
+// 应用1: “合法括号”【“(”和“)”成对出现，而且必须是“(”先出现】
 function isLegalBracket (string) {
 	let stack =  new Stack();
 	for (var i = 0; i < string.length; i++) {
@@ -103,6 +107,8 @@ function  MinStack () {
 		if (min_stack.isEmpty() || item < min_stack.top()) {
 			min_stack.push(item);
 		} else {
+			// 这里的push，是为了防止后面进行pop操作时，出现错误
+			// 这和"用一个栈来存最小值，而不用一个变量来存最小值"同理
 			min_stack.push(min_stack.top());
 		}
 	}
