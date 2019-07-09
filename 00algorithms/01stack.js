@@ -12,7 +12,6 @@ function Stack () {
 	// 压栈
 	this.push = function (item) {
 		items.push(item);
-		return items.length;
 	}
 	// 出栈
 	this.pop = function () {
@@ -33,21 +32,22 @@ function Stack () {
 	// 清空栈
 	this.clear = function () {
 		items = [];
-		return items;
 	}
 	
 }
 
-// 2、栈的方法
 // 思考：栈的底层实现就是数组，即栈能做的事情，数组也能做，那为什么要创造栈这种数据结构？
+// 2、栈的应用
+
 // 应用1: “合法括号”【“(”和“)”成对出现，而且必须是“(”先出现】
 function isLegalBracket (string) {
 	let stack =  new Stack();
 	for (var i = 0; i < string.length; i++) {
+		var item = string[i];
 		// 遇到左括号，入栈
-		if (string[i] === '(') {
+		if (item === '(') {
 			stack.push('(');
-		} else if (string[i] === ')') {
+		} else if (item === ')') {
 			// 遇到右括号，判断栈是否为空
 			// 如果为空，说明括号不合法
 			if (stack.isEmpty()) {
@@ -75,7 +75,6 @@ console.log(isLegalBracket('(6(767(6767)jtug)()'));  // false
 // demo2解析：
 // 先是13/5（即第一出现的符号和最左边相邻两个数进行计算）
 // 然后是4 + 13/5（即前面的计算结果和再前一个数用第二个出现的符号进行运算）
-
 function calc_exp (exp) {
 	var stack = new Stack();
 	for (var i = 0; i < exp.length; i++) {
@@ -96,6 +95,8 @@ function calc_exp (exp) {
 	return stack.pop();
 }
 console.log(calc_exp(['4', '13', '5', '/', '+']));  //6
+console.log(calc_exp(['1','4','5','+','3','+','+','3','-','9','8','+','+']));  //27
+console.log(calc_exp(['1','4','5','+','3','+','4','/','3','-','+','6','8','+','3','*','+']));  //43
 
 //应用3: 实现一个有push, pop, min方法的栈
 function  MinStack () {
@@ -114,7 +115,7 @@ function  MinStack () {
 	}
 	this.pop = function (item) {
 		data_stack.pop();
-		min_stack.pop();
+		min_stack.pop();['1','4','5','+','3','+','+','3','-','9','8','+','+']
 	}
 	this.min = function () {
 		return min_stack.top();
@@ -128,7 +129,55 @@ minstack.push(8)
 console.log(minstack.min())
 minstack.push(2)
 console.log(minstack.min())
+
 //应用4: 中序表达式转后序表达式
+var priority_map = {
+	'+': 1,
+	'-': 1,
+	'*': 2,
+	'/': 2
+};
+function fix_exp_2_postfix_exp (exp) {
+	var stack = new Stack();  //存放括号和预算符号的栈
+	var postfix_list = [];    //存放后序表达式的数组
+
+	for (var i = 0; i < exp.length;i++) {
+		var item = exp[i];
+		if (!isNaN(item)) {
+			// 如果是数字，直接放入数组
+			postfix_list.push(item);
+		} else if (item === '(') {
+			// 如果是左括号，直接入栈
+			stack.push(item);
+		} else  if (item === ')') {
+			// 如果是右括号，把栈顶的运算符放入数组，直到遇到左括号，并把左括号出栈
+			while (stack.top() !== "(") {
+				postfix_list.push(stack.pop());
+			}
+			stack.pop();
+		} else {
+			// 如果是运算符
+			// 如果栈不为空，且栈顶
+			if (!stack.isEmpty() && ['+','-','*','/'].indexOf(item) !== -1 && priority_map[stack.top()] >= priority_map[item]) {
+				postfix_list.push(stack.pop());
+			}
+			stack.push(item);
+		}
+	}
+	while (!stack.isEmpty()) {
+		postfix_list.push(stack.pop());
+	}
+	return postfix_list;
+}
+function exp_2_arr (exp) {
+	return exp.split("");
+}
+var exp = "(1+(4+5+3)/4-3)+(6+8)*3";
+var exp_result = fix_exp_2_postfix_exp(exp_2_arr(exp));
+console.log(exp_result);
+console.log(calc_exp(exp_result));
+// ['1', '4', '5', '+', '3', '+', '4', '/', '3','-', '+', '6','8', '+', '3','*', '+']
+// 43
 
 // Que:什么叫算法的复杂度？
 
