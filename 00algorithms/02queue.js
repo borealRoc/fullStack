@@ -34,7 +34,40 @@ function Queue() {
         items = [];
     };
 }
+// 栈的方法
+function Stack () {
 
+    var items = []; //存储数据
+    // 上面为什么不写this.items = []?
+    // 因为如果这么写，items这个属性就会暴露出去，即后面新建的继承Stack的对象可以在外部操作这个属性，不安全。
+    // items应该作为Stack类的私有属性
+
+    // 压栈
+    this.push = function (item) {
+        items.push(item);
+    }
+    // 出栈
+    this.pop = function () {
+        return items.pop();
+    }
+    // 返回栈顶的元素
+    this.top = function () {
+        return items[items.length - 1];
+    }
+    // 判断栈是否为空
+    this.isEmpty = function () {
+        return items.length === 0;
+    }
+    // 返回栈的大小
+    this.size = function () {
+        return items.length;
+    }
+    // 清空栈
+    this.clear = function () {
+        items = [];
+    }
+
+}
 // 2、队列的应用
 
 // 2.1、约瑟夫环（easy）
@@ -61,7 +94,7 @@ var arr_list = [];
 for (var i = 0; i < 100; i++) {
     arr_list.push(i);
 }
-console.log(del_ring(arr_list));
+console.log(del_ring(arr_list)); //90
 
 // 2.2、斐波那契数列:f(n) = f(n-1) + f(n-2)
 // 假设 n > 2
@@ -79,13 +112,12 @@ function fibonacci(n) {
         queue.enqueue(next_item);
         index += 1;
     }
-    queue.dequeue();
-    return queue.head();
+    return queue.tail();
 }
 
-console.log(fibonacci(16));
+console.log(fibonacci(6));
 
-// 2.3、用栈实现队列，实现队列的push/pop/和top方法(hard)
+// 2.3、用队列实现栈，实现栈的push/pop/和top方法(hard)
 function QueueStack() {
     var queue_1 = new Queue();
     var queue_2 = new Queue();
@@ -108,7 +140,6 @@ function QueueStack() {
     this.push = function (item) {
         init_queue();
         data_queue.enqueue(item);
-        // return data_queue.size();
     }
 
     // top方法
@@ -133,42 +164,95 @@ var queue_stack = new QueueStack()
 queue_stack.push(1);
 queue_stack.push(2);
 queue_stack.push('hello world');
-console.log(queue_stack.pop());
-console.log(queue_stack.top());
+console.log(queue_stack.pop());  // hello world
+console.log(queue_stack.top());  // 2
 
-//2.4、打印杨辉三角
+// 2.4、用栈实现队列，实现队列的enqueue,dequeue,head这三个方法（easy）
+function StackQueue() {
+    var stack1 = new Stack();
+    var stack2 = new Stack();
+    var data_stack = null;
+    var empty_stack = null;
+
+    function init_stack () {
+        if (stack1.isEmpty()) {
+            empty_stack = stack1;
+            data_stack = stack2;
+        } else {
+            data_stack = stack1;
+            empty_stack = stack2;
+        }
+    }
+
+    this.enqueue = function (item) {
+        init_stack();
+        data_stack.push(item);
+    };
+    this.size = function () {
+        init_stack();
+        return data_stack.size();
+    };
+    this.dequeue = function () {
+        init_stack();
+        while (data_stack.size() > 1) {
+            empty_stack.push(data_stack.pop());
+        }
+        return data_stack.pop();
+    };
+    this.head = function () {
+        init_stack();
+        while (data_stack.size() > 1) {
+            empty_stack.push(data_stack.pop());
+        }
+        return data_stack.top();
+    };
+
+}
+var stack_queue = new StackQueue();
+stack_queue.enqueue(3);
+stack_queue.enqueue(4);
+stack_queue.enqueue(5);
+console.log('size',stack_queue.size());
+console.log('head1',stack_queue.head());
+console.log('dequeue',stack_queue.dequeue());
+console.log('head2', stack_queue.head());
+
+//2.5、打印杨辉三角(hard)
 // i代表行数，j代表第几个数
-// f[i][j] = f[i-1][j-1] + f[i-1][j],如果j=0或j=i，则f[i][j]=1
+// f[i][j] = f[i-1][j-1] + f[i-1][j],如果j=1或j=i，则f[i][j]=1
 
-// 1
-// 1 1
-// 1 2 1
-// 1 3 3 1
+    // 1
+   // 1 1
+  // 1 2 1
+ // 1 3 3 1
 // 1 4 6 4 1
 
 function print_yanghui(n) {
     var queue = new Queue();
-    // 往队列的第一行压入"1"
     queue.enqueue(1);
 
-    // 定义两个循环
-    // 第一个循环遍历层数
-    for (var i = 1; i <= n; i++) {
-        var line = '';  //存储每一层的数据
-        var prev = 0;   //在遍历每一层时，假设第一个数前面有个数字0
-        // 第二个循环遍历每一层数字的个数
-        for (var j = 0; j < i; j++) {
-            var item = queue.dequeue();
-            
-            var value = item + prev;
-            prev = item;
-            queue.enqueue(value)
+
+    // 两层循环
+    if (n >= 2) {
+        // 第一层循环遍历层数
+        for (var i = 1; i <= n; i++) {
+            var line = '\xa0'.repeat(n - i) + '';  //每一层的数字(每一层开头有空格，根据所有行数不同，空格不同)
+            var pre = 0;    //存储每一行数据的第一个数据的前面一个数据（会随着队列的不断出栈动态改变），假设每一行第一个数字的前一个数字为0
+            // 第二层循环遍历每层的数字，最后一个数字因为固定为1，所以不参与遍历，之间在后面手动添加进队列
+            for (var j = 0; j < i; j++) {
+                var item = queue.dequeue();
+                line += item + ' ';  //每一层的数字之间用空格隔开
+                value = item + pre;
+                pre = item;
+                queue.enqueue(value);
+            }
+            // 把每一层的最后一个数字手动添加进队列
+            queue.enqueue(1);
+            console.log(line);
         }
-        queue.enqueue(1);
-
-
     }
-
 }
 
+print_yanghui(7);
 
+// 2.6、迷宫问题（very hard）
