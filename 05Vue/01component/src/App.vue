@@ -34,23 +34,24 @@ export default {
       cartTitle: "课程购物车"
     };
   },
-  async created() {
-    try {
-      // 请求模拟的商品列表数据
-      const res = await axios.get('/api/goods');
+  // async created() {
+  //   try {
+  //     // 请求模拟的商品列表数据
+  //     const res = await axios.get("/api/goods");
+  //     if (res.data.code === 0) {
+  //       this.goods = res.data.list;
+  //     }
+  //   } catch (err) {
+  //     alert("商品列表加载失败");
+  //   }
+  // },
+  created() {
+    axios.get("/api/goods").then(res => {
       if (res.data.code === 0) {
         this.goods = res.data.list;
       }
-    } catch (err) {
-      alert('商品列表加载失败');
-    }
+    });
   },
-  // created() {
-  //   axios.get('/api/goods').then(res => {
-  //     const response = res;
-  //   })
-  // },
-
   methods: {
     // 改进：数据传递的方式一：总线模式
     // 这里添加商品到购物车，本质上是属于购物车组件的事情
@@ -74,7 +75,7 @@ export default {
       //   })
       // }
     }
-  },
+  }
 };
 </script>
 
