@@ -46,8 +46,18 @@ export default {
   props: ["title"],
   data() {
     return {
-      items: []
+      // 从本地存储提取购物车列表数据
+      items: JSON.parse(localStorage.getItem('items')) || [],
     };
+  },
+  watch: {
+    items: {
+      handler(n, o) {
+        // 使用本地存储实现数据持久化
+        localStorage.setItem('items', JSON.stringify(n));
+      },
+      deep: true 
+    }
   },
   created() {
     //   接收父组件派发出来的事件
