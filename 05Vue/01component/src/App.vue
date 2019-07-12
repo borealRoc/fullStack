@@ -2,17 +2,19 @@
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
-    <div class="course-ctn">
-      <ul class="course-lists">
-        <li class="course-list" v-for="(good, index) in goods" :key="good.id">
-          <span>{{good.name}}</span>
-          <span>{{good.price}}</span>
-          <button @click="addGood(index)">添加到购物车</button>
-        </li>
-      </ul>
-      <!-- 因为子组件会接收addGood事件，所以不需要父组件把items属性传给子组件-->
-      <!-- <Cart :title="cartTitle" :items="cartItems"></Cart> -->
-      <Cart :title="cartTitle"></Cart>
+    <div class="wrap">
+      <div class="course-ctn">
+        <ul class="course-lists">
+          <li class="course-list" v-for="(good, index) in goods" :key="good.id">
+            <span>{{good.name}}</span>
+            <span>{{good.price}}</span>
+            <button @click="addGood(index)">添加到购物车</button>
+          </li>
+        </ul>
+        <!-- 因为子组件会接收addGood事件，所以不需要父组件把items属性传给子组件-->
+        <!-- <Cart :title="cartTitle" :items="cartItems"></Cart> -->
+        <Cart :title="cartTitle"></Cart>
+      </div>
     </div>
   </div>
 </template>
@@ -88,9 +90,14 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+.wrap {
+  display: -webkit-flex;
+  display: flex;
+  padding: 20px;
+}
 .course-ctn {
-  float: left;
-  width: 600px;
+  -webkit-flex: 1;
+  flex: 1;
 }
 ul {
   list-style: none;
