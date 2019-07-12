@@ -3,7 +3,9 @@
     <img alt="Vue logo" src="./assets/logo.png" />
     <HelloWorld msg="Welcome to Your Vue.js App" />
     <div class="wrap">
+      <!-- 购物车实例 -->
       <div class="course-ctn">
+        <h2>购物车实例</h2>
         <ul class="course-lists">
           <li class="course-list" v-for="(good, index) in goods" :key="good.id">
             <span>{{good.name}}</span>
@@ -15,6 +17,11 @@
         <!-- <Cart :title="cartTitle" :items="cartItems"></Cart> -->
         <Cart :title="cartTitle"></Cart>
       </div>
+      <!-- ElementUi组件引入 -->
+      <div class="course-ctn">
+        <h2>ElementUi组件引入</h2>
+        <ele-form></ele-form>
+      </div>
     </div>
   </div>
 </template>
@@ -22,13 +29,15 @@
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import Cart from "./components/Cart.vue";
+import EleForm from "./components/EleForm.vue";
 import axios from "axios";
 
 export default {
   name: "app",
   components: {
     HelloWorld,
-    Cart
+    Cart,
+    EleForm
   },
   data() {
     return {
@@ -88,7 +97,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 .wrap {
   display: -webkit-flex;
@@ -98,6 +106,7 @@ export default {
 .course-ctn {
   -webkit-flex: 1;
   flex: 1;
+  max-width: 33%;
 }
 ul {
   list-style: none;
