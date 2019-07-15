@@ -1,7 +1,5 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
     <div class="wrap">
       <!-- 购物车实例 -->
       <div class="course-ctn">
@@ -13,6 +11,7 @@
             <button @click="addGood(index)">添加到购物车</button>
           </li>
         </ul>
+
         <!-- 因为子组件会接收addGood事件，所以不需要父组件把items属性传给子组件-->
         <!-- <Cart :title="cartTitle" :items="cartItems"></Cart> -->
         <Cart :title="cartTitle"></Cart>
@@ -22,6 +21,43 @@
         <h2>ElementUi组件引入</h2>
         <ele-form></ele-form>
       </div>
+      <div class="course-ctn my-component">
+        <h2>自定义组件的语法</h2>
+        <div class="event-ctn">
+          <h3>1. 子组件通过事件给父组件传值</h3>
+          <p>我儿子要给我汇钱：&yen;{{moneyFromChildComponent}}</p>
+          <my-button @tradeMoney="receiveMoney"></my-button>
+        </div>
+        <div class="v-model-ctn">
+          <h3>2. 手动实现v-model的双向数据绑定</h3>
+          <p class="two-lines">在下面的输入框输入文字，我右边也会有相应的文字，因为它实现了双向数据绑定: {{someVal}}</p>
+          <my-input v-model="someVal"></my-input>
+        </div>
+        <div class="slot-ctn">
+          <h3>3. slot插槽: 父组件把内容传给子组件</h3>
+          <button class="my-btn" @click="showPopupHandle">点我出现弹窗</button>
+          <my-popup
+            :ifPopupShow="ifPopupShowControlByFather"
+            @pupupHideEmitByChild="pupupHideReceiveByFather"
+          >
+            <template slot="header">
+              <h5>温馨提示</h5>
+            </template>
+            <template slot="content">
+              <p>别看了，把我关了吧！</p>
+            </template>
+          </my-popup>
+        </div>
+        <div class="sel-form-com">
+          <h3>4. 自定义form组件</h3>
+          <my-form-item label="用户名">
+            <my-input placeholder="请输入用户名" v-model="ruleForm.name"></my-input>
+          </my-form-item>
+          <my-form-item label="密码">
+            <my-input type="password" placeholder="请输入密码" v-model="ruleForm.pwd"></my-input>
+          </my-form-item>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -29,6 +65,10 @@
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import Cart from "./components/Cart.vue";
+import MyButton from "./components/MyButton.vue";
+import MyInput from "./components/MyInput.vue";
+import MyPopup from "./components/MyPopup.vue";
+import MyFormItem from "./components/MyFormItem.vue";
 import EleForm from "./components/EleForm.vue";
 import axios from "axios";
 
@@ -37,12 +77,23 @@ export default {
   components: {
     HelloWorld,
     Cart,
-    EleForm
+    EleForm,
+    MyButton,
+    MyInput,
+    MyPopup,
+    MyFormItem
   },
   data() {
     return {
+      moneyFromChildComponent: 0,
       goods: [],
-      cartTitle: "课程购物车"
+      cartTitle: "课程购物车",
+      someVal: "这最初的value是父组件传给子组件的",
+      ifPopupShowControlByFather: false,
+      ruleForm: {
+        name: '',
+        pwd: '',
+      }
     };
   },
   // async created() {
@@ -85,6 +136,15 @@ export default {
       //     active: false,
       //   })
       // }
+    },
+    receiveMoney(obj) {
+      this.moneyFromChildComponent = obj.num;
+    },
+    showPopupHandle() {
+      this.ifPopupShowControlByFather = true;
+    },
+    pupupHideReceiveByFather(hide) {
+      this.ifPopupShowControlByFather = hide;
     }
   }
 };
@@ -101,15 +161,22 @@ export default {
 .wrap {
   display: -webkit-flex;
   display: flex;
-  padding: 20px;
 }
 .course-ctn {
   -webkit-flex: 1;
   flex: 1;
-  max-width: 33%;
+  padding: 20px;
+  /* max-width: 33%; */
+}
+h2 {
+  text-align: center;
 }
 ul {
   list-style: none;
+}
+.two-lines {
+  min-height: 50px;
+  text-align: justify;
 }
 .course-list {
   margin-bottom: 10px;
@@ -126,6 +193,20 @@ ul {
 }
 .course-list button {
   float: left;
+  padding: 0 5px;
+  height: 30px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 30px;
+  color: #fff;
+  background-color: #41b882;
+  border: 0;
+  outline: 0;
+}
+.my-component {
+  text-align: left;
+}
+.my-btn {
   padding: 0 5px;
   height: 30px;
   font-size: 12px;
