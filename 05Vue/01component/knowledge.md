@@ -18,17 +18,21 @@
         - 页面组件：每个页面就是一个页面组件，一般不会复用
     - 6.2 组件开发
         - 组件注册与使用
-            - 全局注册: Vue.component('global-com', {})（可在任意地方直接使用；较少使用）
-            - 局部注册: 单个Vue文件(使用时需引入；常使用，依赖可追溯)
+            - 全局注册: Vue.component('global-component', {})（可在任意地方直接使用）  
+            全局注册往往是不够理想的。比如，如果你使用一个像 webpack 这样的构建系统，全局注册所有的组件意味着即便你已经不再使用一个组件了，它仍然会被包含在你最终的构建结果中。  
+            这造成了用户下载的 JavaScript 的无谓的增加。
+            - 局部注册: 单个Vue文件(使用时需引入)
         - 组件通讯
             - 父子组件
                 - 传值[props]: 父传子
-                - 事件[$emit]： 子组件[传值给]通知父组件
+                - 事件[$emit]：子组件[传值给]通知父组件
                 - 插槽[slot]：父把内容插入子元素中
+            - 双向绑定的实现: 手动实现v-model语法糖
+                - 子组件：<child-input :value="searchText" @input="searchText = $event"></child-input>
+                - 父组件：<child-input v-model="searchText"></child-input>
             - 任意组件通讯机制:
                 - 总线模式 Vue.prototype.$bus = new Vue();
-                - 事件派发 $emit
-                - 事件监听 $on
+                - 事件监听 $on && 事件派发 $emit
 7. 使用axios请求数据: npm install axios
 8. mock数据
 9. ElementUI的使用

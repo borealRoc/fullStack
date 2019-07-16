@@ -11,18 +11,13 @@
             <button @click="addGood(index)">添加到购物车</button>
           </li>
         </ul>
-
         <!-- 因为子组件会接收addGood事件，所以不需要父组件把items属性传给子组件-->
         <!-- <Cart :title="cartTitle" :items="cartItems"></Cart> -->
         <Cart :title="cartTitle"></Cart>
       </div>
-      <!-- ElementUi组件引入 -->
-      <div class="course-ctn">
-        <h2>ElementUi组件引入</h2>
-        <ele-form></ele-form>
-      </div>
+      <!-- 组件的相关语法 -->
       <div class="course-ctn my-component">
-        <h2>自定义组件的语法</h2>
+        <h2>组件的语法</h2>
         <div class="event-ctn">
           <h3>1. 子组件通过事件给父组件传值</h3>
           <p>我儿子要给我汇钱：&yen;{{moneyFromChildComponent}}</p>
@@ -48,15 +43,15 @@
             </template>
           </my-popup>
         </div>
-        <div class="sel-form-com">
-          <h3>4. 自定义form组件</h3>
-          <my-form-item label="用户名">
-            <my-input placeholder="请输入用户名" v-model="ruleForm.name"></my-input>
-          </my-form-item>
-          <my-form-item label="密码">
-            <my-input type="password" placeholder="请输入密码" v-model="ruleForm.pwd"></my-input>
-          </my-form-item>
+        <div class="provide-ctn">
+          <h3>4. 属性注入[provide && inject]: 祖先元素把数据传给后代元素</h3>
+          <hello-world></hello-world>
         </div>
+      </div>
+      <!-- 设计类ElementUi表单组件 -->
+      <div class="course-ctn">
+        <h2>设计组件：模仿ElementUi表单组件</h2>
+        <ele-form></ele-form>
       </div>
     </div>
   </div>
@@ -68,7 +63,7 @@ import Cart from "./components/Cart.vue";
 import MyButton from "./components/MyButton.vue";
 import MyInput from "./components/MyInput.vue";
 import MyPopup from "./components/MyPopup.vue";
-import MyFormItem from "./components/MyFormItem.vue";
+// import MyFormItem from "./components/MyFormItem.vue";
 import EleForm from "./components/EleForm.vue";
 import axios from "axios";
 
@@ -80,8 +75,13 @@ export default {
     EleForm,
     MyButton,
     MyInput,
-    MyPopup,
-    MyFormItem
+    MyPopup
+    // MyFormItem
+  },
+  provide() {
+    return {
+      ancestorVal: 'Hello,这个属性来自祖先元素',
+    }
   },
   data() {
     return {
@@ -89,11 +89,11 @@ export default {
       goods: [],
       cartTitle: "课程购物车",
       someVal: "这最初的value是父组件传给子组件的",
-      ifPopupShowControlByFather: false,
-      ruleForm: {
-        name: '',
-        pwd: '',
-      }
+      ifPopupShowControlByFather: false
+      // ruleForm: {
+      //   name: '',
+      //   pwd: '',
+      // }
     };
   },
   // async created() {
@@ -151,6 +151,10 @@ export default {
 </script>
 
 <style>
+html, body {
+  padding: 0;
+  margin: 0;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

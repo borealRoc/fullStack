@@ -4,20 +4,33 @@
     <div class="form-ctt">
       <slot></slot>
       <!-- 校验错误信息 -->
-      <p class="form-err" v-if="errorStatus === 'error'">{{errorMes}}</p>
+      <p class="form-err" v-if="validateStatus === 'error'">{{errorMes}}</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  props: ["label"],
+  name: 'MyFormItem',
+  // lable用于表单头
+  // prop用于校验
+  props: ["label", "prop"],
   data() {
     return {
-      errorStatus: "",
+      validateStatus: "",
       errorMes: ""
     };
-  }
+  },
+  created() {
+    // 监听子组件的“this.$parent.$emit”，即自己监听自己派发的事件
+    // 暂时不太理解
+    this.$on('validate', this.validate);
+  },
+  methods: {
+    validate() {
+      
+    }
+  },
 };
 </script>
 
