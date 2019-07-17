@@ -22,18 +22,29 @@
             - 局部注册: 单个Vue文件(使用时需引入)
         - 6.2.2 组件通讯
             - 6.2.2.1 父子组件
-                - 传属性[props]: 父传子
-                - 事件[arg参数可以让子组件把值传给父组件]
-                    - 子组件触发: $emit('event-name', arg)
-                    - 父组件监听：$on('event-name', arg)
-                - 插槽[slot]：父把内容插入子组件中
-                - 父子组件双向数据绑定的实现: 手动实现v-model
-                    - 子组件
-                        - <custom-input :value="searchText" @input="searchText = $event"></custom-input>
-                        - 将其 value 特性绑定到一个名叫 value 的 prop 上
-                        - 在其 input 事件被触发时，将新的值通过自定义的 input 事件抛出
-                    - 父组件
-                        - <custom-input v-model="searchText"></custom-input>
+                - 单向数据流
+                    - 传属性[props]: 父传子
+                        - 注意：对于绝大多数特性来说，从外部提供给组件的值会替换掉组件内部设置好的值。但class 和 style 特性会稍微智能一些，即两边的值会被合并起来
+                    - 事件[arg参数可以让子组件把值传给父组件]
+                        - 子组件触发: $emit('event-name', arg)
+                        - 父组件监听：$on('event-name', arg)
+                    - 插槽[slot]：父把内容插入子组件中
+                        - 编译作用域：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。  
+                        <img src="../knowledge/5.png"/>
+                        - 具名插槽：slot只能添加在```<template slot="">```上
+                        - 作用域插槽: 插槽内容访问子组件中才有的数据  
+                        <img src="../knowledge/6.png"/>
+                - 双向数据流
+                    - 父子组件双向数据绑定的实现: 自定义组件的v-model
+                        - 子组件：```<custom-input :value="searchText" @input="searchText = $event"></custom-input>```
+                            - 将其value特性绑定到一个名叫value的prop上
+                            - 在其input事件被触发时，将新的值通过自定义的input事件抛出
+                        - 父组件：```<custom-input model="searchText"></custom-input>```  
+                        <img src="../knowledge/4.png"/>
+                    - props + 事件
+                    - .sync 修饰符  
+                    <img src="../knowledge/7.png"/>
+
             - 6.2.2.2 任意组件通讯机制:
                 - 总线模式 Vue.prototype.$bus = new Vue();
                 - 事件监听 $on && 事件派发 $emit
