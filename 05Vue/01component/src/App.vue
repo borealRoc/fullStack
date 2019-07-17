@@ -31,13 +31,10 @@
         <div class="slot-ctn">
           <h3>3. slot插槽: 父组件把内容传给子组件</h3>
           <button class="my-btn" @click="showPopupHandle">点我出现弹窗</button>
-          <my-popup
-            :ifPopupShow="ifPopupShowControlByFather"
-            @pupupHideEmitByChild="pupupHideReceiveByFather"
-          >
-            <template slot="header">
-              <h5>温馨提示</h5>
-            </template>
+          <my-popup :ifPopupShow="ifPopupShowControlByFather" @pupupHideEmitByChild="pupupHideReceiveByFather">
+            <!-- <template slot="header" v-slot:default="slotProps"> -->
+              <!-- <h5>{{slotProps}}</h5> -->
+            <!-- </template> -->
             <template slot="content">
               <p>别看了，把我关了吧！</p>
             </template>
@@ -89,11 +86,7 @@ export default {
       goods: [],
       cartTitle: "课程购物车",
       someVal: "这最初的value是父组件传给子组件的",
-      ifPopupShowControlByFather: false
-      // ruleForm: {
-      //   name: '',
-      //   pwd: '',
-      // }
+      ifPopupShowControlByFather: false,
     };
   },
   // async created() {

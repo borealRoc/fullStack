@@ -4,7 +4,7 @@
       <div class="bg-gray" @click="closePopup"></div>
       <div class="popup-ctn">
         <header>
-          <slot name="header"></slot>
+          <slot name="header" v-bind:titleObj="titleObj">{{titleObj.title1}}</slot>
         </header>
         <section class="content">
           <slot name="content"></slot>
@@ -25,6 +25,14 @@ export default {
       type: Boolean,
       default: false
     },
+  },
+  data() {
+    return {
+      titleObj: {
+        title1: '温馨提示',
+        title2: '不温馨提示'
+      }
+    }
   },
   methods: {
     closePopup() {
@@ -51,27 +59,26 @@ export default {
     left: 50%;
     box-sizing: border-box;
     width: 500px;
-    height: 300px;
     margin-left: -250px;
-    margin-top: -150px;
     font-size: 16x;
     text-align: center;
     border-radius: 8px;
     background-color: #fff;
+    transform: translateY(-50%);
     z-index: 3;
     header {
       font-size: 24px;
-      line-height: 80px;
+      line-height: 79px;
       border-bottom: solid 1px #f2f2f2;
       h5 {
         margin: 0;
       }
     }
     .content {
-      height: 170px;
+      height: 129px;
       padding: 20px;
       font-size: 40px;
-      line-height: 170px;
+      line-height: 129px;
       border-bottom: solid 1px #f2f2f2;
       p {
         margin: 0;

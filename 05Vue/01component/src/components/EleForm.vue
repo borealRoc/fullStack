@@ -35,7 +35,8 @@
           <my-input type="password" v-model="ruleForm.pwd"></my-input>
         </my-form-item>
         <my-form-item class="login-item">
-          <el-button type="primary" @click="myLogin">登录</el-button>
+          <!-- <el-button type="primary" @click="myLogin">登录</el-button> -->
+          <el-button type="primary">登录</el-button>
         </my-form-item>
       </my-form>
     </div>

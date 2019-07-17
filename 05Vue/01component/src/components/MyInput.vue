@@ -29,6 +29,8 @@ export default {
       // 通知父组件值更新，实现双向数据绑定
       this.$emit("input", this.inputVal);
       // 通知FormItem做校验
+      // 这里之所以要this.$parent.$emit，而不是this.$emit，是因为form-item组件的input位置一开始只是个插槽，没有真实的input
+      // 暂时不太理解
       this.$parent.$emit("validate", this.inputVal);
     }
   }
