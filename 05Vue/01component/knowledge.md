@@ -17,20 +17,24 @@
         - 业务组件：有特定功能需求的组件，经常复用
         - 页面组件：每个页面就是一个页面组件，一般不会复用
     - 6.2 组件开发
-        - 组件注册与使用
+        - 6.2.1 组件注册与使用
             - 全局注册: Vue.component('global-component', {})（可在任意地方直接使用）  
-            全局注册往往是不够理想的。比如，如果你使用一个像 webpack 这样的构建系统，全局注册所有的组件意味着即便你已经不再使用一个组件了，它仍然会被包含在你最终的构建结果中。  
-            这造成了用户下载的 JavaScript 的无谓的增加。
             - 局部注册: 单个Vue文件(使用时需引入)
-        - 组件通讯
-            - 父子组件
-                - 传值[props]: 父传子
-                - 事件[$emit]：子组件[传值给]通知父组件
-                - 插槽[slot]：父把内容插入子元素中
-            - 双向绑定的实现: 手动实现v-model语法糖
-                - 子组件：<child-input :value="searchText" @input="searchText = $event"></child-input>
-                - 父组件：<child-input v-model="searchText"></child-input>
-            - 任意组件通讯机制:
+        - 6.2.2 组件通讯
+            - 6.2.2.1 父子组件
+                - 传属性[props]: 父传子
+                - 事件[arg参数可以让子组件把值传给父组件]
+                    - 子组件触发: $emit('event-name', arg)
+                    - 父组件监听：$on('event-name', arg)
+                - 插槽[slot]：父把内容插入子组件中
+                - 父子组件双向数据绑定的实现: 手动实现v-model
+                    - 子组件
+                        - <custom-input :value="searchText" @input="searchText = $event"></custom-input>
+                        - 将其 value 特性绑定到一个名叫 value 的 prop 上
+                        - 在其 input 事件被触发时，将新的值通过自定义的 input 事件抛出
+                    - 父组件
+                        - <custom-input v-model="searchText"></custom-input>
+            - 6.2.2.2 任意组件通讯机制:
                 - 总线模式 Vue.prototype.$bus = new Vue();
                 - 事件监听 $on && 事件派发 $emit
 7. 使用axios请求数据: npm install axios
