@@ -1,7 +1,7 @@
 # 本实例涉及到的知识点
 1. ES6对象、数组的扩展
     - 对象的扩展运算符 ...good,
-    - 数组的扩展方法: find/filter/forEach
+    - 数组的扩展方法: find/filter/forEach/map
 2. ES6模块化: import Vue from 'vue'
 3. ES6异步方案Promise: axios.get("/api/goods").then(res => {})\
 4. ES7异步方案: async + await
@@ -23,19 +23,19 @@
         - 6.2.2 组件通讯
             - 6.2.2.1 父子组件
                 - 单向数据流
-                    - 传属性[props]: 父传子
-                        - 注意：对于绝大多数特性来说，从外部提供给组件的值会替换掉组件内部设置好的值。但class 和 style 特性会稍微智能一些，即两边的值会被合并起来
-                    - 事件[arg参数可以让子组件把值传给父组件]
-                        - 子组件触发: $emit('event-name', arg)
-                        - 父组件监听：$on('event-name', arg)
-                    - 插槽[slot]：父把内容插入子组件中
+                    - 传属性[props]: 父传子  
+                    注意：对于绝大多数特性来说，从外部提供给组件的值会替换掉组件内部设置好的值。但class 和 style 特性会稍微智能一些，即两边的值会被合并起来
+                    - 事件[arg参数可以让子组件把值传给父组件]  
+                    子组件触发: $emit('event-name', arg)  
+                    父组件监听：$on('event-name', arg)  
+                    - 插槽[slot]：父把内容插入子组件中  
                         - 作用：如果`<navigation-link>` 没有包含一个 `<slot> `元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃  
-                        <img src="../knowledge/8.png"/>
+                        <img src="../knowledge/8.png"/>  
                         - 编译作用域：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。  
-                        <img src="../knowledge/5.png"/>
+                        <img src="../knowledge/5.png"/>  
                         - 具名插槽：v-slot只能添加在`<template v-slot:header>`上[独占默认插槽这种情况除外],这一点和已经废弃的slot特性不同。
                         - 作用域插槽: 插槽内容访问子组件中才有的数据  
-                        <img src="../knowledge/6.png"/>
+                        <img src="../knowledge/6.png"/>  
                 - 双向数据流
                     - 父子组件双向数据绑定的实现: 自定义组件的v-model
                         - 子组件：```<custom-input :value="searchText" @input="searchText = $event"></custom-input>```
