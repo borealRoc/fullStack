@@ -29,9 +29,11 @@
                         - 子组件触发: $emit('event-name', arg)
                         - 父组件监听：$on('event-name', arg)
                     - 插槽[slot]：父把内容插入子组件中
+                        - 作用：如果`<navigation-link>` 没有包含一个 `<slot> `元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃  
+                        <img src="../knowledge/8.png"/>
                         - 编译作用域：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。  
                         <img src="../knowledge/5.png"/>
-                        - 具名插槽：slot只能添加在`<template slot="">`上
+                        - 具名插槽：v-slot只能添加在`<template v-slot:header>`上[独占默认插槽这种情况除外],这一点和已经废弃的slot特性不同。
                         - 作用域插槽: 插槽内容访问子组件中才有的数据  
                         <img src="../knowledge/6.png"/>
                 - 双向数据流
@@ -44,10 +46,30 @@
                     - props + 事件
                     - .sync 修饰符  
                     <img src="../knowledge/7.png"/>
-
-            - 6.2.2.2 任意组件通讯机制:
-                - 总线模式 Vue.prototype.$bus = new Vue();
-                - 事件监听 $on && 事件派发 $emit
+            - 6.2.2.2 任意组件通讯:
+                - 总线模式
+                    - Vue.prototype.$bus = new Vue(); 
+                    - this.$bus.$emit("eventName", arg);
+                    - this.$bus.$on("eventName", arg);
+                - 依赖注入: provide && inject
+                - Vuex
+        - 6.2.3 动态组件  
+        <img src="../knowledge/9.png"/>
+        - 6.2.4 异步组件[暂时不太理解]
+    - 6.3 处理边界情况
+        - 6.3.1 访问元素 & 组件
+            - 访问根实例：this.$root  
+            - 访问父级实例：this.$parent
+            - 访问子组件实例或子元素: this.$ref
+            - 依赖注入: provide && inject  
+            <img src="../knowledge/10.png"/>
+        - 6.3.2 程序化的事件侦听器
+            - $on(eventName, eventHandler) 侦听一个事件
+            - $once(eventName, eventHandler) 一次性侦听一个事件
+            - $off(eventName, eventHandler) 停止侦听一个事件
+        - 6.3.3 控制更新
+            - 强制更新：$forceUpdate
+            - 静态组件：v-once
 7. 使用axios请求数据: npm install axios
 8. mock数据
 9. ElementUI的使用

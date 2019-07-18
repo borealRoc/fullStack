@@ -32,10 +32,27 @@
           <h3>3. slot插槽: 父组件把内容传给子组件</h3>
           <button class="my-btn" @click="showPopupHandle">点我出现弹窗</button>
           <my-popup :ifPopupShow="ifPopupShowControlByFather" @pupupHideEmitByChild="pupupHideReceiveByFather">
-            <!-- <template slot="header" v-slot:default="slotProps"> -->
-              <!-- <h5>{{slotProps}}</h5> -->
-            <!-- </template> -->
-            <template slot="content">
+            <!-- 作用域插槽的三种写法 -->
+            <!-- 1. 下面的写法废弃 -->
+            <!-- <template slot="header" slot-scope="slotProps">
+                <h5>{{slotProps.titleObj.title2}}</h5>
+            </template>-->
+            <!-- 2. 新的写法 -->
+            <!-- <template v-slot:header="slotProps">
+              <h5>{{slotProps.titleObj.title2}}</h5>
+            </template> -->
+            <!-- 3. 新的写法的缩写形式 -->
+            <template #header="slotProps">
+              <h5>{{slotProps.titleObj.title2}}</h5>
+            </template>
+
+            <!-- 具名插槽的三种写法 -->
+            <!-- 1. 下面的写法废弃 -->
+            <!-- <template slot="content"> -->
+            <!-- 2. 新的写法 -->
+            <!-- <template v-slot:content> -->
+            <!-- 3. 新的写法的缩写形式 -->
+            <template #content>
               <p>别看了，把我关了吧！</p>
             </template>
           </my-popup>
@@ -60,7 +77,6 @@ import Cart from "./components/Cart.vue";
 import MyButton from "./components/MyButton.vue";
 import MyInput from "./components/MyInput.vue";
 import MyPopup from "./components/MyPopup.vue";
-// import MyFormItem from "./components/MyFormItem.vue";
 import EleForm from "./components/EleForm.vue";
 import axios from "axios";
 
@@ -73,12 +89,11 @@ export default {
     MyButton,
     MyInput,
     MyPopup
-    // MyFormItem
   },
   provide() {
     return {
-      ancestorVal: 'Hello,这个属性来自祖先元素',
-    }
+      ancestorVal: "Hello,这个属性来自祖先元素"
+    };
   },
   data() {
     return {
@@ -86,7 +101,7 @@ export default {
       goods: [],
       cartTitle: "课程购物车",
       someVal: "这最初的value是父组件传给子组件的",
-      ifPopupShowControlByFather: false,
+      ifPopupShowControlByFather: false
     };
   },
   // async created() {
@@ -144,7 +159,8 @@ export default {
 </script>
 
 <style>
-html, body {
+html,
+body {
   padding: 0;
   margin: 0;
 }
