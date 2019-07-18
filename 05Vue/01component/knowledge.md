@@ -54,7 +54,7 @@
                 - 依赖注入: provide && inject
                 - Vuex
         - 6.2.3 动态组件  
-        <img src="../knowledge/9.png"/>
+        <img src="../knowledge/9.png"/>  
         - 6.2.4 异步组件[暂时不太理解]
     - 6.3 处理边界情况
         - 6.3.1 访问元素 & 组件
