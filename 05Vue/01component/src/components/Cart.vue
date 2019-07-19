@@ -136,7 +136,7 @@ tr.active {
 }
 .item-count {
   display: inline-block;
-  width: 60px;
+  width: 20px;
   text-align: center;
 }
 .sel-btn {
