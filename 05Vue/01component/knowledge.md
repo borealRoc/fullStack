@@ -30,22 +30,22 @@
                     父组件监听：$on('event-name', arg)  
                     - 插槽[slot]：父把内容插入子组件中  
                         - 作用：如果`<navigation-link>` 没有包含一个 `<slot> `元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃  
-                        <img src="../knowledge/8.png"/>  
+                        <img src="../knowledgePic/8.png"/>  
                         - 编译作用域：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。  
-                        <img src="../knowledge/5.png"/>  
+                        <img src="../knowledgePic/5.png"/>  
                         - 具名插槽：v-slot只能添加在`<template v-slot:header>`上[独占默认插槽这种情况除外],这一点和已经废弃的slot特性不同。
                         - 作用域插槽: 插槽内容访问子组件中才有的数据  
-                        <img src="../knowledge/6.png"/>  
+                        <img src="../knowledgePic/6.png"/>  
                 - 双向数据流
                     - 父子组件双向数据绑定的实现: 自定义组件的v-model
                         - 子组件：```<custom-input :value="searchText" @input="searchText = $event"></custom-input>```
                             - 将其value特性绑定到一个名叫value的prop上
                             - 在其input事件被触发时，将新的值通过自定义的input事件抛出
                         - 父组件：```<custom-input model="searchText"></custom-input>```  
-                        <img src="../knowledge/4.png"/>
+                        <img src="../knowledgePic/4.png"/>
                     - props + 事件
                     - .sync 修饰符  
-                    <img src="../knowledge/7.png"/>
+                    <img src="../knowledgePic/7.png"/>
             - 6.2.2.2 任意组件通讯:
                 - 总线模式
                     - Vue.prototype.$bus = new Vue(); 
@@ -54,7 +54,7 @@
                 - 依赖注入: provide && inject
                 - Vuex
         - 6.2.3 动态组件    
-        <img src="../knowledge/9.png"/>  
+        <img src="../knowledgePic/9.png"/>  
         - 6.2.4 异步组件[暂时不太理解]  
     - 6.3 处理边界情况
         - 6.3.1 访问元素 & 组件
@@ -62,7 +62,7 @@
             - 访问父级实例：this.$parent
             - 访问子组件实例或子元素: this.$ref
             - 依赖注入: provide && inject  
-            <img src="../knowledge/10.png"/>
+            <img src="../knowledgePic/10.png"/>
         - 6.3.2 程序化的事件侦听器
             - $on(eventName, eventHandler) 侦听一个事件
             - $once(eventName, eventHandler) 一次性侦听一个事件
