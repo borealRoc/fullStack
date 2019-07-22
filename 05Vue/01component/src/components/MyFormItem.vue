@@ -64,7 +64,7 @@ export default {
         const validator = new schema(descriptor);
         validator.validate({ [this.prop]: this.form.mymodel[this.prop]}, errors => {
           if (errors) {
-            console.log('errors', errors);
+            // console.log('errors', errors);
             this.validateStatus = "error";
             this.errorMes = errors[0].message;
             // 校验的结果不管是成功还是失败，对于promise来说，都是执行成功了，所以都是执行resolve

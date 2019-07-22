@@ -2,12 +2,22 @@
   <div>
     <div class="ele-form-com">
       <h3>1. ElementUI表单组件</h3>
-      <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+      <el-form
+        :model="ruleForm"
+        :rules="rules"
+        ref="ruleForm"
+        label-width="100px"
+        class="demo-ruleForm"
+      >
         <el-form-item label="活动名称" prop="name">
-          <el-input v-model="ruleForm.name"></el-input>
+          <Interfer>
+            <el-input v-model="ruleForm.name"></el-input>
+          </Interfer>
         </el-form-item>
         <el-form-item label="活动形式" prop="desc">
-          <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+          <Interfer>
+            <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+          </Interfer>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
@@ -23,7 +33,9 @@
       <p>FormInput负责双向数据绑定</p>
       <my-form :mymodel="myRuleForm" :myrules="myRules" ref="myForm">
         <my-form-item label="用户名" prop="name">
-          <my-input v-model="myRuleForm.name"></my-input>
+          <Interfer>
+            <my-input v-model="myRuleForm.name"></my-input>
+          </Interfer>
         </my-form-item>
         <my-form-item label="密码" prop="pwd">
           <my-input type="password" v-model="myRuleForm.pwd"></my-input>
@@ -40,13 +52,15 @@
 import MyForm from "./MyForm.vue";
 import MyFormItem from "./MyFormItem.vue";
 import MyInput from "./MyInput.vue";
+import Interfer from "./Interfer.vue";
 
 export default {
   name: "EleForm",
   components: {
     MyForm,
     MyFormItem,
-    MyInput
+    MyInput,
+    Interfer
   },
   data() {
     return {
@@ -66,14 +80,25 @@ export default {
       // 我自己的表单的数据模型
       myRuleForm: {
         name: "default",
-        pwd: "",
+        pwd: ""
       },
       myRules: {
         name: [
-          { required: true, message: "请输入姓名", },
-          { min: 6, max: 10, message: "长度要在6~10个字符之间",}
+          { required: true, message: "请输入姓名",},
+          {
+            min: 6,
+            max: 10,
+            message: "长度要在6~10个字符之间",
+          }
         ],
-        pwd: [{ required: true, message: "请输入密码" }]
+        pwd: [
+          { required: true, message: "请输入密码",},
+          {
+            min: 4,
+            max: 10,
+            message: "长度要在4~10个字符之间",
+          }
+        ]
       }
     };
   },
@@ -100,7 +125,7 @@ export default {
           return false;
         }
       });
-    },
+    }
   }
 };
 </script>
