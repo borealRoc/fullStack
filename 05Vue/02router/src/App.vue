@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <!-- 路由导航 -->
+    <router-link to="/home">Home</router-link>
+    <router-link to="/about:vue">About</router-link>
+    <!-- 路由出口 -->
+    <router-view></router-view>
   </div>
 </template>
 
@@ -16,5 +16,8 @@
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+a {
+  margin-right: 10px;
 }
 </style>
