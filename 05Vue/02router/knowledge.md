@@ -1,16 +1,22 @@
 1. 基础语法
-    - 1.1  router vs route
+    - 1.1  router vs route vs routes
         - router: 路由器。this.$router访问路由器 
         - route: 路由。this.$route访问当前路由
+        - routes: 指router路由实例的routes API.用来配置多个route路由对象
     - 1.2 动态路由匹配
         - 路径参数：/user/:username/post/:post_id + /user/evan/post/123 => $route.params {username: 'evan', post_id: 123}     
         - 查询参数：/foo?user=1 => $route.query {user: 1}
-        - 路劲参数 vs 查询参数
-    - 1.3 路由跳转的方式  
-name | 价格 |  数量  
--|-|-
-香蕉 | $1 | 5 |
-苹果 | $1 | 6 |
-草莓 | $1 | 7 |
-2. hash模式 vs HTML5 History 模式  
-<img src="../knowledgePic/11.png"/>
+        - 路径参数 vs 查询参数
+            - 路径参数：语义化的路径组成部分，必传参
+            - 查询参数：和页面逻辑无关的路径组成部分，可传参
+    - 1.3 路由跳转的方式
+        - 声明式
+        - 编程式
+    - 1.4 嵌套路由：children
+        - children 配置就是像 routes 配置一样的路由配置数组
+    - 1.5 命名路由：name
+    - 1.6 命名视图：components
+        - 嵌套命名视图：children + components
+    - 1.7 重定向和别名
+        - 重定向：
+2. 进阶语法  
