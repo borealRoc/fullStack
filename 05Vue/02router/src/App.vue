@@ -13,13 +13,15 @@
         <router-link to="/">Go to '/' but redirect to Error</router-link>
         <router-link to="/nohome">Go to '/nohome' but turn to Home because of alias</router-link>
         <h3>1.4嵌套路由</h3>
-        <router-link to="/home/login">Go to Home-Login</router-link>
+        <router-link :to="{name: 'login'}">Go to Home-Login</router-link>
         <router-link to="/home/register">Go to Home-Register</router-link>
         <router-link to="/home/news">Go to Home-News</router-link>
         <!-- 路由出口 -->
         <div class="router-view">
           <h1>Router-view: Look at below</h1>
-          <router-view></router-view>
+          <transition name="slide">
+            <router-view></router-view>
+          </transition>
         </div>
       </div>
     </div>

@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <h4>This is home page</h4>
-    <router-view></router-view>
+    <transition name="fade">
+      <router-view></router-view>
+    </transition>
   </div>
 </template>
 
