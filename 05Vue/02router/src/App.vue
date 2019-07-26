@@ -1,9 +1,8 @@
 <template>
   <div id="app">
-    <h1>vue-router的语法及其应用</h1>
     <div class="flex">
       <div class="flex1">
-        <h2>1.基础语法</h2>
+        <h2>1.vue-router的语法及其应用</h2>
         <h3>1.1路由导航</h3>
         <router-link to="/home">声明式: Go to Home</router-link>
         <a @click="goToAbout" class="link">编程式: Go to About</a>
@@ -24,12 +23,21 @@
           </transition>
         </div>
       </div>
+      <div class="flex1">
+        <h2>2.vuex的语法及其应用</h2>
+        <vuex-syntax></vuex-syntax>
+      </div>
     </div>
   </div>
 </template>
 <script>
+import VuexSyntax from './views/VuexSyntax.vue';
+
 export default {
   name: "App",
+  components: {
+    VuexSyntax,
+  },
   methods: {
     goToAbout() {
       this.$router.push({ name: "about", params: { msg: "vue" } });
@@ -54,6 +62,7 @@ export default {
 .flex1 {
   flex: 1;
   -webkit-flex: 1;
+  padding: 0 60px;
   text-align: left;
 }
 .link {

@@ -1,4 +1,4 @@
-1. 基础语法
+1. vue-router基础语法
     - 1.1  router vs route vs routes
         - router: 路由器。this.$router访问路由器 
         - route: 路由。this.$route访问当前路由
@@ -25,7 +25,7 @@
         - 别名：alias
             - {path: '/home', component: Home, alias: '/index'}
             - 访问'/index',跳转到'/index'，但展示Home视图的内容
-2. 进阶语法
+2. vue-router进阶语法
     - 2.1、导航守卫
         - 全局导航守卫
             - 全局前置守卫: beforeEach((to, from, next) => {})
@@ -79,3 +79,16 @@
     - 2.6 路由懒加载：当路由被访问的时候才加载对应组件
         原理：结合 Vue 的异步组件和 Webpack 的代码分割功能
         使用方法：const Foo = () => import('./Foo.vue')
+3. vuex
+    - 安装：vue add vuex
+    - 3.1 核心概念
+        - 仓库[store]：一个容器，包含着应用中大部分的状态 (state)
+        - 状态[state]
+            - 单一状态树，一个对象就包含了全部的应用层级状态，即它作为一个“唯一数据源”而存在，这意味着，每个应用将仅仅包含一个 store 实例。单状态树和模块化并不冲突。
+            - 使用 Vuex 并不意味着所有的状态放入 Vuex，如果有些状态严格属于单个组件，最好还是作为组件的局部状态。
+        - 计算属性[getter]
+        - 更改store中的状态[mutations]&&[actions]
+            - mutations:（1）直接变更状态（2）必须是同步事务
+            - actions:（1）提交的是 mutation，而不是直接变更状态（2）可以包含任意异步操作
+
+
