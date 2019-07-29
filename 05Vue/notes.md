@@ -79,6 +79,8 @@
     - 注意
         - 在安装时如果选择了按需加载，那么在引用ui组件时，需要在plugins/elements.js中手动引入对应组件
 
+***
+
 # 二、vue-router
 1. vue-router基础语法
     - 1.1  router vs route vs routes
