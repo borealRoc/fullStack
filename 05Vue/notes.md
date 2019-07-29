@@ -78,9 +78,6 @@
         - 通过vue-cli安装：vue add element
     - 注意
         - 在安装时如果选择了按需加载，那么在引用ui组件时，需要在plugins/elements.js中手动引入对应组件
-
-***
-
 # 二、vue-router
 1. vue-router基础语法
     - 1.1  router vs route vs routes
@@ -180,7 +177,6 @@
     - 2.7 路由懒加载：当路由被访问的时候才加载对应组件
         原理：结合 Vue 的异步组件和 Webpack 的代码分割功能
         使用方法：const Foo = () => import('./Foo.vue')
-
 # 三、vuex
 - 安装：vue add vuex
 - 核心概念
@@ -230,6 +226,14 @@
             - 根节点状态
                 - getters[第三个参数]: rootState
                 - actions: context.rootState
+
+
+
+
+
+
+
+
                
                  
                                                   
