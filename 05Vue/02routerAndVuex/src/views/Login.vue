@@ -31,7 +31,8 @@ export default {
     // }
     async login() {
       const ret = await this.$store.dispatch("submitLogin");
-      if (ret) {
+    //   if (ret) {
+    if (this.$store.state.isLogin) {
         this.loginStatus = "已登录";
         const { redirect } = this.$route.query;
         if (redirect) {
