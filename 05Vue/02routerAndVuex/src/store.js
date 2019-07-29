@@ -11,7 +11,8 @@ export default new Vuex.Store({
     todos: [
       { id: 1, text: 'todo-1', done: true },
       { id: 2, text: 'todo-2', done: false }
-    ]
+    ],
+    isLogin: false
   },
   // store的计算属性
   getters: {
@@ -26,6 +27,12 @@ export default new Vuex.Store({
     },
     addNum(state,n) {
       state.num += n;
+    },
+    login(state) {
+      state.isLogin = true;
+    },
+    logout(state) {
+      state.isLogin = false;
     }
   },
   actions: {
@@ -37,6 +44,23 @@ export default new Vuex.Store({
       setTimeout(()=>{
         commit('addNum',n);
       },1000)
-    }
+    },
+
+    submitLogin({commit}) {
+      return new Promise(resolve => {
+        setTimeout(()=>{
+          commit('login');
+          resolve(true);
+        },2000)
+      })
+    },
+    submitLogout({commit}) {
+      return new Promise(resolve => {
+        setTimeout(()=>{
+          commit('logout');
+          resolve(true);
+        },1000)
+      })
+    },
   }
 })

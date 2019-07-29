@@ -8,6 +8,8 @@ import Error from '@/views/404.vue'
 // import Login from '@/views/Login.vue'
 // import Register from '@/views/Register.vue'
 // import News from '@/views/News.vue'
+import store from './store';
+
 
 // 路由懒加载
 const Login = () => import('@/views/Login.vue');
@@ -67,7 +69,7 @@ router.beforeEach((to, from , next) => {
   // eslint-disable-next-line no-empty
   // 用户需要先登录，才能去其它页面
   if (to.name !== 'login' && to.path !== '/error' && to.name !== 'home') {
-    if (window.isLogin) {
+    if (store.state.isLogin) {
       // 已经登录
       next();
     } else {
