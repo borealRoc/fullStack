@@ -58,7 +58,7 @@
         - $once(eventName, eventHandler) 一次性侦听一个事件
         - $off(eventName, eventHandler) 停止侦听一个事件
     - 6.3.3 控制更新
-        - 强制更新：$forceUpdate
+        - 强制更新[作用类似于刷新页面]：vm.$forceUpdate
         - 静态组件：v-once
 7. 使用axios请求数据: npm install axios
 8. mock数据
