@@ -216,10 +216,20 @@
             - 根节点状态
                 - getters[第三个参数]: rootState
                 - actions: context.rootState
-
-
-
-
+# 四、使用vue全家桶构建电商项目
+- 开发思路
+    - 安装: @vue/cli 3.x(vuex,vur-router), Cube-UI, axios
+    - router.js
+        - 为页面配置路由，并标记[token]哪些页面需要登录
+        - 全局路由拦截，认证token
+    - store.js
+        - 设置token, 并提供修改token的方法
+    - 拦截axios所有http请求，预先放入token请求头
+    - 登录功能
+        - 登录成功后：页面重定向至目标页面
+        - 若是第一次登录：把token存入vuex.state.token和localStorage
+    - 注销功能
+        - 根据token有无值判断用户是否已经登录
 
 
 
