@@ -224,10 +224,11 @@
         - 全局路由拦截，认证token
     - store.js
         - 设置token, 并提供修改token的方法
-    - 拦截axios所有http请求，预先放入token请求头
+    - 请求拦截器：预先放入token请求头
     - 登录功能
         - 登录成功后：页面重定向至目标页面
         - 若是第一次登录：把token存入vuex.state.token和localStorage
+    - 响应拦截器：如果请求返回-1,说明用户处于注销状态或者token已经过期，则需要把token的state和localStorage清空，并且跳转到登录页面进行登录，然后再重定向回目的页面 
     - 注销功能
         - 根据token有无值判断用户是否已经登录
 
