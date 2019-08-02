@@ -5,15 +5,18 @@
 </template>
 
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
+
   data() {
     return {
-        // 数据模型
+      // 数据模型
       model: {
         user: "",
         pass: ""
       },
-        // 表单结构模型
+      // 表单结构模型
       schema: {
         fields: [
           // 用户名输入框
@@ -56,12 +59,15 @@ export default {
             label: "登录"
           },
           {
-              type: "submit",
-              label: "退出登录"
+            type: "submit",
+            label: "退出登录"
           }
         ]
       }
     };
+  },
+  computed: {
+      ...mapGetters(['isLogin'])
   },
   methods: {
     async submitHandler(e) {
@@ -79,7 +85,7 @@ export default {
         localStorage.setItem("token", token);
         this.$store.commit("setToken", token);
         // 然后跳转至一开始的目的页面
-        const redirect = this.$route.query.redirect || '/';
+        const redirect = this.$route.query.redirect || "/";
         this.$router.push(redirect);
       } else {
         // 登录失败
