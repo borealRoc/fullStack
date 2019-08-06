@@ -53,11 +53,14 @@ export default {
               required: "您还未输入密码"
             }
           },
+          // v-if = "!isLogin"
           // 登录按钮
           {
             type: "submit",
             label: "登录"
           },
+          // v-if = "isLogin"
+          // 退出登录按钮
           {
             type: "submit",
             label: "退出登录"
@@ -85,13 +88,14 @@ export default {
         localStorage.setItem("token", token);
         this.$store.commit("setToken", token);
         // 然后跳转至一开始的目的页面
-        const redirect = this.$route.query.redirect || "/";
+        const {redirect = "/"} = this.$route.query;
         this.$router.push(redirect);
       } else {
         // 登录失败
         const toast = this.$createToast({
           time: 1000,
-          txt: message
+          txt: message,
+          type: 'txt'
         });
         toast.show();
       }

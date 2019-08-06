@@ -60,7 +60,7 @@ const router = new Router({
         msg: route.params.msg,
         foo: route.query.foo,
         staticProp: 'staticPropVal',
-       })
+      })
     }
   ]
 })

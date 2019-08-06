@@ -2,6 +2,10 @@
 1. ES6对象、数组的扩展
     - 对象的扩展运算符 ...good,
     - 数组的扩展方法: find/filter/forEach/map
+        - find: 查找第一个符合条件的数组元素
+        - filter: 查找所有符合条件的数组元素
+        - map: 映射数组每一项，返回新数组
+        - forEach: 遍历数组每一项，对每一项进行操作
 2. ES6模块化: import Vue from 'vue'
 3. ES6异步方案Promise: axios.get("/api/goods").then(res => {})
 4. ES7异步方案: async + await
@@ -25,9 +29,9 @@
                     - 父组件监听：$on('event-name', arg)  
                 - 插槽[slot]：父把内容插入子组件中  
                     - 作用：如果`<navigation-link>` 没有包含一个 `<slot> `元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃<img src="knowledgePic/8.png"/>
-                    - 编译作用域：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。<img src="knowledgePic/5.png"/>
+                    - 编译作用域：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。
                     - 作用域插槽: 插槽内容访问子组件中才有的数据
-                    - 具名插槽：v-slot只能添加在```<template v-slot:header>```上(独占默认插槽这种情况除外),这一点和已经废弃的slot特性不同。<img src="knowledgePic/6.png"/>
+                    - 具名插槽：v-slot只能添加在```<template v-slot:header>```上(独占默认插槽这种情况除外),这一点和已经废弃的slot特性不同。<img src="knowledgePic/5.png"/>  <img src="knowledgePic/6.png"/>
             - 双向数据流
                 - 父子组件双向数据绑定的实现: 自定义组件的v-model
                     - 子组件：```<custom-input :value="searchText" @input="searchText = $event"></custom-input>```
@@ -142,7 +146,7 @@
         - 触发 DOM 更新。
         - 用创建好的实例调用 beforeRouteEnter 守卫中传给 next 的回调函数。
     - 2.3 路由元信息：meta: {requiresAuth: true}
-        - 用户：在路由导航时，有配置meta字段的，表示需要认证，即需要先登录才能跳到该页面
+        - 作用：在路由导航时，有配置meta字段的，表示需要认证，即需要先登录才能跳到该页面
     - 2.4 过渡动效：`<transition><router-view></router-view></transition>`
     - 2.5 数据获取  
     进入某个路由后，需要从服务器获取数据。可以通过两种方式来实现：
@@ -165,8 +169,8 @@
     })
     ```
     - 2.7 路由懒加载：当路由被访问的时候才加载对应组件
-        原理：结合 Vue 的异步组件和 Webpack 的代码分割功能
-        使用方法：const Foo = () => import('./Foo.vue')
+        - 原理：结合 Vue 的异步组件和 Webpack 的代码分割功能
+        - 使用方法：const Foo = () => import('./Foo.vue')
 # 三、vuex
 - 安装：vue add vuex
 - 核心概念

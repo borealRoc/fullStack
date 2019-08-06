@@ -53,9 +53,12 @@ module.exports = {
           }
         });
 
-        // app.get('/api/logout', function(req, res) {
-        //   res.json({code: -1})
-        // })
+        app.get('/api/logout', function(req, res) {
+          res.json({
+            code: -1,
+            token: ""
+          });
+        })
 
 
       }
