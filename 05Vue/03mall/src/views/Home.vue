@@ -7,6 +7,13 @@
 <script>
 // @ is an alias to /src
 export default {
-  name: 'home',
-}
+  name: "home",
+  async created() {
+    const res = await this.$http.get("/api/goods");
+    const { code, list } = res.data;
+    if (code === 0) {
+      console.log(list);
+    }
+  }
+};
 </script>
