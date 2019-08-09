@@ -231,12 +231,13 @@
     - main.js 
         - 为Vue原型增加$http方法
         - 引入http-interceptor.js
-    - vue.config.js
-        - 验证浏览器传过来的token，如果token已过期则返回401
-        - 提供登录、注销接口
     - http-interceptor.js
-        - 请求拦截器：在每个请求都把token放入请求头，供服务器校验
+        - 请求拦截器：在每个请求都把token放入请求头，供服务器校验[用户鉴权]
         - 响应拦截器：如果请求返回-1,说明用户处于注销状态或者token已经过期（401），则需要把浏览器保存的token[state和localStorage]清空，并且跳转到登录页面进行登录，然后再重定向回目的页面 
+    - vue.config.js
+        - 搭建一个简易服务器：CLI服务是基于 webpack的webpack-dev-server
+            - 中间件：验证浏览器传过来的token，如果token已过期则返回401
+            - 提供登录、注销接口
     - 登录功能
         - 把token存入vuex.state.token和localStorage,登录成功后,页面重定向至目标页面
     - 注销功能
