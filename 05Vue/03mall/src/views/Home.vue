@@ -8,6 +8,11 @@
 // @ is an alias to /src
 export default {
   name: "home",
+  data() {
+    return {
+      key: null
+    }
+  },
   async created() {
     const res = await this.$http.get("/api/goods");
     const { code, list } = res.data;
