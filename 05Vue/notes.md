@@ -50,20 +50,20 @@
     - 6.2.3 动态组件: 当在这些组件之间切换的时候，你有时会想保持这些组件的状态，以避免反复重渲染导致的性能问题  
     <img src="knowledgePic/9.png"/>  
     - 6.2.4 异步组件: 在大型应用中，我们可能需要将应用分割成小一些的代码块，并且只在需要的时候才从服务器加载一个模块。
-- 6.3 处理边界情况
-    - 6.3.1 访问元素 & 组件
-        - 访问根实例：this.$root  
-        - 访问父级实例：this.$parent
-        - 访问子组件实例或子元素: this.$ref
-        - 依赖注入: provide && inject  
-        <img src="knowledgePic/10.png"/>
-    - 6.3.2 程序化的事件侦听器
-        - $on(eventName, eventHandler) 侦听一个事件
-        - $once(eventName, eventHandler) 一次性侦听一个事件
-        - $off(eventName, eventHandler) 停止侦听一个事件
-    - 6.3.3 控制更新
-        - 强制更新[作用类似于刷新页面]：vm.$forceUpdate
-        - 静态组件：v-once
+    - 6.3 处理边界情况
+        - 6.3.1 访问元素 & 组件
+            - 访问根实例：this.$root  
+            - 访问父级实例：this.$parent
+            - 访问子组件实例或子元素: this.$ref
+            - 依赖注入: provide && inject  
+            <img src="knowledgePic/10.png"/>
+        - 6.3.2 程序化的事件侦听器
+            - $on(eventName, eventHandler) 侦听一个事件
+            - $once(eventName, eventHandler) 一次性侦听一个事件
+            - $off(eventName, eventHandler) 停止侦听一个事件
+        - 6.3.3 控制更新
+            - 强制更新[作用类似于刷新页面]：vm.$forceUpdate
+            - 静态组件：v-once
 7. 使用axios请求数据: npm install axios
 8. mock数据
 9. ElementUI的使用
@@ -72,6 +72,77 @@
         - 通过vue-cli安装：vue add element
     - 注意
         - 在安装时如果选择了按需加载，那么在引用ui组件时，需要在plugins/elements.js中手动引入对应组件
+10. 过渡 & 动画
+    - 进入/离开 & 列表过渡
+        - 过渡效果：Vue 在插入、更新或者移除 DOM 时，提供多种不同方式的应用过渡效果
+            - 在 CSS 过渡和动画中自动应用 class
+            - 在过渡钩子函数中使用 JavaScript 直接操作 DOM
+            - 配合使用第三方 CSS 动画库，如 Animate.css
+            - 可以配合使用第三方 JavaScript 动画库，如 Velocity.js
+        - 过渡类型
+            - 单元素/组件的过渡
+                - 过渡触发条件：Vue 提供了 transition 的封装组件，在下列情形中，可以给任何元素和组件添加进入/离开过渡
+                    - 条件渲染：v-if & v-show
+                    - 组件根节点
+                    - 动态组件
+                - 过渡类名  
+                <img src="knowledgePic/12.png">
+                - 过渡效果
+                    - css过渡
+                        - `v-enter-active,v-leave-active {transition: ;}`
+                    - css动画
+                        - `v-enter-active,v-leave-active {animation: ;}`
+                    - 自定义过渡的类名：他们的优先级高于普通的类名，这对于 Vue 的过渡系统和其他第三方 CSS 动画库，如 Animate.css 结合使用十分有用
+                    - 同时设置过渡和动画
+                        - Vue 为了知道过渡的完成，必须设置相应的事件监听器。它可以是 transitionend 或 animationend ，这取决于给元素应用的 CSS 规则。如果你使用其中任何一种，Vue 能自动识别类型并设置监听。
+                        - 但是，在一些场景中，你需要给同一个元素同时设置两种过渡动效，比如 animation 很快的被触发并完成了，而 transition 效果还没结束。在这种情况中，你就需要使用 type 特性并设置 animation 或 transition 来明确声明你需要 Vue 监听的类型。
+                    - 显性的过渡持续时间
+                        - `<transition :duration="1000">...</transition>`
+                    - JavaScript 钩子  
+                    <img src="knowledgePic/13.png">  
+                    <img src="knowledgePic/14.png">
+            - 初始渲染的过渡
+                - 可以通过 appear 特性设置节点在初始渲染的过渡
+                - `<transition appear>...</transition>`
+            - 多个元素的过渡
+                - 对于原生标签可以使用 v-if/v-else  
+                    ```html
+                    <transition>
+                        <table v-if="items.length > 0">
+                            <!-- ... -->
+                        </table>
+                        <p v-else>Sorry, no items found.</p>
+                    </transition>
+                    ```
+                - 当有相同标签名的元素切换时，需要通过 key 特性设置唯一的值来标记以让 Vue 区分它们，否则 Vue 为了效率只会替换相同标签内部的内容。
+                    ```html
+                    <transition>
+                        <button v-if="isEditing" key="save">
+                            Save
+                        </button>
+                        <button v-else key="edit">
+                            Edit
+                        </button>
+                    </transition>
+                    ```
+                - 过渡模式
+                    - 多个元素的过渡默认行为：新元素的进入和旧元素离开同时发生
+                    - 同时生效的进入和离开的过渡不能满足所有要求，所以 Vue 提供了 过渡模式
+                        - in-out：新元素先进行过渡，完成之后当前元素过渡离开
+                        - out-in：当前元素先进行过渡，完成之后新元素过渡进入  
+                        ```html
+                        <transition name="fade" mode="out-in">
+                            <!-- ... the buttons ... -->
+                        </transition>
+                        ```
+            - 多个组件的过渡
+                - 不需要使用 key 特性，只需要使用动态组件
+                    ```html
+                    <transition name="component-fade" mode="out-in">
+                        <component v-bind:is="view"></component>
+                    </transition>
+                    ```
+    - 状态过渡
 # 二、vue-router
 1. vue-router基础语法
     - 1.1  router vs route vs routes
@@ -222,27 +293,40 @@
                 - actions: context.rootState
 # 四、使用vue全家桶构建电商项目
 - 开发思路
-    - 安装: @vue/cli 3.x(vuex,vur-router), Cube-UI, axios
-    - router.js
-        - 为页面配置路由，并标记[token]哪些页面需要登录
-        - 全局路由拦截，认证token
-    - store.js
-        - 设置token, 并提供修改token的方法
-        - 根据token的值判断用户的登录状态：isLogin
-    - main.js 
-        - 为Vue原型增加$http方法
-        - 引入http-interceptor.js
-    - http-interceptor.js
-        - 请求拦截器：在每个请求都把token放入请求头，供服务器校验[用户鉴权]
-        - 响应拦截器：如果请求返回-1,说明用户处于注销状态或者token已经过期（401），则需要把浏览器保存的token[state和localStorage]清空，并且跳转到登录页面进行登录，然后再重定向回目的页面 
-    - 登录功能
-        - 把token存入vuex.state.token和localStorage,登录成功后,页面重定向至目标页面
-    - 注销功能
-        - 把token[state和localStorage]清空
-    - vue.config.js
-        - 搭建一个简易服务器：CLI服务是基于 webpack的webpack-dev-server
-            - 中间件：验证浏览器传过来的token，如果token已过期则返回401
-            - 提供登录、注销接口
+    - 第一天
+        - 安装: @vue/cli 3.x(vuex,vur-router), Cube-UI, axios
+        - router.js
+            - 为页面配置路由，并标记[token]哪些页面需要登录
+            - 全局路由拦截，认证token
+        - store.js
+            - 设置token, 并提供修改token的方法
+            - 根据token的值判断用户的登录状态：isLogin
+        - main.js 
+            - 为Vue原型增加$http方法
+            - 引入http-interceptor.js
+        - http-interceptor.js[前端]
+            - 请求拦截器：在每个请求都把token放入请求头，供服务器校验[用户鉴权]
+            - 响应拦截器：如果请求返回-1,说明用户处于注销状态或者token已经过期（401），则需要把浏览器保存的token[state和localStorage]清空，并且跳转到登录页面进行登录，然后再重定向回目的页面 
+        - vue.config.js[后端]
+            - 搭建一个简易服务器：CLI服务是基于 webpack的webpack-dev-server
+                - 中间件：验证浏览器传过来的token，如果token不存在则返回401，提示用户去登录
+                - 提供登录、注销接口
+        - 登录功能
+            - 把token存入vuex.state.token和localStorage,登录成功后,页面重定向至目标页面
+        - 注销功能
+            - 把token[state和localStorage]清空
+        - 拓展
+            - 处理post请求
+            - 设置token有效期
+            - 表单异步校验
+    - 第二天
+        - 设计页面
+            - 首页：底部导航栏
+            - 购物车：
+            - 我的：登录、注销
+    
+
+
 
 
 
