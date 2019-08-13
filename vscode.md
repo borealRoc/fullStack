@@ -1,0 +1,2 @@
+- 快捷键
+    - Option + Shift + F 格式化
