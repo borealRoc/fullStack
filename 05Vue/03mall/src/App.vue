@@ -1,17 +1,43 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> | 
-      <router-link to="/login">Login</router-link>
-    </div>
-    <router-view/>
+    <cube-tab-bar v-model="selectedLabel" :data="tabs" @change="changeHandler"></cube-tab-bar>
+    <transition name="slide">
+      <router-view />
+    </transition>
   </div>
 </template>
-
+<script>  
+export default {
+  data() {
+    return {
+      selectedLabel: "/", // 默认页签
+      tabs: [
+        { label: "Home", value: "/", icon: "cubeic-home" },
+        { label: "Cart", value: "/cart", icon: "cubeic-mall" },
+        { label: "Me", value: "/login", icon: "cubeic-person" }
+      ]
+    };
+  },
+  watch: {
+    // 路由发生变化时，同步tabs选中
+    $route(route) {
+      this.selectedLabel = route.path;
+    }
+  },
+  created() {
+    // 初始化页签设置
+    this.selectedLabel = this.$route.path;
+  },
+  methods: {
+    changeHandler(val) {
+      this.$router.push(val);
+    }
+  }
+};
+</script>
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -28,5 +54,18 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+.cube-tab-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 1px solid #e7e7e7;
+}
+.cube-tab {
+  color: #5d656d;
+}
+.cube-tab_active {
+  color: #ff4e22;
 }
 </style>
