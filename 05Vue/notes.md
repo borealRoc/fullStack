@@ -73,24 +73,25 @@
     - 注意
         - 在安装时如果选择了按需加载，那么在引用ui组件时，需要在plugins/elements.js中手动引入对应组件
 10. 过渡 & 动画
-    - 进入/离开 & 列表过渡
-        - 过渡效果：Vue 在插入、更新或者移除 DOM 时，提供多种不同方式的应用过渡效果
-            - 在 CSS 过渡和动画中自动应用 class
-            - 在过渡钩子函数中使用 JavaScript 直接操作 DOM
-            - 配合使用第三方 CSS 动画库，如 Animate.css
-            - 可以配合使用第三方 JavaScript 动画库，如 Velocity.js
-        - 过渡类型
+    - 概述：Vue 在插入、更新或者移除 DOM 时，提供多种不同方式的应用过渡效果
+        - 在 CSS 过渡和动画中自动应用 class
+        - 在过渡钩子函数中使用 JavaScript 直接操作 DOM
+        - 配合使用第三方 CSS 动画库，如 Animate.css
+        - 可以配合使用第三方 JavaScript 动画库，如 Velocity.js
+    - 进入/离开过渡
+        - 特点：单个节点、同一时间渲染多个节点中的一个
+        - 触发条件：Vue 提供了 transition 的封装组件，在下列情形中，可以给任何元素和组件添加进入/离开过渡
+            - 条件渲染：v-if & v-show
+            - 组件根节点
+            - 动态组件
+        - 进入/离开过渡的类型
             - 单元素/组件的过渡
-                - 过渡触发条件：Vue 提供了 transition 的封装组件，在下列情形中，可以给任何元素和组件添加进入/离开过渡
-                    - 条件渲染：v-if & v-show
-                    - 组件根节点
-                    - 动态组件
                 - 过渡类名  
                 <img src="knowledgePic/12.png">
                 - 过渡效果
                     - css过渡
                         - `v-enter-active,v-leave-active {transition: ;}`
-                    - css动画
+                    - css动画：CSS 动画用法同 CSS 过渡，区别是在动画中 v-enter 类名在节点插入 DOM 后不会立即删除，而是在 animationend 事件触发时删除
                         - `v-enter-active,v-leave-active {animation: ;}`
                     - 自定义过渡的类名：他们的优先级高于普通的类名，这对于 Vue 的过渡系统和其他第三方 CSS 动画库，如 Animate.css 结合使用十分有用
                     - 同时设置过渡和动画
@@ -142,6 +143,47 @@
                         <component v-bind:is="view"></component>
                     </transition>
                     ```
+            - 列表过渡
+            - 可复用的过渡
+            - 动态过渡        
+    - 列表过渡
+        - 特点：同时渲染整个列表，在这种场景中，使用`<transition-group>`组件
+            - 不同于`<transition>`，它会以一个真实元素呈现：默认为一个`<span>`。可以通过 tag 特性更换为其他元素
+            - 过渡模式不可用，因为我们不再相互切换特有的元素
+            - 内部元素 总是需要 提供唯一的 key 属性值
+            - CSS 过渡的类将会应用在内部的元素中，而不是这个组/容器本身
+        - 列表过渡的类型
+            - 列表的进入/离开过渡
+            ```html
+                <transition-group name="list" tag="p">
+                    <span v-for="item in items" v-bind:key="item" class="list-item">
+                    {{ item }}
+                    </span>
+                </transition-group>
+            ```
+            ```css
+                .list-enter-active, .list-leave-active { transition: all 1s;}
+                .list-enter, .list-leave-to { opacity: 0; transform: translateY(30px);}
+            ```
+            - 列表的排序过渡
+                - `<transition-group>`组件还有一个特殊之处。不仅可以进入和离开动画，还可以改变定位。要使用这个新功能只需了解新增的 v-move 特性，它会在元素的改变定位的过程中应用。像之前的类名一样，可以通过 name 属性来自定义前缀，也可以通过 move-class 属性手动设置
+                ```html
+                    <transition-group name="list" tag="p">
+                        <span v-for="item in items" v-bind:key="item" class="list-item">
+                        {{ item }}
+                        </span>
+                    </transition-group>
+                ```
+                ```css
+                    .list-enter-active, .list-leave-active { transition: all 1s;}
+                    .list-leave-active { position: absolute;}
+                    .list-enter, .list-leave-to { opacity: 0; transform: translateY(30px);}
+                    .list-move {transition: all 1s;} /*加了这个之后，比上面例子的过渡平滑*/
+                ```
+    - 可复用的过渡
+        - 过渡可以通过 Vue 的组件系统实现复用。要创建一个可复用过渡组件，你需要做的就是将`<transition>` 或者 `<transition-group>` 作为根组件，然后将任何子组件放置在其中就可以了
+    - 动态过渡
+        - 在 Vue 中即使是过渡也是数据驱动的,所有过渡特性都可以动态绑定
     - 状态过渡
 # 二、vue-router
 1. vue-router基础语法
