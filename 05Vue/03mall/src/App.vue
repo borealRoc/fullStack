@@ -2,11 +2,11 @@
   <div id="app">
     <cube-tab-bar v-model="selectedLabel" :data="tabs" @change="changeHandler"></cube-tab-bar>
     <transition name="slide">
-      <router-view />
+      <router-view class="router-part"/>
     </transition>
   </div>
 </template>
-<script>  
+<script>
 export default {
   data() {
     return {
@@ -37,6 +37,11 @@ export default {
 </script>
 <style>
 #app {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -67,5 +72,24 @@ export default {
 }
 .cube-tab_active {
   color: #ff4e22;
+}
+.router-part {
+  position: absolute;
+  top: 0;
+  bottom: 48px;
+  left: 0;
+  right: 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.slide-enter {
+  transform: translate3d(-100%, 0, 0);
+}
+.slide-leave-to {
+  transform: translate3d(100%, 0, 0);
+}
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.5s;
 }
 </style>
