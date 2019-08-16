@@ -51,153 +51,172 @@ module.exports = {
 								img: "/img/4.jpg"
 							}
 						],
-						data: {
-							fe: [{
-									id: 1,
-									title: "Vue2.x实战",
-									price: "100",
-									img: "/img/01.jpg",
-									count: 100
-								},
-								{
-									id: 2,
-									title: "React16.x实战",
-									price: "120",
-									img: "/img/03.jpg",
-									count: 100
-								},
-								{
-									id: 3,
-									title: "nodejs实战",
-									price: "80",
-									img: "/img/02.jpg",
-									count: 100
-								},
-								{
-									id: 4,
-									title: "前端工程化",
-									price: "110",
-									img: "/img/04.jpg",
-									count: 100
-								},
-								{
-									id: 5,
-									title: "面试",
-									price: "200",
-									img: "/img/02.jpg",
-									count: 100
-								},
-								{
-									id: 6,
-									title: "前端安全",
-									price: "30",
-									img: "/img/05.jpg",
-									count: 100
-								}
-							],
-							python: [{
-									id: 7,
-									title: "Python基础语法",
-									price: "120",
-									img: "/img/03.jpg",
-									count: 101
-								},
-								{
-									id: 8,
-									title: "Flask实战",
-									price: "80",
-									img: "/img/02.jpg",
-									count: 100
-								},
-								{
-									id: 9,
-									title: "Django实战",
-									price: "110",
-									img: "/img/01.jpg",
-									count: 100
-								},
-								{
-									id: 10,
-									title: "Python语法进阶",
-									price: "200",
-									img: "/img/04.jpg",
-									count: 100
-								}
-							],
-							java: [{
-									id: 11,
-									title: "java入门实战",
-									price: "80",
-									img: "/img/02.jpg",
-									count: 100
-								},
-								{
-									id: 12,
-									title: "spring boot实战",
-									price: "110",
-									img: "/img/01.jpg",
-									count: 100
-								},
-								{
-									id: 13,
-									title: "Java高并发",
-									price: "30",
-									img: "/img/04.jpg",
-									count: 100
-								}
-							],
-							bigdata: [{
-									id: 14,
-									title: "大数据实战",
-									price: "200",
-									img: "/img/01.jpg",
-									count: 100
-								},
-								{
-									id: 15,
-									title: "Hadoop实战",
-									price: "120",
-									img: "/img/03.jpg",
-									count: 100
-								},
-								{
-									id: 16,
-									title: "Kafka平台",
-									price: "80",
-									img: "/img/02.jpg",
-									count: 100
-								}
-							],
-							ai: [{
-									id: 17,
-									title: "算法实战",
-									price: "100",
-									img: "/img/01.jpg",
-									count: 100
-								},
-								{
-									id: 18,
-									title: "个性化推荐",
-									price: "120",
-									img: "/img/03.jpg",
-									count: 100
-								},
-								{
-									id: 19,
-									title: "机器学习",
-									price: "80",
-									img: "/img/02.jpg",
-									count: 100
-								},
-								{
-									id: 20,
-									title: "AI实战",
-									price: "110",
-									img: "/img/05.jpg",
-									count: 100
-								}
-							]
-						},
+						data: [
+							{
+								name: 'fe',
+								course: [{
+										id: 1,
+										title: "Spring Boot仿抖音短视频小程序开发 全栈式实战项目",
+										price: "100",
+										img: "/img/c1.jpg",
+										count: 100
+									},
+									{
+										id: 2,
+										title: "阿里新零售数据库设计与实战 ",
+										price: "120",
+										img: "/img/c2.jpg",
+										count: 100
+									},
+									{
+										id: 3,
+										title: "前端要学的测试课 从Jest入门到 TDD/BDD双实战",
+										price: "80",
+										img: "/img/c3.jpg",
+										count: 100
+									},
+									{
+										id: 4,
+										title: "专为程序员设计的统计课 彻底学会统计分析",
+										price: "110",
+										img: "/img/c4.jpg",
+										count: 100
+									},
+									{
+										id: 5,
+										title: "零基础入门 全角度解读企业主流数据库MySQL8.0",
+										price: "200",
+										img: "/img/c5.jpg",
+										count: 100
+									},
+									{
+										id: 6,
+										title: "Flutter从入门到进阶 实战携程网App",
+										price: "30",
+										img: "/img/c6.jpg",
+										count: 100
+									}
+								]
+							},
+							{
+								name: 'python',
+								course: [{
+										id: 7,
+										title: "Python基础语法",
+										price: "120",
+										img: "/img/c7.jpg",
+										count: 101
+									},
+									{
+										id: 8,
+										title: "Flask实战",
+										price: "80",
+										img: "/img/c8.jpg",
+										count: 100
+									},
+									{
+										id: 9,
+										title: "Django实战",
+										price: "110",
+										img: "/img/c9.jpg",
+										count: 100
+									},
+									{
+										id: 10,
+										title: "Python语法进阶",
+										price: "200",
+										img: "/img/c10.jpg",
+										count: 100
+									}
+								]
+							},
+							{
+								name: 'java',
+								course: [
+									{
+										id: 11,
+										title: "java入门实战",
+										price: "80",
+										img: "/img/c11.jpg",
+										count: 100
+									},
+									{
+										id: 12,
+										title: "spring boot实战",
+										price: "110",
+										img: "/img/c12.jpg",
+										count: 100
+									},
+									{
+										id: 13,
+										title: "Java高并发",
+										price: "30",
+										img: "/img/c13.jpg",
+										count: 100
+									}
+
+								]
+							},
+							{
+								name: 'bigdata',
+								course: [{
+										id: 14,
+										title: "大数据实战",
+										price: "200",
+										img: "/img/c14.jpg",
+										count: 100
+									},
+									{
+										id: 15,
+										title: "Hadoop实战",
+										price: "120",
+										img: "/img/c15.jpg",
+										count: 100
+									},
+									{
+										id: 16,
+										title: "Kafka平台",
+										price: "80",
+										img: "/img/c16.jpg",
+										count: 100
+									}
+
+								]
+							},
+							{
+								name: 'ai',
+								course: [{
+										id: 17,
+										title: "算法实战",
+										price: "100",
+										img: "/img/c17.jpg",
+										count: 100
+									},
+									{
+										id: 18,
+										title: "个性化推荐",
+										price: "120",
+										img: "/img/c18.jpg",
+										count: 100
+									},
+									{
+										id: 19,
+										title: "机器学习",
+										price: "80",
+										img: "/img/c19.jpg",
+										count: 100
+									},
+									{
+										id: 20,
+										title: "AI实战",
+										price: "110",
+										img: "/img/c20.jpg",
+										count: 100
+									}
+
+								]
+							}
+						],
 						keys: ["fe", "python", "java", "bigdata", "ai"]
 					});
 				});

@@ -1,30 +1,40 @@
 <template>
   <div class="home">
-    <cube-slide :data="items">
-      <cube-slide-item v-for="item in items" :key="item.id">
+    <cube-slide :data="slider">
+      <cube-slide-item v-for="item in slider" :key="item.id">
         <router-link :to="`/detail/${item.id}`">
           <img :src="item.img" />
         </router-link>
       </cube-slide-item>
     </cube-slide>
+    <course-list :courseLists="courseLists"></course-list>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
+import courseList from "@/components/CourseList";
+
 export default {
   name: "home",
   data() {
     return {
-      items: []
+      slider: [],
+      keys: [],
+      courseLists: []
     };
+  },
+  components: {
+    courseList
   },
   async created() {
     const res = await this.$http.get("/api/goods");
     const { code } = res.data;
     if (code === 0) {
-      const { slider, data, keys } = res.data;
-      this.items = slider;
+      const { slider, data: courseLists, keys } = res.data;
+      this.slider = slider;
+      this.courseLists = courseLists;
+      this.keys = keys;
     }
   }
 };
@@ -42,6 +52,9 @@ export default {
         height: 100%;
       }
     }
+  }
+  .cube-slide-dots {
+    bottom: 8px;
   }
 }
 </style>
