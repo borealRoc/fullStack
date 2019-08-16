@@ -55,6 +55,7 @@ module.exports = {
 							{
 								name: 'fe',
 								cName: '前端全栈开发',
+								bg: 'url("/img/c_bar_1.png")',
 								course: [{
 										id: 1,
 										title: "Spring Boot仿抖音短视频小程序开发 全栈式实战项目",
@@ -102,6 +103,7 @@ module.exports = {
 							{
 								name: 'python',
 								cName: 'Python高级开发',
+								bg: 'url("/img/c_bar_2.png")',
 								course: [{
 										id: 7,
 										title: "Python基础语法",
@@ -135,6 +137,7 @@ module.exports = {
 							{
 								name: 'java',
 								cName: 'Java高级开发',
+								bg: 'url("/img/c_bar_3.png")',
 								course: [
 									{
 										id: 11,
@@ -163,6 +166,7 @@ module.exports = {
 							{
 								name: 'bigdata',
 								cName: '大数据开发',
+								bg: 'url("/img/c_bar_4.png")',
 								course: [{
 										id: 14,
 										title: "大数据实战",
@@ -190,6 +194,7 @@ module.exports = {
 							{
 								name: 'ai',
 								cName: '人工智能',
+								bg: 'url("/img/c_bar_5.png")',
 								course: [{
 										id: 17,
 										title: "算法实战",
