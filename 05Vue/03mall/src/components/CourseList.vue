@@ -5,13 +5,15 @@
         v-for="courseList in courseLists"
         :key="courseList.name"
         :label="courseList.name"
+        :title="courseList.cName"
       >
         <ul>
           <li v-for="courseItem in courseList.course" :key="courseItem.id">
             <div class="course-ctn">
               <img :src="courseItem.img" />
               <div class="course-ctt">
-                <p>{{courseItem.title}}</p>
+                <p class="course-title">{{courseItem.title}}</p>
+                <p class="course-count">学习人数：{{courseItem.count}}人</p>
               </div>
               <span class="course-price">&yen;{{courseItem.price}}</span>
             </div>
@@ -25,7 +27,12 @@
 <script>
 export default {
   name: "CourseList",
-  props: ["courseLists"]
+  props: ["courseLists"],
+  filters: {
+    uppercase: function (val) {
+      return val.toUpperCase()
+    }
+  }
 };
 </script>
 
@@ -41,14 +48,9 @@ export default {
   .cube-scroll-nav-bar_horizontal {
     border-bottom: 1px solid #f4f4f4;
   }
-  .scroll-nav-def .cube-scroll-nav-panel-title {
-    padding: 15px;
-    font-size: 16px;
-    text-align: center;
-  }
   .cube-scroll-nav-panel {
-    margin: 20px;
     ul {
+      margin: 0 20px;
       overflow: hidden;
       font-size: 14px;
       line-height: 1.4;
@@ -72,7 +74,8 @@ export default {
             width: 160px;
             padding-left: 10px;
             text-align: left;
-            p {
+            .course-title {
+              color: #2B333B;
               overflow: hidden;
               text-overflow: ellipsis;
               display: -webkit-box;
@@ -80,6 +83,11 @@ export default {
               -webkit-box-orient: vertical;
               word-break: break-all;
               word-wrap: break-word;
+            }
+            .course-count {
+              padding-top: 6px;
+              font-size: 12px;
+              color: #71777D;
             }
           }
           .course-price {

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
-    <cube-tab-bar v-model="selectedLabel" :data="tabs" @change="changeHandler"></cube-tab-bar>
     <transition name="slide">
       <router-view class="router-part"/>
     </transition>
+    <cube-tab-bar v-model="selectedLabel" :data="tabs" @change="changeHandler"></cube-tab-bar>
   </div>
 </template>
 <script>
@@ -36,6 +36,9 @@ export default {
 };
 </script>
 <style>
+html, body {
+  height: 100%;
+}
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
