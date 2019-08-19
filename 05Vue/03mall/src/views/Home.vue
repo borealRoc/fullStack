@@ -1,5 +1,12 @@
 <template>
   <div class="home">
+    <div class="home-header">
+      <h1 class="home-logo">IMLOGO</h1>
+      <div class="show-course-btn">
+        <cube-button @click="showCourseDrawer" icon="cubeic-back"></cube-button>
+      </div>
+    </div>
+    <cube-drawer ref="courseDrawer" title="请选择" :data="courseData"></cube-drawer>
     <cube-slide :data="slider">
       <cube-slide-item v-for="item in slider" :key="item.id">
         <router-link :to="`/detail/${item.id}`">
@@ -21,7 +28,8 @@ export default {
     return {
       slider: [],
       keys: [],
-      courseLists: []
+      courseLists: [],
+      courseData: [[], []]
     };
   },
   components: {
@@ -36,11 +44,43 @@ export default {
       this.courseLists = courseLists;
       this.keys = keys;
     }
+  },
+  methods: {
+    showCourseDrawer() {
+      this.$refs.courseDrawer.show();
+    }
   }
 };
 </script>
 
 <style lang="scss">
+.home-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 50px;
+  background-color: #ff4e1f;
+  z-index: 2;
+  .home-logo {
+    float: left;
+    text-indent: 40px;
+    font-size: 24px;
+    font-family: monospace;
+    line-height: 50px;
+    color: #fff;
+    background: url("/img/logo.png") no-repeat 10px center;
+    background-size: 20px;
+  }
+  .show-course-btn {
+    position: absolute;
+    right: 0;
+    width: 50px;
+    .cube-btn {
+      background: none;
+    }
+  }
+}
+
 .cube-slide {
   height: auto;
   .cube-slide-group {

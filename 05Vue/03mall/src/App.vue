@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <transition name="slide">
-      <router-view class="router-part"/>
-    </transition>
+    <div class="router-part">
+      <transition name="slide">
+        <router-view />
+      </transition>
+    </div>
     <cube-tab-bar v-model="selectedLabel" :data="tabs" @change="changeHandler"></cube-tab-bar>
   </div>
 </template>
@@ -36,7 +38,8 @@ export default {
 };
 </script>
 <style>
-html, body {
+html,
+body {
   height: 100%;
 }
 #app {
@@ -75,6 +78,13 @@ html, body {
   position: absolute;
   top: 0;
   bottom: 48px;
+  left: 0;
+  right: 0;
+}
+.router-part > div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
   left: 0;
   right: 0;
   overflow-y: auto;
