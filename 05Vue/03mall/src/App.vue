@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     changeHandler(val) {
-      this.$router.push(val);
+      this.$router.push(val)
     }
   }
 };

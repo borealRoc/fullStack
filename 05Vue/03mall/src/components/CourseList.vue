@@ -14,6 +14,7 @@
               <div class="course-ctt">
                 <p class="course-title">{{courseItem.title}}</p>
                 <p class="course-count">学习人数：{{courseItem.count}}人</p>
+                <span class="course-add-cart">添加到购物车</span>
               </div>
               <span class="course-price">&yen;{{courseItem.price}}</span>
             </div>
@@ -67,6 +68,7 @@ export default {
             border-radius: 6px;
           }
           .course-ctt {
+            position: relative;
             float: left;
             box-sizing: border-box;
             width: 160px;
@@ -86,6 +88,16 @@ export default {
               padding-top: 6px;
               font-size: 12px;
               color: #71777D;
+            }
+            .course-add-cart {
+              position: absolute;
+              right: 10px;
+              bottom: 0;
+              width: 16px;
+              height: 16px;
+              text-indent: -999px;
+              background: url("/img/cart.png") no-repeat right 0;
+              background-size: cover;
             }
           }
           .course-price {

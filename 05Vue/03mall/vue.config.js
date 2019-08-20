@@ -51,8 +51,8 @@ module.exports = {
 								img: "/img/4.jpg"
 							}
 						],
-						data: [
-							{
+						data: {
+							'fe': {
 								name: 'fe',
 								cName: '前端全栈开发',
 								bg: 'url("/img/c_bar_1.png")',
@@ -100,7 +100,7 @@ module.exports = {
 									}
 								]
 							},
-							{
+							'python': {
 								name: 'python',
 								cName: 'Python高级开发',
 								bg: 'url("/img/c_bar_2.png")',
@@ -134,7 +134,7 @@ module.exports = {
 									}
 								]
 							},
-							{
+							'java': {
 								name: 'java',
 								cName: 'Java高级开发',
 								bg: 'url("/img/c_bar_3.png")',
@@ -163,7 +163,7 @@ module.exports = {
 
 								]
 							},
-							{
+							'bigdata': {
 								name: 'bigdata',
 								cName: '大数据开发',
 								bg: 'url("/img/c_bar_4.png")',
@@ -191,7 +191,7 @@ module.exports = {
 
 								]
 							},
-							{
+							'ai': {
 								name: 'ai',
 								cName: '人工智能',
 								bg: 'url("/img/c_bar_5.png")',
@@ -226,7 +226,7 @@ module.exports = {
 
 								]
 							}
-						],
+						},
 						keys: ["fe", "python", "java", "bigdata", "ai"]
 					});
 				});
