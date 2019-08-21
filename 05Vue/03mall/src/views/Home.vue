@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <div class="home-header">
-      <h1 class="home-logo">IMLOGO</h1>
+      <h1 class="home-logo">XUSHAO</h1>
       <div class="show-course-btn">
         <cube-button @click="showCourseDrawer" icon="cubeic-back"></cube-button>
       </div>
@@ -28,8 +28,7 @@ const label = {
   python: "PYTHON",
   java: "JAVA",
   bigdata: "大数据",
-  ai: "人工智能",
-  all: "全部"
+  ai: "人工智能"
 };
 
 export default {
@@ -57,7 +56,6 @@ export default {
       this.keys = keys;
       this.filterKeys = [...this.keys]; //默认显示全部课程
     }
-    console.log(this.courseData);
   },
   computed: {
     filterCourseLists() {
@@ -75,7 +73,7 @@ export default {
             text: label[key]
           };
         })
-        .concat([{ value: "all", text: "全部" }]);
+        .concat([{ value: ["fe", "python", "java", "bigdata", "ai"], text: "全部" }]);
     }
   },
   methods: {
@@ -83,12 +81,11 @@ export default {
       this.$refs.courseDrawer.show();
     },
     selectHandler(val) {
-      // if (val[0] === 'all') {
-      //   this.filterKeys = [].concat(this.keys);
-      // } else {
-      //   this.filterKeys = [...val];
-      // }
-      this.filterKeys = [...val]
+      if (typeof val[0] === "string") {
+        this.filterKeys = [...val];
+      } else {
+        this.filterKeys = [...val[0]];
+      }
     },
     imagePreview(index) {
       this.initialIndex = index;
