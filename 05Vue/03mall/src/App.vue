@@ -5,10 +5,21 @@
         <router-view />
       </transition>
     </div>
-    <cube-tab-bar v-model="selectedLabel" :data="tabs" @change="changeHandler"></cube-tab-bar>
+    <!-- <cube-tab-bar v-model="selectedLabel" :data="tabs" @change="changeHandler"></cube-tab-bar> -->
+    <!-- 为了给Cart-tab加一个数量提示的badge，所以需要对这个组件进行重构 -->
+    <cube-tab-bar v-model="selectedLabel" @change="changeHandler">
+      <cube-tab v-for="(item, index) in tabs" :key="index" :label="item.value" :icon="item.icon">
+        <span class="cart-badge" v-if="showBadge(item.label)">{{cartTotal}}</span>
+        <p>{{item.label}}</p>
+      </cube-tab>
+    </cube-tab-bar>
   </div>
 </template>
+
+
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -30,9 +41,15 @@ export default {
     // 初始化页签设置
     this.selectedLabel = this.$route.path;
   },
+  computed: {
+    ...mapGetters(["cartTotal"])
+  },
   methods: {
     changeHandler(val) {
-      this.$router.push(val)
+      this.$router.push(val);
+    },
+    showBadge(label) {
+      return label === "Cart" && this.cartTotal > 0;
     }
   }
 };
@@ -73,6 +90,18 @@ body {
 }
 .cube-tab_active {
   color: #ff4e22;
+}
+.cart-badge {
+  position: absolute;
+  font-size: 9px;
+  width: 14px;
+  height: 14px;
+  margin-top: -4px;
+  text-align: center;
+  line-height: 14px;
+  background-color: #e00000;
+  border-radius: 50%;
+  color: #fff;
 }
 .router-part {
   position: absolute;

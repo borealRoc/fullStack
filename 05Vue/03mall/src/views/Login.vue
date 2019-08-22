@@ -83,11 +83,10 @@ export default {
       if (code === 0) {
         // 登录成功
         // 先把接口返回的token存入localStorage和state
-        localStorage.setItem("token", token);
+        // localStorage.setItem("token", token);
         this.$store.commit("setToken", token);
         // 再把用户名存入localStorage和state
-        
-        localStorage.setItem("user", user);
+        // localStorage.setItem("user", user);
         this.$store.commit("setUser", user);
         // 然后跳转至一开始的目的页面
         const { redirect = "/" } = this.$route.query;

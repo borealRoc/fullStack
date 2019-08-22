@@ -73,7 +73,9 @@ export default {
             text: label[key]
           };
         })
-        .concat([{ value: ["fe", "python", "java", "bigdata", "ai"], text: "全部" }]);
+        .concat([
+          { value: ["fe", "python", "java", "bigdata", "ai"], text: "全部" }
+        ]);
     }
   },
   methods: {
@@ -84,7 +86,8 @@ export default {
       if (typeof val[0] === "string") {
         this.filterKeys = [...val];
       } else {
-        this.filterKeys = [...val[0]];
+        // this.filterKeys = [...val[0]];
+        console.log('展示全部商品列表，这个功能总是有bug')
       }
     },
     imagePreview(index) {

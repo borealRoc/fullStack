@@ -58,7 +58,7 @@ module.exports = {
 								bg: 'url("/img/c_bar_1.png")',
 								course: [{
 										id: 1,
-										title: "Spring Boot仿抖音短视频小程序开发 全栈式实战项目",
+										title: "专为程序员设计的统计课:Spring Boot仿抖音短视频小程序开发 全栈式实战项目",
 										price: "100",
 										img: "/img/c1.jpg",
 										count: 100
