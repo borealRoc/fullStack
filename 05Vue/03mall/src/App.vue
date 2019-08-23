@@ -97,11 +97,12 @@ body {
   width: 14px;
   height: 14px;
   margin-top: -4px;
+  border: solid 1px;
   text-align: center;
   line-height: 14px;
-  background-color: #e00000;
+  color: #e00000;
+  background-color: #fff;
   border-radius: 50%;
-  color: #fff;
 }
 .router-part {
   position: absolute;

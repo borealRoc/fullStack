@@ -26,6 +26,16 @@ const store = new Vuex.Store({
                     cartCount: 1,
                 })
             }
+        },
+        addCartCount(state, index) {
+            state.cart[index].cartCount += 1;
+        },
+        reduceCartCount(state, index) {
+            if (state.cart[index].cartCount > 1) {
+                state.cart[index].cartCount -= 1;
+            } else {
+                state.cart.splice(index, 1);
+            }
         }
     },
     actions: {
@@ -39,13 +49,14 @@ const store = new Vuex.Store({
                 num += item.cartCount
             })
             return num;
-        }
+        },
+        sumTotal: state => state.cart.reduce((num, item) => num += item.price * item.cartCount, 0),
     }
 })
 
 // 订阅store变化
 store.subscribe((mutation, state) => {
-    // 当token，用户名，购物车商品发生变化时，将这些数据存储在localStorage
+    // 当token，用户名，购物车商品发生变化时，将这些(变化响应)数据存储在localStorage
     switch (mutation.type) {
         case 'setToken':
             localStorage.setItem('token', state.token);
@@ -54,6 +65,12 @@ store.subscribe((mutation, state) => {
             localStorage.setItem('user', state.user);
             break;
         case 'addCart':
+            localStorage.setItem('cart', JSON.stringify(state.cart));
+            break;
+        case 'addCartCount':
+            localStorage.setItem('cart', JSON.stringify(state.cart));
+            break;
+        case 'reduceCartCount':
             localStorage.setItem('cart', JSON.stringify(state.cart));
             break;
     }

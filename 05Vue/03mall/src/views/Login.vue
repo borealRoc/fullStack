@@ -1,15 +1,18 @@
 <template>
-  <div class="login-view">
-    <div class="not-login" v-if="isLogin">
-      <div class="user-modal">
-        <img class="user-pic" src="../assets/logo.png" />
-        <h3 class="user-name">{{this.$store.state.user}}</h3>
+  <div>
+    <x-header title="登录"></x-header>
+    <div class="login-view">
+      <div class="not-login" v-if="isLogin">
+        <div class="user-modal">
+          <img class="user-pic" src="../assets/logo.png" />
+          <h3 class="user-name">{{this.$store.state.user}}</h3>
+        </div>
+        <cube-button type="submit" @click="logoutHandler">退出登录</cube-button>
       </div>
-      <cube-button type="submit" @click="logoutHandler">退出登录</cube-button>
-    </div>
-    <div class="is-login" v-else>
-      <cube-form :model="model" :schema="schema"></cube-form>
-      <cube-button type="submit" @click="loginHandler">登录</cube-button>
+      <div class="is-login" v-else>
+        <cube-form :model="model" :schema="schema"></cube-form>
+        <cube-button type="submit" @click="loginHandler">登录</cube-button>
+      </div>
     </div>
   </div>
 </template>
@@ -108,12 +111,12 @@ export default {
       if (code === -1) {
         localStorage.setItem("token", token);
         this.$store.commit("setToken", token);
-        localStorage.removeItem('user');
-        this.$store.commit("setUser", '');
+        localStorage.removeItem("user");
+        this.$store.commit("setUser", "");
       } else {
         const toast = this.$createToast({
           time: 1000,
-          txt: '退出登录失败，请稍后再试',
+          txt: "退出登录失败，请稍后再试",
           type: "txt"
         });
         toast.show();
