@@ -65,6 +65,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 #nav {
   padding: 30px;
@@ -111,7 +116,21 @@ body {
   left: 0;
   right: 0;
 }
-.router-part > div {
+.router-part .header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 50px;
+}
+.router-part .content {
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  width: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+/* .router-part > div {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -119,7 +138,7 @@ body {
   right: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-}
+} */
 .slide-enter {
   transform: translate3d(-100%, 0, 0);
 }

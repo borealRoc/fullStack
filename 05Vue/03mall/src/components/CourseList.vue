@@ -52,7 +52,6 @@ export default {
   right: 0;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-
   .cube-scroll-nav-panel {
     ul {
       margin: 0 20px;

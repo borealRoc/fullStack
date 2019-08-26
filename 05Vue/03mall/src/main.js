@@ -11,6 +11,7 @@ import XHeader from './components/Header.vue'
 Vue.config.productionTip = false
 Vue.prototype.$http = axios
 
+// 全局注册header组件
 Vue.component('x-header', XHeader)
 
 new Vue({

@@ -4,8 +4,17 @@ import Home from './views/Home.vue'
 import Cart from './views/Cart.vue'
 import Login from './views/Login.vue'
 import store from './store'
+import History from './utils/history'
 
 Vue.use(Router)
+// 把History插件挂载到Vue上,执行History对象的install方法，这样就可以像使用router一样使用$routerHistory
+Vue.use(History)
+
+// 实例化Router之前，扩展Router,重构Router的back方法
+Router.prototype.goBack = function () {
+    this.isBack = true;
+    this.back();
+}
 
 const router = new Router({
   mode: 'history',
@@ -49,6 +58,17 @@ router.beforeEach((to, from, next) => {
   // 不需要认证
     next()
   }
+})
+// 记录历史记录
+router.afterEach((to, from) => {
+    if (router.isBack) {
+        //后退
+        History.pop()
+        router.isBack = false
+    } else {
+        // 前进
+        History.push(to.path)
+    }
 })
 
 export default router

@@ -1,17 +1,21 @@
 <template>
   <div>
-    <x-header title="登录"></x-header>
-    <div class="login-view">
-      <div class="not-login" v-if="isLogin">
-        <div class="user-modal">
-          <img class="user-pic" src="../assets/logo.png" />
-          <h3 class="user-name">{{this.$store.state.user}}</h3>
+    <div class="header">
+      <x-header title="登录"></x-header>
+    </div>
+    <div class="content">
+      <div class="login-view">
+        <div class="not-login" v-if="isLogin">
+          <div class="user-modal">
+            <img class="user-pic" src="../assets/logo.png" />
+            <h3 class="user-name">{{this.$store.state.user}}</h3>
+          </div>
+          <cube-button type="submit" @click="logoutHandler">退出登录</cube-button>
         </div>
-        <cube-button type="submit" @click="logoutHandler">退出登录</cube-button>
-      </div>
-      <div class="is-login" v-else>
-        <cube-form :model="model" :schema="schema"></cube-form>
-        <cube-button type="submit" @click="loginHandler">登录</cube-button>
+        <div class="is-login" v-else>
+          <cube-form :model="model" :schema="schema"></cube-form>
+          <cube-button type="submit" @click="loginHandler">登录</cube-button>
+        </div>
       </div>
     </div>
   </div>

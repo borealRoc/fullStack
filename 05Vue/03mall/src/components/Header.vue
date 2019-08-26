@@ -1,7 +1,7 @@
 <template>
   <div class="header-com">
     <h1>{{title}}</h1>
-    <i class="cubeic-back" @click="back"></i>
+    <i class="cubeic-back" @click="back" v-if="$routerHistory.canBack()"></i>
     <div class="extend">
       <slot></slot>
     </div>
@@ -19,7 +19,7 @@ export default {
     },
     methods: {
         back() {
-            history.back();
+            this.$router.goBack();
         }
     },
 };
@@ -28,8 +28,8 @@ export default {
 <style lang="scss" scoped>
 .header-com {
   position: relative;
-  height: 44px;
-  line-height: 44px;
+  height: 100%;
+  line-height: 50px;
   text-align: center;
   border-bottom: solid 1px #e5e5e5;
   .cubeic-back {
@@ -38,6 +38,9 @@ export default {
     left: 0;
     padding: 0 15px;
     color: #a3a3a3;
+    > i {
+        font-size: 20px;
+    }
   }
   .extend {
     position: absolute;

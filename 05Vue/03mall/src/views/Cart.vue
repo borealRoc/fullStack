@@ -1,36 +1,40 @@
 <template>
   <div>
-    <x-header title="购物车"></x-header>
-    <div class="cart-view">
-      <!-- 有商品 -->
-      <div class="has-goods" v-if="cart.length > 0">
-        <ul class="goods-lists">
-          <li class="goods-list" v-for="(item, index) in cart" :key="item.id">
-            <img class="goods-pic" :src="item.img" alt />
-            <div class="goods-ctt">
-              <p class="goods-name">{{item.title}}</p>
-              <strong class="goods-price">&yen;{{item.price * item.cartCount}}</strong>
-              <div class="goods-ctrl">
-                <span class="goods-reduce-btn" @click="cartCountReduce(index)"></span>
-                <span class="goods-num">{{item.cartCount}}</span>
-                <span class="goods-add-btn" @click="cartCountAdd(index)"></span>
+    <div class="header">
+      <x-header title="购物车"></x-header>
+    </div>
+    <div class="content">
+      <div class="cart-view">
+        <!-- 有商品 -->
+        <div class="has-goods" v-if="cart.length > 0">
+          <ul class="goods-lists">
+            <li class="goods-list" v-for="(item, index) in cart" :key="item.id">
+              <img class="goods-pic" :src="item.img" alt />
+              <div class="goods-ctt">
+                <p class="goods-name">{{item.title}}</p>
+                <strong class="goods-price">&yen;{{item.price * item.cartCount}}</strong>
+                <div class="goods-ctrl">
+                  <span class="goods-reduce-btn" @click="cartCountReduce(index)"></span>
+                  <span class="goods-num">{{item.cartCount}}</span>
+                  <span class="goods-add-btn" @click="cartCountAdd(index)"></span>
+                </div>
               </div>
-            </div>
-          </li>
-        </ul>
-        <div class="goods-total">
-          <p class="total-sel"></p>
-          <p class="toal-sum">
-            总计：
-            <strong class="total-sum-account">&yen;{{sumTotal}}</strong>
-          </p>
-          <p class="total-clear" @click="goToClear">去结算({{cartTotal}}件)</p>
+            </li>
+          </ul>
+          <div class="goods-total">
+            <p class="total-sel"></p>
+            <p class="toal-sum">
+              总计：
+              <strong class="total-sum-account">&yen;{{sumTotal}}</strong>
+            </p>
+            <p class="total-clear" @click="goToClear">去结算({{cartTotal}}件)</p>
+          </div>
         </div>
-      </div>
-      <!-- 无商品 -->
-      <div class="no-goods" v-else>
-        <img class="no-goods-pic" src="/img/cart_big.png" />
-        <p class="no-goods-tip">您的购物车还未添加商品</p>
+        <!-- 无商品 -->
+        <div class="no-goods" v-else>
+          <img class="no-goods-pic" src="/img/cart_big.png" />
+          <p class="no-goods-tip">您的购物车还未添加商品</p>
+        </div>
       </div>
     </div>
   </div>
@@ -80,7 +84,7 @@ export default {
 
 <style lang="scss" scoped>
 .cart-view {
-  height: calc(100% - 45px);
+  height: 100%;
   .no-goods {
     .no-goods-pic {
       display: block;

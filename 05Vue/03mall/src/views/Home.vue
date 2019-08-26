@@ -1,22 +1,30 @@
 <template>
   <div class="home">
-    <div class="home-header">
-      <h1 class="home-logo">XUSHAO</h1>
-      <div class="show-course-btn">
-        <cube-button @click="showCourseDrawer" icon="cubeic-back"></cube-button>
-      </div>
+    <div class="header">
+      <!-- <div class="home-header">
+        <h1 class="home-logo">XUSHAO</h1>
+        <div class="show-course-btn">
+          <cube-button @click="showCourseDrawer" icon="cubeic-back"></cube-button>
+        </div>
+      </div>-->
+      <x-header title="首页" class="home-header">
+        <cube-button @click="showCourseDrawer" icon="cubeic-more"></cube-button>
+      </x-header>
     </div>
     <!-- 过程过滤显示组件 -->
-    <cube-drawer ref="courseDrawer" title="请选择" :data="[courseData]" @select="selectHandler"></cube-drawer>// 轮播图
-    <cube-slide :data="slider">
-      <cube-slide-item v-for="(item, index) in slider" :key="item.id">
-        <router-link :to="`/detail/${item.id}`">
-          <img :src="item.img" @click.stop.prevent="imagePreview(index)" />
-        </router-link>
-      </cube-slide-item>
-    </cube-slide>
-    <!-- 课程列表组件 -->
-    <course-list :courseLists="filterCourseLists"></course-list>
+    <cube-drawer ref="courseDrawer" title="请选择" :data="[courseData]" @select="selectHandler"></cube-drawer>
+    <div class="content">
+      <!-- 录播图 -->
+      <cube-slide :data="slider">
+        <cube-slide-item v-for="(item, index) in slider" :key="item.id">
+          <router-link :to="`/detail/${item.id}`">
+            <img :src="item.img" @click.stop.prevent="imagePreview(index)" />
+          </router-link>
+        </cube-slide-item>
+      </cube-slide>
+      <!-- 课程列表组件 -->
+      <course-list :courseLists="filterCourseLists"></course-list>
+    </div>
   </div>
 </template>
 
@@ -87,7 +95,7 @@ export default {
         this.filterKeys = [...val];
       } else {
         // this.filterKeys = [...val[0]];
-        console.log('展示全部商品列表，这个功能总是有bug')
+        console.log("展示全部商品列表，这个功能总是有bug");
       }
     },
     imagePreview(index) {
@@ -113,30 +121,40 @@ export default {
 
 <style lang="scss">
 .home-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 50px;
-  background-color: #ff4e1f;
-  z-index: 2;
-  .home-logo {
-    float: left;
-    text-indent: 40px;
-    font-size: 24px;
-    font-family: monospace;
-    line-height: 50px;
-    color: #fff;
-    background: url("/img/logo.png") no-repeat 10px center;
-    background-size: 20px;
-  }
-  .show-course-btn {
-    position: absolute;
-    right: 0;
-    width: 50px;
+  //   position: fixed;
+  //   top: 0;
+  //   width: 100%;
+  //   height: 50px;
+  //   background-color: #ff4e1f;
+  //   z-index: 2;
+  //   .home-logo {
+  //     float: left;
+  //     text-indent: 40px;
+  //     font-size: 24px;
+  //     font-family: monospace;
+  //     line-height: 50px;
+  //     color: #fff;
+  //     background: url("/img/logo.png") no-repeat 10px center;
+  //     background-size: 20px;
+  //   }
+  //   .show-course-btn {
+  //     position: absolute;
+  //     right: 0;
+  //     width: 50px;
+  //     .cube-btn {
+  //       background: none;
+  //     }
+  //   }
     .cube-btn {
-      background: none;
+        padding: 14px 0;
+        text-align: right;
+        color: #A3A3A6;
+        background: #fff;
+        > i {
+            margin-right: 0;
+            font-size: 20px;
+        }
     }
-  }
 }
 
 .cube-slide {
