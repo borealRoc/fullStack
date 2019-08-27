@@ -1,7 +1,7 @@
 # 一、Vue
 1. ES6对象、数组的扩展
     - 对象的扩展运算符 ...good,
-    - 数组的扩展方法: find/filter/forEach/map
+    - 数组的扩展方法: find/filter/forEach/map/reduce
         - find: 查找第一个符合条件的数组元素
         - filter: 查找所有符合条件的数组元素
         - map: 映射数组每一项，返回新数组
@@ -368,17 +368,21 @@
             - 表单异步校验
     - 第二天
         - 设计页面
-            - 首页：轮播图，商品列表，商品过滤列表，底部导航栏，添加到购物车的商品数量
+            - 首页：轮播图`cube-slide`，商品列表`cube-scroll-nav`，商品过滤列表`cube-drawer`[添加商品到购物车]，底部导航栏`cube-tab-bar`，添加到购物车的商品数量[重构`cube-tab-bar`组件]
             - 购物车：购物车的商品列表：增加商品，减少商品，计算总价
+            - ”添加商品到购物车“、”‘增加商品“、”减少商品“这三个动作的执行所导致的状态变化要由`store.subscribe((mutation, state) => {})`来监听
             - 我的：登录、注销
     - 第三天
         - 优化
             - 构建全局`<header>`组件
             - `<header>`组件的返回按钮功能
-                - History插件
-                - 全局路由守卫afterEach: 记录路由跳转
-    
-
+                - History插件模拟历史记录堆栈
+                - 全局路由守卫afterEach: 记录路由的入栈和出栈
+                - 根据入栈[前进]还是出栈[后退]动态添加过滤效果
+            - ”添加商品到购物车“动画效果”
+            - 全局组件的设计和使用：游离于`<div id="app"></div>`之外，类似于cube-ui的this.$createToast。实现以 API 的形式调用自定义组件，并且既可以在 Vue 实例上下文中调用，也可以在普通 js 文件中调用
+                - 方法一：利用cube-ui的create-api模块
+                
 
 
 
