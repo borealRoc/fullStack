@@ -7,9 +7,14 @@ import store from './store'
 import axios from 'axios'
 import interceptor from './http-interceptor'
 import XHeader from './components/Header.vue'
+import { createAPI } from  'cube-ui'
+import Notice from './components/Notice.vue'
 
 Vue.config.productionTip = false
+
 Vue.prototype.$http = axios
+ // 创建 this.$createNotice API
+ createAPI(Vue, Notice, true) //true表示单例
 
 // 全局注册header组件
 Vue.component('x-header', XHeader)

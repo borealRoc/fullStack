@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="router-part">
-      <transition name="slide">
+      <transition :name="routerTransition">
         <router-view />
       </transition>
     </div>
@@ -28,13 +28,16 @@ export default {
         { label: "Home", value: "/", icon: "cubeic-home" },
         { label: "Cart", value: "/cart", icon: "cubeic-mall" },
         { label: "Me", value: "/login", icon: "cubeic-person" }
-      ]
+      ],
+      routerTransition: 'router-forward',
     };
   },
   watch: {
     // 路由发生变化时，同步tabs选中
     $route(route) {
-      this.selectedLabel = route.path;
+      this.selectedLabel = route.path
+      // 根据路由跳转方向，动态添加不同的过渡效果
+      this.routerTransition = this.$router.transitionName
     }
   },
   created() {
@@ -58,7 +61,9 @@ export default {
 html,
 body {
   height: 100%;
+  overflow-x: hidden;
 }
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -130,23 +135,18 @@ body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
-/* .router-part > div {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-} */
-.slide-enter {
+.router-back-enter,
+.router-forward-leave {
   transform: translate3d(-100%, 0, 0);
 }
-.slide-leave-to {
+.router-back-leave-to,
+.router-forward-enter {
   transform: translate3d(100%, 0, 0);
 }
-.slide-enter-active,
-.slide-leave-active {
-  transition: all 0.5s;
+.router-back-enter-active,
+.router-back-leave-active,
+.router-forward-enter-active,
+.router-forward-leave-active {
+  transition: all 0.3s;
 }
 </style>

@@ -114,6 +114,12 @@ export default {
         }
       };
       this.$createImagePreview({ ...params }).show();
+    },
+    noticeTest() {
+      // 创建Notice实例
+      //   cube-ui方式
+      const notice = this.$createNotice();
+      notice.add({ content: "啊...我被打开了", duration: 2 });
     }
   }
 };
@@ -145,16 +151,16 @@ export default {
   //       background: none;
   //     }
   //   }
-    .cube-btn {
-        padding: 14px 0;
-        text-align: right;
-        color: #A3A3A6;
-        background: #fff;
-        > i {
-            margin-right: 0;
-            font-size: 20px;
-        }
+  .cube-btn {
+    padding: 14px 0;
+    text-align: right;
+    color: #a3a3a6;
+    background: #fff;
+    > i {
+      margin-right: 0;
+      font-size: 20px;
     }
+  }
 }
 
 .cube-slide {
