@@ -9,10 +9,12 @@ import interceptor from './http-interceptor'
 import XHeader from './components/Header.vue'
 import { createAPI } from  'cube-ui'
 import Notice from './components/Notice.vue'
+import notice from './service/notice'
 
 Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
+Vue.prototype.$notice = notice;
  // 创建 this.$createNotice API
  createAPI(Vue, Notice, true) //true表示单例
 

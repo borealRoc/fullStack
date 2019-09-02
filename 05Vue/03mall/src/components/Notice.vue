@@ -1,6 +1,6 @@
 <template>
   <div class="notice-com">
-    <div class="notice-popup">
+    <div class="notice-popup" v-if="noticePopupShow">
       <div class="notice-popup-ctn" v-for="item in alerts" :key="item.id">
         <div class="notice-popup-ctt">{{item.content}}</div>
       </div>
@@ -14,6 +14,7 @@ export default {
     data() {
         return {
             alerts: [], 
+            noticePopupShow: false
         }
     },
     created () {
@@ -22,9 +23,12 @@ export default {
     },
     methods: {
         add(opt) {
+            // 控制弹窗是一个单例
             const id = '_id' + this.id++
             const alert = {...opt, id: id}
+            this.noticePopupShow = true
             this.alerts.push(alert)
+            console.log(this.alerts)
             // 默认1秒后自动关闭
             const duration = opt.duration || 1
             setTimeout(()=> {
@@ -36,6 +40,7 @@ export default {
                 const element = this.alerts[i];
                 if (element.id === id) {
                     this.alerts.splice(i, 1)
+                    this.noticePopupShow = false
                     break;
                 }
             }
@@ -66,6 +71,7 @@ export default {
     border-radius: 2px;
     .notice-popup-ctt {
         line-height: 20px; 
+        text-align: justify;
     }
   }
 }

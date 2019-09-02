@@ -24,6 +24,7 @@
       </cube-slide>
       <!-- 课程列表组件 -->
       <course-list :courseLists="filterCourseLists"></course-list>
+      <div class="notice-test" @click="noticeTest">NoticeTest</div>
     </div>
   </div>
 </template>
@@ -117,9 +118,14 @@ export default {
     },
     noticeTest() {
       // 创建Notice实例
-      //   cube-ui方式
-      const notice = this.$createNotice();
-      notice.add({ content: "啊...我被打开了", duration: 2 });
+      // cube-ui方式
+      // const notice = this.$createNotice();
+      // notice.add({ content: "啊...我被打开了", duration: 2 });
+      // 原生方式
+      this.$notice.remind({
+        content: "我被打开了",
+        duration: 2
+      });
     }
   }
 };
@@ -232,6 +238,19 @@ export default {
         height: 100%;
       }
     }
+  }
+}
+.content {
+  .notice-test {
+    position: fixed;
+    top: 0;
+    left: 50px;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    background-color: #eaeaea;
+    z-index: 1000;
   }
 }
 </style>
