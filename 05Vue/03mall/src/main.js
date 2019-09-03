@@ -15,8 +15,9 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
 Vue.prototype.$notice = notice;
- // 创建 this.$createNotice API
- createAPI(Vue, Notice, true) //true表示单例
+// 创建 this.$createNotice API
+createAPI(Vue, Notice, true) //true表示单例
+
 
 // 全局注册header组件
 Vue.component('x-header', XHeader)

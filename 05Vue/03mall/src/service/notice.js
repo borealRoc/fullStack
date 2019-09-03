@@ -21,13 +21,14 @@ Notice.getInstance = props => {
 }
 
 // 设计单例模式，全局范围唯一创建一个Notice实例
+// 如果不设计成单例，不停创建Notice实例，可能会导致内存泄露
 let singelInstance = null
 function getSingleInstance () {
     singelInstance = singelInstance || Notice.getInstance()
     return singelInstance
 }
 
-// 暴露接口
+// 暴露接口 
 export default({
     remind({duration = 2, content = ''}) {
         getSingleInstance().add({
