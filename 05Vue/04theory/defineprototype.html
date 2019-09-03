@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>使用Object.defineProperty实现数据驱动</title>
+</head>
+<body>
+    <h1>hello <span id="name"></span></h1>
+    <script>
+        window.onload = () => {
+            let obj = {}
+            let _name = document.getElementById('name')
+            Object.defineProperty(obj, 'name', {
+                get() {
+                   return _name.innerHTML
+                },
+                set(name) {
+                    _name.innerHTML = name
+                }
+            })
+            console.log('第一次',obj.name)
+            obj.name = '史诗王爵'
+            console.log('第二次',obj.name)
+        }    
+    </script>
+</body>
+</html>
