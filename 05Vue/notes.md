@@ -387,9 +387,10 @@
 # 五、vue全家桶底层原理
 - 数据监听
     - Observer: 监听data属性
+    - Dependency && Watcher: 依赖收集与追踪
 - 编译模板
 - 将实例挂载到 DOM 并在数据变化时更新 DOM 
-
+- 
 
 
 

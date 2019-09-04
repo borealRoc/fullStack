@@ -7,20 +7,31 @@
       <div class="cart-view">
         <!-- 有商品 -->
         <div class="has-goods" v-if="cart.length > 0">
-          <ul class="goods-lists">
-            <li class="goods-list" v-for="(item, index) in cart" :key="item.id">
-              <img class="goods-pic" :src="item.img" alt />
-              <div class="goods-ctt">
-                <p class="goods-name">{{item.title}}</p>
-                <strong class="goods-price">&yen;{{item.price * item.cartCount}}</strong>
-                <div class="goods-ctrl">
-                  <span class="goods-reduce-btn" @click="cartCountReduce(index)"></span>
-                  <span class="goods-num">{{item.cartCount}}</span>
-                  <span class="goods-add-btn" @click="cartCountAdd(index)"></span>
-                </div>
-              </div>
-            </li>
-          </ul>
+          <div class="cube-scroll-ctn">
+            <cube-scroll
+              ref="scroll"
+              :data="cart"
+              :options="options"
+              @pulling-down="onPullingDown"
+              @pulling-up="onPullingUp"
+            >
+              <ul class="goods-lists">
+                <li class="goods-list" v-for="(item, index) in cart" :key="item.id">
+                  <img class="goods-pic" :src="item.img" alt />
+                  <div class="goods-ctt">
+                    <p class="goods-name">{{item.title}}</p>
+                    <strong class="goods-price">&yen;{{item.price * item.cartCount}}</strong>
+                    <div class="goods-ctrl">
+                      <span class="goods-reduce-btn" @click="cartCountReduce(index)"></span>
+                      <span class="goods-num">{{item.cartCount}}</span>
+                      <span class="goods-add-btn" @click="cartCountAdd(index)"></span>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </cube-scroll>
+          </div>
+
           <div class="goods-total">
             <p class="total-sel"></p>
             <p class="toal-sum">
@@ -44,11 +55,61 @@ import { mapState, mapGetters, mapMutations } from "vuex";
 
 export default {
   data() {
-    return {};
+    return {
+      // 滚动组件相关参数
+      pullDownRefresh: true, //是否开启了下拉刷新功能
+      pullDownRefreshThreshold: 50,  //顶部下拉的距离触发刷新
+      pullDownRefreshStop: 50,  //回弹停留的距离
+      pullDownRefreshTxt: "Refresh success", //下拉刷新成功提示文字
+
+      pullUpLoad: true, //是否开启了上拉加载更多功能
+      pullUpLoadThreshold: 50,  //底部上拉的距离触发加载
+      pullUpLoadMoreTxt: "Load more", //上拉加载刚开始时的提示文字
+      pullUpLoadNoMoreTxt: "No more data", //上拉加载没有更多数据时的提示文字
+
+      goods: this.$store.state.cart
+    };
   },
   computed: {
-    ...mapState(["cart"]),
-    ...mapGetters(["cartTotal", "sumTotal"])
+    // ...mapState(["cart"]),
+    ...mapGetters(["cartTotal", "sumTotal"]),
+
+    cart: {
+    //   return this.goods.slice(0, 5);
+        get() {
+            return this.goods.slice(0, 5);
+        },
+        set(newValue) {
+            return newValue
+        }
+    },
+
+    options() {
+      return {
+        pullDownRefresh: this.pullDownRefreshObj,
+        pullUpLoad: this.pullUpLoadObj,
+        scrollbar: true
+      };
+    },
+    pullDownRefreshObj: function() {
+      return this.pullDownRefresh
+        ? {
+            threshold: parseInt(this.pullDownRefreshThreshold),
+            txt: this.pullDownRefreshTxt
+          }
+        : false;
+    },
+    pullUpLoadObj: function() {
+      return this.pullUpLoad
+        ? {
+            threshold: parseInt(this.pullUpLoadThreshold),
+            txt: {
+              more: this.pullUpLoadMoreTxt,
+              noMore: this.pullUpLoadNoMoreTxt
+            }
+          }
+        : false;
+    }
   },
   methods: {
     ...mapMutations(["addCartCount", "reduceCartCount"]),
@@ -77,6 +138,30 @@ export default {
           href: "javascript:;"
         }
       }).show();
+    },
+    onPullingDown() {
+      // 模拟更新数据
+      setTimeout(() => {
+        if (Math.random() > 0.5) {
+          // 如果有新数据
+          this.cart = this.cart.reverse();
+        } else {
+          // 如果没有新数据
+          this.$refs.scroll.forceUpdate();
+        }
+      }, 1000);
+    },
+    onPullingUp() {
+      // 更新数据
+      setTimeout(() => {
+        if (this.goods.length > 5) {
+          let newPage = this.goods.slice(5, -1);
+          this.cart = this.cart.concat(newPage);
+        } else {
+          // 如果没有新数据
+          this.$refs.scroll.forceUpdate();
+        }
+      }, 1000);
     }
   }
 };
@@ -103,9 +188,9 @@ export default {
   .has-goods {
     position: relative;
     height: 100%;
-    .goods-lists {
+    .cube-scroll-ctn {
       height: calc(100% - 50px);
-      overflow: auto;
+      //   overflow: auto;
       .goods-list {
         display: flex;
         box-sizing: border-box;
