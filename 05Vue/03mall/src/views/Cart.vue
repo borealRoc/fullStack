@@ -58,31 +58,30 @@ export default {
     return {
       // 滚动组件相关参数
       pullDownRefresh: true, //是否开启了下拉刷新功能
-      pullDownRefreshThreshold: 50,  //顶部下拉的距离触发刷新
-      pullDownRefreshStop: 50,  //回弹停留的距离
+      pullDownRefreshThreshold: 50, //顶部下拉的距离触发刷新
+      pullDownRefreshStop: 50, //回弹停留的距离
       pullDownRefreshTxt: "Refresh success", //下拉刷新成功提示文字
 
       pullUpLoad: true, //是否开启了上拉加载更多功能
-      pullUpLoadThreshold: 50,  //底部上拉的距离触发加载
+      pullUpLoadThreshold: 100, //底部上拉的距离触发加载
       pullUpLoadMoreTxt: "Load more", //上拉加载刚开始时的提示文字
       pullUpLoadNoMoreTxt: "No more data", //上拉加载没有更多数据时的提示文字
 
-      goods: this.$store.state.cart
+    //   goods: this.$store.state.cart
     };
   },
   computed: {
-    // ...mapState(["cart"]),
+    ...mapState(["cart"]),
     ...mapGetters(["cartTotal", "sumTotal"]),
 
-    cart: {
-    //   return this.goods.slice(0, 5);
-        get() {
-            return this.goods.slice(0, 5);
-        },
-        set(newValue) {
-            return newValue
-        }
-    },
+    // cart: {
+    //   get() {
+    //     return this.goods.slice(0, 5);
+    //   },
+    //   set(newValue) {
+    //     return newValue;
+    //   }
+    // },
 
     options() {
       return {
@@ -144,7 +143,12 @@ export default {
       setTimeout(() => {
         if (Math.random() > 0.5) {
           // 如果有新数据
-          this.cart = this.cart.reverse();
+          const toast = this.$createToast({
+            time: 1000,
+            txt: '更新成功',
+            type: "txt"
+          });
+          toast.show();
         } else {
           // 如果没有新数据
           this.$refs.scroll.forceUpdate();
@@ -154,9 +158,13 @@ export default {
     onPullingUp() {
       // 更新数据
       setTimeout(() => {
-        if (this.goods.length > 5) {
-          let newPage = this.goods.slice(5, -1);
-          this.cart = this.cart.concat(newPage);
+        if (Math.random() > 0.5) {
+          const toast = this.$createToast({
+            time: 1000,
+            txt: '加载更多成功',
+            type: "txt"
+          });
+          toast.show();
         } else {
           // 如果没有新数据
           this.$refs.scroll.forceUpdate();

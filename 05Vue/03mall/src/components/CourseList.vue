@@ -14,7 +14,7 @@
               <div class="course-ctt">
                 <p class="course-title">{{courseItem.title}}</p>
                 <p class="course-count">学习人数：{{courseItem.count}}人</p>
-                <span class="course-add-cart" @click.stop.prevent="addCart(courseItem)">添加到购物车</span>
+                <span class="course-add-cart" @click.stop.prevent="addCart(courseItem, $event)">添加到购物车</span>
               </div>
               <span class="course-price">&yen;{{courseItem.price}}</span>
             </div>
@@ -35,9 +35,10 @@ export default {
     }
   },
   methods: {
-      addCart(item) {
+      addCart(item, e) {
           // 添加到购物车
           this.$store.commit('addCart', item)
+          this.$emit('addCart', e.target)
       }
   },
 };

@@ -23,8 +23,14 @@
         </cube-slide-item>
       </cube-slide>
       <!-- 课程列表组件 -->
-      <course-list :courseLists="filterCourseLists"></course-list>
-      <div class="notice-test" @click="noticeTest">NoticeTest</div>
+      <course-list :courseLists="filterCourseLists" @addCart="onAddCart"></course-list>
+      <!-- 加购动画载体 -->
+    </div>
+    <div class="ball-warp">
+    <span class="ball-dot-pos" ref="ballDot"></span>
+      <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+        <span class="ball-dot" v-if="ball.show"></span>
+      </transition>
     </div>
   </div>
 </template>
@@ -39,6 +45,8 @@ const label = {
   bigdata: "大数据",
   ai: "人工智能"
 };
+let ballDotX = 0, ballDotY = 0
+
 
 export default {
   name: "home",
@@ -48,8 +56,19 @@ export default {
       sliderImgs: [], // 录播图图片合集
       courseLists: [], //课程列表
       keys: [], //课程标签
-      filterKeys: [] //过滤课程标签
+      filterKeys: [], //过滤课程标签
+      ball: {
+        show: false, //小球是否显示
+        el: null //目标dom
+      }
     };
+  },
+  mounted() {
+      // 获取小球的初始物理位置
+      const $ballDot = this.$refs.ballDot;
+      ballDotX = $ballDot.offsetLeft
+      ballDotY = $ballDot.offsetTop
+      console.log('ballDotX,ballDotY',ballDotX, ballDotY)
   },
   components: {
     courseList
@@ -116,16 +135,29 @@ export default {
       };
       this.$createImagePreview({ ...params }).show();
     },
-    noticeTest() {
-      // 创建Notice实例
-      // cube-ui方式
-      // const notice = this.$createNotice();
-      // notice.add({ content: "啊...我被打开了", duration: 2 });
-      // 原生方式
-      this.$notice.remind({
-        content: "我被打开了",
-        duration: 2
-      });
+    onAddCart(el) {
+      this.ball.el = el;
+      this.ball.show = true;
+    },
+    // 加购小球动画
+    beforeEnter(el) {
+        // 获取点击初始位置
+        const ballDom = this.ball.el
+        const ballRect = ballDom.getBoundingClientRect()
+        console.log('ballRect.left, ballRect.top',ballRect.left, ballRect.top)
+        // 把小球移动到“点击初始位置”
+        el.style.display = "block"
+        el.transform = `translate(${ballRect.left - ballDotX}, -${ballDotY - ballRect.top})`;
+    },
+    enter(el, done) {
+        // 把小球移动到初始物理位置
+        el.transform = `translate(0, 0)`;
+        el.addEventListener("transitionend", done);
+    },
+    afterEnter(el) {
+        // 结束隐藏小球
+        this.ball.show = false
+        el.style.display = "none"
     }
   }
 };
@@ -252,5 +284,24 @@ export default {
     background-color: #eaeaea;
     z-index: 1000;
   }
+}
+.ball-dot,
+.ball-dot-pos {
+  position: fixed;
+  left: 50%;
+  bottom: 36px;
+  width: 8px;
+  height: 8px;
+  margin-left: -3px;
+  border-radius: 50%;
+  background-color: #e00000;
+}
+.ball-dot {
+  transform: translate(0, 0);
+  transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41);
+}
+.ball-dot-pos {
+    z-index: -1;
+    background-color: transparent;
 }
 </style>

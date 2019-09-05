@@ -100,12 +100,18 @@ export default {
         this.$router.push(redirect);
       } else {
         // 登录失败
-        const toast = this.$createToast({
-          time: 1000,
-          txt: message,
-          type: "txt"
+        // cube-ui提示框API
+        // const toast = this.$createToast({
+        //   time: 1000,
+        //   txt: message,
+        //   type: "txt"
+        // });
+        // toast.show();
+        // 自己封装的提示框API
+        this.$notice.remind({
+          content: message,
+          duration: 2
         });
-        toast.show();
       }
     },
     async logoutHandler(e) {
@@ -126,7 +132,7 @@ export default {
         toast.show();
       }
     }
-  },
+  }
 };
 </script>
 
