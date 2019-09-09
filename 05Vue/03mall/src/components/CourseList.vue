@@ -81,6 +81,7 @@ export default {
             padding-left: 10px;
             text-align: left;
             .course-title {
+                min-height: 38px;
               color: #2b333b;
               overflow: hidden;
               text-overflow: ellipsis;
