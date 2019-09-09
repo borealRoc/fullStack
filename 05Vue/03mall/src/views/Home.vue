@@ -1,12 +1,6 @@
 <template>
   <div class="home">
     <div class="header">
-      <!-- <div class="home-header">
-        <h1 class="home-logo">XUSHAO</h1>
-        <div class="show-course-btn">
-          <cube-button @click="showCourseDrawer" icon="cubeic-back"></cube-button>
-        </div>
-      </div>-->
       <x-header title="首页" class="home-header">
         <cube-button @click="showCourseDrawer" icon="cubeic-more"></cube-button>
       </x-header>
@@ -27,11 +21,11 @@
       <!-- 加购动画载体 -->
     </div>
     <div class="ball-warp">
-    <span class="ball-dot-pos" ref="ballDot"></span>
       <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
-        <span class="ball-dot" v-if="ball.show"></span>
+        <span class="ball-dot" v-show="ball.show"></span>
       </transition>
     </div>
+    <span class="ball-dot-pos" ref="ballDot"></span>
   </div>
 </template>
 
@@ -144,20 +138,19 @@ export default {
         // 获取点击初始位置
         const ballDom = this.ball.el
         const ballRect = ballDom.getBoundingClientRect()
-        console.log('ballRect.left, ballRect.top',ballRect.left, ballRect.top)
         // 把小球移动到“点击初始位置”
-        el.style.display = "block"
-        el.transform = `translate(${ballRect.left - ballDotX}, -${ballDotY - ballRect.top})`;
+        // el.style.display = "block"
+        el.style.transform = `translate(${ballRect.left - ballDotX}px, ${ballRect.top - ballDotY}px)`;
     },
     enter(el, done) {
         // 把小球移动到初始物理位置
-        el.transform = `translate(0, 0)`;
+        el.style.transform = `translate(0, 0)`;
         el.addEventListener("transitionend", done);
     },
     afterEnter(el) {
         // 结束隐藏小球
         this.ball.show = false
-        el.style.display = "none"
+        // el.style.display = "none"
     }
   }
 };
@@ -165,30 +158,6 @@ export default {
 
 <style lang="scss">
 .home-header {
-  //   position: fixed;
-  //   top: 0;
-  //   width: 100%;
-  //   height: 50px;
-  //   background-color: #ff4e1f;
-  //   z-index: 2;
-  //   .home-logo {
-  //     float: left;
-  //     text-indent: 40px;
-  //     font-size: 24px;
-  //     font-family: monospace;
-  //     line-height: 50px;
-  //     color: #fff;
-  //     background: url("/img/logo.png") no-repeat 10px center;
-  //     background-size: 20px;
-  //   }
-  //   .show-course-btn {
-  //     position: absolute;
-  //     right: 0;
-  //     width: 50px;
-  //     .cube-btn {
-  //       background: none;
-  //     }
-  //   }
   .cube-btn {
     padding: 14px 0;
     text-align: right;
@@ -297,8 +266,9 @@ export default {
   background-color: #e00000;
 }
 .ball-dot {
-  transform: translate(0, 0);
+//   transform: translate(0, 0);
   transition: all 0.5s cubic-bezier(0.49, -0.29, 0.75, 0.41);
+  z-index: 10;
 }
 .ball-dot-pos {
     z-index: -1;
