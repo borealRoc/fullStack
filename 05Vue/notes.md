@@ -1,26 +1,18 @@
-# 一、Vue
-1. ES6对象、数组的扩展
-    - 对象的扩展运算符 ...good,
-    - 数组的扩展方法: find/filter/forEach/map/reduce
-        - find: 查找第一个符合条件的数组元素
-        - filter: 查找所有符合条件的数组元素
-        - map: 映射数组每一项，返回新数组
-        - forEach: 遍历数组每一项，对每一项进行操作
-2. ES6模块化: import Vue from 'vue'
-3. ES6异步方案Promise: axios.get("/api/goods").then(res => {})
-4. ES7异步方案: async + await
-5. Vue基础知识
+# 一、Vue基本语法
+1. Vue基础知识
     - 全局安装Vue脚手架: npm install -g @vue/cli
     - 开发单个Vue文件: npm install -g @vue/cli-service-global
     - 利用脚手架快速构建Vue工程: vue create vue-demo
+    - 使用axios请求数据: npm install axios
+    - mock数据: Vue.config.js
     - 动态值、动态属性、动态样式`:class="{'active': item.active}"`、条件（控制显隐）、列表渲染、事件（@click）、计算属性（computed）、监听属性（watch）、表单双向数据绑定（v-model）
     - 生命周期: init -> created[操作data] -> mounted[操作DOM] -> updated -> destrory
-6. Vue组件化机制
-    - 6.1 组件注册与使用
+2. Vue组件化机制
+    - 2.1 组件注册与使用
         - 全局注册: Vue.component('global-component', {})（可在任意地方直接使用）  
         - 局部注册: 单个Vue文件(使用时需引入)
-    - 6.2 组件通讯
-        - 6.2.1 父子组件
+    - 2.2 组件通讯
+        - 2.2.1 父子组件
             - 单向数据流
                 - 传属性[props]: 父传子  
                 注意：对于绝大多数特性来说，从外部提供给组件的值会替换掉组件内部设置好的值。但class 和 style 特性会稍微智能一些，即两边的值会被合并起来
@@ -40,39 +32,31 @@
                 - props + 事件
                 - .sync 修饰符  
                 <img src="knowledgePic/7.png"/>
-        - 6.2.2 任意组件通讯:
+        - 2.2.2 任意组件通讯:
             - 总线模式
                 - Vue.prototype.$bus = new Vue(); 
                 - this.$bus.$emit("eventName", arg);
                 - this.$bus.$on("eventName", arg);
             - 依赖注入: provide && inject
             - Vuex
-    - 6.2.3 动态组件: 当在这些组件之间切换的时候，你有时会想保持这些组件的状态，以避免反复重渲染导致的性能问题  
+    - 2.2.3 动态组件: 当在这些组件之间切换的时候，你有时会想保持这些组件的状态，以避免反复重渲染导致的性能问题  
     <img src="knowledgePic/9.png"/>  
-    - 6.2.4 异步组件: 在大型应用中，我们可能需要将应用分割成小一些的代码块，并且只在需要的时候才从服务器加载一个模块。
-    - 6.3 处理边界情况
-        - 6.3.1 访问元素 & 组件
+    - 2.2.4 异步组件: 在大型应用中，我们可能需要将应用分割成小一些的代码块，并且只在需要的时候才从服务器加载一个模块。
+    - 2.3 处理边界情况
+        - 2.3.1 访问元素 & 组件
             - 访问根实例：this.$root  
             - 访问父级实例：this.$parent
             - 访问子组件实例或子元素: this.$ref
             - 依赖注入: provide && inject  
             <img src="knowledgePic/10.png"/>
-        - 6.3.2 程序化的事件侦听器
+        - 2.3.2 程序化的事件侦听器
             - $on(eventName, eventHandler) 侦听一个事件
             - $once(eventName, eventHandler) 一次性侦听一个事件
             - $off(eventName, eventHandler) 停止侦听一个事件
-        - 6.3.3 控制更新
+        - 2.3.3 控制更新
             - 强制更新[作用类似于刷新页面]：vm.$forceUpdate
             - 静态组件：v-once
-7. 使用axios请求数据: npm install axios
-8. mock数据
-9. ElementUI的使用
-    - 安装
-        - npm方式安装：npm i element-ui -S
-        - 通过vue-cli安装：vue add element
-    - 注意
-        - 在安装时如果选择了按需加载，那么在引用ui组件时，需要在plugins/elements.js中手动引入对应组件
-10. 过渡 & 动画
+3. 过渡 & 动画
     - 概述：Vue 在插入、更新或者移除 DOM 时，提供多种不同方式的应用过渡效果
         - 在 CSS 过渡和动画中自动应用 class
         - 在过渡钩子函数中使用 JavaScript 直接操作 DOM
@@ -290,8 +274,8 @@
         - 原理：结合 Vue 的异步组件和 Webpack 的代码分割功能
         - 使用方法：const Foo = () => import('./Foo.vue')
 # 三、vuex
-- 安装：vue add vuex
-- 核心概念
+1. 安装：vue add vuex
+2. 核心概念
     - 仓库[store]：一个容器，包含着应用中大部分的状态 (state)
     - 状态[state]
         - 单一状态树，一个对象就包含了全部的应用层级状态，即它作为一个“唯一数据源”而存在，这意味着，每个应用将仅仅包含一个 store 实例。单状态树和模块化并不冲突。
@@ -390,8 +374,28 @@
     - Dependency && Watcher: 依赖收集与追踪
 - 编译模板
 - 将实例挂载到 DOM 并在数据变化时更新 DOM 
-- 
-
+# 六、补充
+1. ES6相关
+    - ES6对象、数组的扩展
+        - 对象的扩展运算符 ...good,
+        - 数组的扩展方法: find/filter/forEach/map/reduce/Array.from
+            - find: 查找第一个符合条件的数组元素
+            - filter: 查找所有符合条件的数组元素
+            - map: 映射数组每一项，返回新数组
+            - forEach: 遍历数组每一项，对每一项进行操作
+            - reduce: 数组中的每个值（从左到右）开始缩减，最终计算为一个值
+            - Array.from: 把类数组转化成数组
+    - ES6模块化: import Vue from 'vue'
+    - ES6异步方案: Promise axios.get("/api/goods").then(res => {})
+    - ES7异步方案: async + await
+2. Vue UI框架
+    - ElementUI
+        - 安装
+            - npm方式安装：npm i element-ui -S
+            - 通过vue-cli安装：vue add element
+        - 注意
+            - 在安装时如果选择了按需加载，那么在引用ui组件时，需要在plugins/elements.js中手动引入对应组件
+    - Cube-UI
 
 
 
