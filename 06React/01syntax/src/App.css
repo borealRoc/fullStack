@@ -1,0 +1,10 @@
+ul {
+    list-style: none;
+}
+.logo {
+    width: 48px;
+}
+h1 {
+    color: #e00000;
+    text-align: center;
+}
