@@ -33,7 +33,6 @@ export default class  extends Component {
             // 注意1：不能直接改状态
             // this.state.date = new Date();//错误
         }, 1000)
-
         // 注意2：setState()是异步的
         this.setState((preState, preProps) => ({
             count: preState.count + 1
