@@ -59,6 +59,7 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
 // 记录历史记录
 router.afterEach((to, from) => {
     if (router.isBack) {

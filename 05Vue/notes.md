@@ -1,10 +1,11 @@
-# 一、Vue基本语法
+# 一、Vue CLI
+1. 安装：npm install -g @vue/cli
+2. 快速原型开发：npm install -g @vue/cli-service-global
+3. 创建项目：vue create vue-demo
+4. 插件：vue add plugin-demo
+    - 在运行 vue add 之前将项目的最新状态提交，因为该命令将会调用插件的文件生成器并很有可能更改现有的文件
+# 二、Vue基本语法
 1. Vue基础知识
-    - 全局安装Vue脚手架: npm install -g @vue/cli
-    - 开发单个Vue文件: npm install -g @vue/cli-service-global
-    - 利用脚手架快速构建Vue工程: vue create vue-demo
-    - 使用axios请求数据: npm install axios
-    - mock数据: Vue.config.js
     - 动态值、动态属性、动态样式`:class="{'active': item.active}"`、条件（控制显隐）、列表渲染、事件（@click）、计算属性（computed）、监听属性（watch）、表单双向数据绑定（v-model）
     - 生命周期: init -> created[操作data] -> mounted[操作DOM] -> updated -> destrory
 2. Vue组件化机制
@@ -18,7 +19,7 @@
                 注意：对于绝大多数特性来说，从外部提供给组件的值会替换掉组件内部设置好的值。但class 和 style 特性会稍微智能一些，即两边的值会被合并起来
                 - 事件[arg参数可以让子组件把值传给父组件]  
                     - 子组件触发: $emit('event-name', arg)  
-                    - 父组件监听：$on('event-name', arg)  
+                    - 父组件监听: $on('event-name', arg)  
                 - 插槽[slot]：父把内容插入子组件中  
                     - 作用：如果`<navigation-link>` 没有包含一个 `<slot> `元素，则该组件起始标签和结束标签之间的任何内容都会被抛弃<img src="knowledgePic/8.png"/>
                     - 编译作用域：父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。
@@ -385,18 +386,22 @@
             - forEach: 遍历数组每一项，对每一项进行操作
             - reduce: 数组中的每个值（从左到右）开始缩减，最终计算为一个值
             - Array.from: 把类数组转化成数组
-    - ES6模块化: import Vue from 'vue'
-    - ES6异步方案: Promise axios.get("/api/goods").then(res => {})
-    - ES7异步方案: async + await
+    - ES6模块化: `import Vue from 'vue'`
+    - ES6异步方案[Promise]: axios.get("/api/goods").then(res => {})
+    - ES7异步方案[async + await]
 2. Vue UI框架
     - ElementUI
         - 安装
-            - npm方式安装：npm i element-ui -S
-            - 通过vue-cli安装：vue add element
+            - npm方式安装：`npm i element-ui -S`
+            - 通过vue-cli安装：`vue add element`
         - 注意
             - 在安装时如果选择了按需加载，那么在引用ui组件时，需要在plugins/elements.js中手动引入对应组件
     - Cube-UI
-
+        - 安装
+            - 通过vue-cli安装：`vue add cube-ui`
+3. 其它
+    - 使用axios请求数据: `npm install axios`
+    - mock数据: Vue.config.js
 
 
 
