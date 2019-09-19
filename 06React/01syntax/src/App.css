@@ -8,3 +8,7 @@ h1 {
     color: #e00000;
     text-align: center;
 }
+th, td {
+    min-width: 100px;
+    text-align: center;
+}
