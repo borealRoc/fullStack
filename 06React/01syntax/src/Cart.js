@@ -78,10 +78,10 @@ export default class Cart extends Component {
     }
     // 购物车增加商品数量
     addCount = good => {
-        console.log(this.state.cart);
         const cartArray = [...this.state.cart]
         const index = cartArray.findIndex(item => item.id === good.id)
         const goodItem = cartArray[index]
+
         cartArray.splice(index, 1, {...goodItem, count: goodItem.count + 1})
         this.setState({
             cart: cartArray
@@ -90,7 +90,17 @@ export default class Cart extends Component {
 
     // 购物车减少商品数量
     delCount = good => {
-
+        const cartArray = [...this.state.cart]
+        const index = cartArray.findIndex(item => item.id === good.id)
+        const goodItem = cartArray[index]
+        if (goodItem.count > 1) {
+            cartArray.splice(index, 1, {...goodItem, count: goodItem.count - 1})
+        } else {
+            cartArray.splice(index, 1)
+        }
+        this.setState({
+            cart: cartArray
+        })
     }
 
     render() {
