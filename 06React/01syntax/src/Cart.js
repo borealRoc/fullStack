@@ -49,8 +49,7 @@ export default class Cart extends Component {
     addGood = () => {
         this.setState(preState => ({
             goods: [...preState.goods, {id: preState.goods[preState.goods.length - 1].id + 1, text: preState.good, price: 4000}],
-            good: '',
-            cart: []
+            good: ''
         }))
     }
     goodChange(e) {
