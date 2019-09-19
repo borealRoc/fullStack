@@ -80,7 +80,6 @@ export default class Cart extends Component {
         const cartArray = [...this.state.cart]
         const index = cartArray.findIndex(item => item.id === good.id)
         const goodItem = cartArray[index]
-
         cartArray.splice(index, 1, {...goodItem, count: goodItem.count + 1})
         this.setState({
             cart: cartArray
