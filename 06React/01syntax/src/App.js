@@ -3,6 +3,14 @@ import logo from './logo.png'
 import jsxImg from './jsx.png'
 import domImg from './dom.png'
 import './App.css'
+//手动引入antd组件
+import Button from 'antd/es/button';
+// import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
+// 按需引入antd组件
+// js 和 css 代码都会按需加载
+import { Input } from 'antd';
+
+
 
 // 函数组件
 let Welcome = props => {
@@ -90,6 +98,11 @@ export default class extends Component {
                         <p>5.4、{this.state.shouldComponentUpdate}</p>
                         <p>5.5、{this.state.componentWillUpdate}</p>
                         <p>5.6、{this.state.componentDidUpdate}</p>
+                    </li>
+                    <li>
+                        <h2>6. antd组件</h2>
+                        <p>6.1、手动引入<Button type="danger">Danger</Button></p>
+                        <p>6.2、按需引入<Input size="small" placeholder="small size" /></p>
                     </li>
                 </ul>
             </div>
