@@ -7,12 +7,14 @@ import Lifecycle from './Lifecycle'
 // eslint-disable-next-line
 import Cart from './Cart'
 import Message from './components/Message';
+import Composition from './components/Composition';
 
 const $root = document.getElementById('root')
 // ReactDOM.render(<App/>, $root)
 // ReactDOM.render(<Lifecycle/>, $root)
 // ReactDOM.render(<Cart title='React购物车'/>, $root)
-ReactDOM.render(<Message/>, $root)
+// ReactDOM.render(<Message/>, $root)
+ReactDOM.render(<Composition/>, $root)
 
 // 动态渲染
 // React 只更新它需要更新的部分

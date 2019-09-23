@@ -1,4 +1,5 @@
-import React, { Component, PureComponent} from 'react'
+// eslint-disable-next-line 
+import React, { Component, PureComponent } from 'react'
 
 
 // function List({ data }) {
@@ -31,17 +32,27 @@ import React, { Component, PureComponent} from 'react'
 // }
 
 
-class List extends PureComponent {
-    render() {
-        console.log('render')
-        return (
-            <div>
-                <p>{this.props.body}</p>
-                <p>----{this.props.author}</p>
-            </div>
-        )
-    }
-}
+// class List extends PureComponent {
+//     render() {
+//         console.log('render')
+//         return (
+//             <div>
+//                 <p>{this.props.body}</p>
+//                 <p>----{this.props.author}</p>
+//             </div>
+//         )
+//     }
+// }
+
+const List = React.memo(({ body, author}) => {
+    console.log('render')
+    return (
+        <div>
+            <p>{body}</p>
+            <p>----{author}</p>
+        </div>
+    )
+})
 
 export default class Message extends Component {
 
@@ -66,7 +77,8 @@ export default class Message extends Component {
     render() {
         return (
             <div>
-                {this.state.mes.map((item, index) => <List key={index} body={item.body} author = {item.author}/>)}
+                {/* {this.state.mes.map((item, index) => <List key={index} body={item.body} author = {item.author}/>)} */}
+                {this.state.mes.map((item, index) => <List key={index} {...item} />)}
             </div>
         )
     }

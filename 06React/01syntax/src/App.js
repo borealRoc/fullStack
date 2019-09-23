@@ -11,7 +11,6 @@ import Button from 'antd/es/button';
 import { Input } from 'antd';
 
 
-
 // 函数组件
 let Welcome = props => {
     return <strong>这是一个{props.txt}</strong>
