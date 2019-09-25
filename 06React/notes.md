@@ -2,16 +2,84 @@
 1. 安装：npm install -g create-react-app
 2. 创建工程：create-react-app react-demo
 # 二、React核心语法
-1. JSX语法：表达式[值、属性、函数表达式，JSX语句]，用{}表示、样式[className]
-2. 状态：state, setState({})/setState(prve=>{})[异步]
-3. 组件形式：class[有状态], function[无状态]
-4. 生命周期：constructor -> componentWillMount -> componentDidMount -> componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> compopnentDidUpdate
-5. props传递参数
-    - 父传递：`<Child data={this.state.cart}/>`
-    - 子接收：props.data
-6. 组件通讯
-    - 父监听：`<Child addCount={this.addCount}/>  addCount = ()=> {}`
-    - 子触发：`onClick={()=>props.addCount(item)}`
+1. JSX
+    - JSX具有JavaScript的全部功能
+    - JSX将变量包裹在大括号中，在大括号内放置任何有效的JavaScript表达[JSX也是表达式]
+    - JSX将字符串字面量包裹在引号中
+    - 仅使用引号（对于字符串值）或大括号（对于表达式）中的一个，对于同一属性不能同时使用这两种符号
+    - 使用 camelCase（小驼峰命名）来定义属性的名称
+    - React DOM 在渲染所有输入内容之前，默认会进行转义，可以防止XSS攻击
+2. 元素渲染
+    - 
+    ```javascript
+    setInterval(() => {
+        ReactDOM.render(<h1>{new Date().toLocaleTimeString()}</h1>, $root)
+    }, 1000)
+    ```
+    在setInterval函数中，尽管每秒都在调用render函数，但React DOM 会将元素和它的子元素与它们之前的状态进行比较，并只会进行必要的更新来使 DOM 达到预期的状态。
+3. 组件 & Props
+    - 组件
+        - 组件名称必须以大写字母开头
+        - 组件形式：class[有状态], function[无状态]
+        - 提取组件：将组件拆分为更小的组件
+    - Props
+        - Props的只读性：组件无论是使用函数声明还是通过 class 声明，都决不能修改自身的 props
+    - 组件通讯
+        - 父传子[props]
+            - 父传递：`<Child data={this.state.cart}/>`
+            - 子接收：props.data
+        - 子传父
+            - 父监听：`<Child addCount={this.addCount}/>  addCount = ()=> {}`
+            - 子触发：`onClick={()=>props.addCount(item)}`
+    - 生命周期
+        - constructor -> componentWillMount -> componentDidMount -> componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> compopnentDidUpdate
+4. 状态
+    - State 与 props 类似，但是 state 是私有的，并且完全受控于当前组件。
+    - 正确使用State
+        - 不要直接修改 State
+            - // Wrong `this.state.comment = 'Hello';`
+            - // Correct  `this.setState({comment: 'Hello'});`
+        - State 的更新可能是异步的
+        ```javascript
+        this.setState((preState, preProps) => ({
+            count: preState.count + 1
+        }), () => {
+            console.log('在setState的回调函数里，正确取到了值', this.state.count)
+        })
+        console.log('因为setState()是异步的,所以我这里取到的值是错误的', this.state.count)
+        ```
+        - State 的更新会被合并?  
+        <img src="./knowledgePic/1.png">
+5. 事件处理
+    - 事件名采用驼峰写法，如`onClick={handler}`
+    - 不能通过返回 false 的方式阻止默认行为, 必须显式的使用 preventDefault
+    - 确定this的指向
+        - 方法1：`this.handleClick = this.handleClick.bind(this);`
+        - 方法2：`onClick={(e) => this.handleClick(e)}`
+        - 方法3：`handleClick = () => {console.log('this is:', this);}`
+        - 方法3问题在于每次渲染 LoggingButton 时都会创建不同的回调函数。在大多数情况下，这没什么问题，但如果该回调函数作为 prop 传入子组件时，这些组件可能会进行额外的重新渲染。我们通常建议在构造器中绑定或使用 class fields 语法来避免这类性能问题。
+6. 条件渲染
+    - if语句或三元预算符
+7. 列表 & Key
+    - `const goods = this.state.goods.map(item => <li key={item.id}>{item.text}<button onClick={()=>this.addToCart(item)}>加购</button></li>)`
+    - 元素的 key 只有放在就近的数组上下文中才有意义：一个好的经验法则是，在 map() 方法中的元素需要设置 key 属性
+8. 表单：受控组件[双向数据绑定]
+    - input
+    ```javascript
+        <input type="text" value={this.state.good} onChange={e=>this.goodChange(e)}/>
+        goodChange(e) {
+            this.setState({
+                good: e.target.value
+            })
+        }
+    ```
+    - textarea 
+        - `<textarea>`使用 value 属性代替，这样可以使得使用`<textarea>`的表单和使用单行 input 的表单非常类似
+    - select 标签
+        - 由于 selected 属性的缘故，椰子选项默认被选中。React 并不会使用 selected 属性，而是在根 select 标签上使用 value 属性。这在受控组件中更便捷
+    - 总的来说，`<input type="text">`, `<textarea>` 和 `<select>` 之类的标签都非常相似,它们使用value + onChange事件实现受控组件
+    - 文件 input 标签
+        - 因为它的 value 只读，所以它是 React 中的一个非受控组件
 # 三、组件化
 1. 容器组件 VS 展示组件
     - 容器组件负责数据获取，展示组件负责根据props显示信息
@@ -32,6 +100,8 @@
     - 比如：小组件负责渲染数据，中组件负责处理逻辑，大组件负责展示视图
 4. 高阶组件（HOC）
     - 高阶组件是一个函数
+    - 重写组件生命周期
+    
 # 四、React全家桶
 # 五、其它
 1. 命令行
