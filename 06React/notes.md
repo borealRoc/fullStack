@@ -31,6 +31,8 @@
         - 子传父
             - 父监听：`<Child addCount={this.addCount}/>  addCount = ()=> {}`
             - 子触发：`onClick={()=>props.addCount(item)}`
+        - Context
+            - Context 提供了一个无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法
     - 生命周期
         - constructor -> componentWillMount -> componentDidMount -> componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> compopnentDidUpdate
 4. 状态
@@ -75,10 +77,11 @@
     ```
     - textarea 
         - `<textarea>`使用 value 属性代替，这样可以使得使用`<textarea>`的表单和使用单行 input 的表单非常类似
-    - select 标签
-        - 由于 selected 属性的缘故，椰子选项默认被选中。React 并不会使用 selected 属性，而是在根 select 标签上使用 value 属性。这在受控组件中更便捷
+    - select  
+        <img src="./knowledgePic/2.png">  
+        <img src="./knowledgePic/3.png">
     - 总的来说，`<input type="text">`, `<textarea>` 和 `<select>` 之类的标签都非常相似,它们使用value + onChange事件实现受控组件
-    - 文件 input 标签
+    - 文件 `<input type="file"/>` 标签
         - 因为它的 value 只读，所以它是 React 中的一个非受控组件
 # 三、组件化
 1. 容器组件 VS 展示组件
@@ -110,6 +113,8 @@
         - WIN: del *
 2. ES6
     - Module
-3. React相关库
+3. ES7
+    - Decorator 装饰器
+4. React相关库
     - UI库：antd
     
