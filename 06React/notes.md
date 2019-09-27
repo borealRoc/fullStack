@@ -32,7 +32,14 @@
             - 父监听：`<Child addCount={this.addCount}/>  addCount = ()=> {}`
             - 子触发：`onClick={()=>props.addCount(item)}`
         - Context
+            - vuejs的privide&inject模式参考了context
             - Context 提供了一个无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法
+            - 这种模式下有两个角色，一个是Provider 一个是Consumer ，Provider在外城的组件，内部需要数据的，就用 Consumer来读取
+            ```javascript
+            const FormContext = React.createContext()
+            const FormProvider = FormContext.Provider
+            const FormConsumer = FormContext.Consumer
+            ```
     - 生命周期
         - constructor -> componentWillMount -> componentDidMount -> componentWillReceiveProps -> shouldComponentUpdate -> componentWillUpdate -> compopnentDidUpdate
 4. 状态
@@ -104,7 +111,10 @@
 4. 高阶组件（HOC）
     - 高阶组件是一个函数
     - 重写组件生命周期
-    
+    - 装饰器 + 高阶组件写法
+        - 装饰器使用前提
+            - 安装babel插件：`npm install --save-dev babel-plugin-transform-decorators-legacy`
+            - 加一点配置：`["@babel/plugin-proposal-decorators", { legacy: true }]`
 # 四、React全家桶
 # 五、其它
 1. 命令行
