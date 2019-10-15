@@ -20,3 +20,4 @@ console.log(buf3)
 // 合并
 const buf4 = Buffer.concat([buf2, buf3])
 console.log(buf4)
+
