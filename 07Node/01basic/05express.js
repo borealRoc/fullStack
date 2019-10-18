@@ -1,9 +1,12 @@
 const express = require('express')
+const body = require('body-parser');
 
 const app = express()
 app.listen(8080)
 
 // express一直都是从上往下走的
+
+app.use(body.urlencoded())
 
 // res可以发送任何格式的数据
 app.get('/index', (req, res, next) => {
@@ -25,5 +28,8 @@ app.get('/get', (req, res, next) => {
     res.send(req.query);
 })
 
-// 托管静态文件，使用 Express 中的 express.static 内置中间件函数
+
+
+
+// 托管静态文件，使用 Express 中的 express.static 内置中间件函数, 一般放在最后
 app.use(express.static('www'))
