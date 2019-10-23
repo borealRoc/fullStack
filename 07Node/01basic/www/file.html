@@ -7,10 +7,9 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="http://localhost:8080/reg" method="post">
-        <input type="text" value="" name="user"/>
-        <input type="password" value="" name="pass"/>
-        <input type="submit" value="发送"/>
-    </form>
+    <form action="http://localhost:8080/profile" method="post" enctype="multipart/form-data">
+        <input type="file" name="avatar" />
+        <input type="submit" value="提交文件" />
+      </form>
 </body>
 </html>
