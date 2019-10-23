@@ -26,7 +26,7 @@
                 - 解决：设置httpOnly; 对cookie进行签名[浏览器的cookie容量只有4kb，签名会让cookie变长变大]
             - session: 存储在服务器，不是独立存在，基于cookie[token:存储在cookie里面的sessionID]
                 - 问题：session挟持[sessionID被盗取]
-                - 解决：缩短sessionID有效期，定时更新
+                - 解决：缩短sessionID有效期[一般设置20分钟]，定时更新
         - cookie-parse
             - 读取：req.cookies: 普通cookie, signedCookies: 签名过的cookie
             - 写入: 
@@ -41,4 +41,6 @@
             })
             ```
         - cookie-session
+            - token其实只是一个32位的签名，它并没有加密
+            - 拓展：签名是不可逆的，加密是可逆的
 2. koa
