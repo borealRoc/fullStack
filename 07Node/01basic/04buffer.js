@@ -9,13 +9,19 @@ console.log(buf2)
 const buf3 = Buffer.from('hello,许')
 console.log(buf3)
 
+
+
 // 写入
 buf1.write('hello')
 console.log(buf1)
 
+
+
 // 读取
 console.log(buf3.toString())
 console.log(buf3)
+
+
 
 // 合并
 const buf4 = Buffer.concat([buf2, buf3])
