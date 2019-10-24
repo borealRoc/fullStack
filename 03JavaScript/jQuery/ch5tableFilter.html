@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>jquery 表格过滤</title>
+    <link rel="stylesheet" href="">
+    <style type="text/css">
+    table {
+        border: 0;
+        border-collapse: collapse;
+    }
+
+    div {
+        font: normal 12px/17px Arial;
+    }
+
+    td {
+        font: normal 12px/17px Arial;
+        padding: 2px;
+        width: 100px;
+    }
+
+    th {
+        font: bold 12px/17px Arial;
+        text-align: left;
+        padding: 4px;
+        border-bottom: 1px solid #333;
+        width: 100px;
+    }
+
+    .even {
+        background: #FFF38F;
+    }
+
+    /* 偶数行样式*/
+    .odd {
+        background: #FFFFEE;
+    }
+
+    /* 奇数行样式*/
+    .selected {
+        background: #FF6500;
+        color: #fff;
+    }
+    </style>
+    <script src="js/jquery.js"></script>
+</head>
+
+<body>
+    <div>
+        <br />
+        筛选
+        <input id="filterName" />
+        <br />
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>暂住地</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>王一</td>
+                <td>男</td>
+                <td>广东</td>
+            </tr>
+            <tr>
+                <td>王二</td>
+                <td>男</td>
+                <td>湖南</td>
+            </tr>
+            <tr>
+                <td>张三</td>
+                <td>女</td>
+                <td>湖南</td>
+            </tr>
+            <tr>
+                <td>许四</td>
+                <td>女</td>
+                <td>广东</td>
+            </tr>
+            <tr>
+                <td>刘五</td>
+                <td>男</td>
+                <td>上海</td>
+            </tr>
+            <tr>
+                <td>王五</td>
+                <td>女</td>
+                <td>四川</td>
+            </tr>
+            <tr>
+                <td>李六</td>
+                <td>女</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>刘七</td>
+                <td>女</td>
+                <td>北京</td>
+            </tr>
+            <tr>
+                <td>刘八</td>
+                <td>男</td>
+                <td>香港</td>
+            </tr>
+        </tbody>
+    </table>
+    <script type="text/javascript">
+    $(function() {
+        var filterName = $("#filterName");
+        var trList = $("tbody tr");
+        filterName.on('keyup', function() {
+            trList.hide().filter(":contains('" + $(this).val() + "')").show();
+        });
+    });
+    </script>
+</body>
+
+</html>

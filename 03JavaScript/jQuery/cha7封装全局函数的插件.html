@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <style type="text/css" media="screen">
+        span {
+            white-space: pre;
+            background-color: #ea6542;
+        }
+    </style>
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery.trim.js"></script>
+</head>
+    
+<body>
+    <span>  前后有空格    </span>
+    <span id='trimL'>  去掉前面的空格    </span>
+    <span id="trimR">  去掉后面的空格    </span>
+    <script type="text/javascript">
+    $(function() {
+        $("#trimL").text(jQuery.trimL($("#trimL").text()));
+        $("#trimR").text(jQuery.trimR($("#trimR").text()));
+    })
+    </script>
+</body>
+
+</html>
