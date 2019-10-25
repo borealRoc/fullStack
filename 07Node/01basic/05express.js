@@ -83,5 +83,7 @@ app.get('/session', (req, res) => {
     res.send(`欢迎您，这是您第${req.session['amount']}访问本网站，您的余额还有&yen;${req.session['money']}`)
 })
 
+
+
 // 托管静态文件，使用 Express 中的 express.static 内置中间件函数, 一般放在最后
 app.use(express.static('www'))
