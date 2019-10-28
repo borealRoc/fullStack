@@ -20,7 +20,7 @@ http.createServer((req, res) => {
                 return
             }
             res.statusCode = 200
-            res.setHeader('Content-Type', 'text/html')
+            res.setHeader('Content-Type', 'text/html')  // html
             // res.setHeader('Content-Type', 'text/plain') //纯文本
             res.write(data)
             res.end()
@@ -31,5 +31,9 @@ http.createServer((req, res) => {
         res.setHeader('Content-Type', 'application/json') //JSON格式
         res.write(JSON.stringify({name: 'xu', age: 17}))
         res.end()
+    // 请求图片
+    } else if (req.headers.accept.indexOf('image/*') !== -1 && method === 'GET') {
+        console.log(url)
+        fs.createReadStream(url).pipe(res)
     }
 }).listen(3000)

@@ -7,7 +7,14 @@
         - 导入: require
 2. 核心API
     - buffer: 八位字节组成的[类]数组，可以有效的在js中存储二进制数据的缓存区。用十六进制表示
-    - fs, http, stream
+        - 分配内存: `buffer.alloc()`
+        - 从数据创建: `buffer.from(str/any...)`
+        - 写入：`buf.write()`
+        - 读取：`buf.toString()`
+        - 合并： `Buffer.concat(buf1, buf2...)`
+    - fs: `fs.readFile((err, data) => {})`
+    - stream: `fs.createReadStream().pipe().fs.createWriteStream()`
+    - http: `http.createServer((req, res)=>{}).listen(3000)`
 3. 其它
     -  `npm i nodemon -g`: 在每次修改js文件需要重新执行才能生效，安装nodemon可以监视文件改动，自动重启
     - 调试
@@ -44,3 +51,11 @@
             - token其实只是一个32位的签名，它并没有加密
             - 拓展：签名是不可逆的，加密是可逆的
 2. koa
+# 五、网络编程
+1. http
+
+2. https
+3. http2
+4. webSocket
+
+ 

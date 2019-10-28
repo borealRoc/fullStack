@@ -3,6 +3,7 @@
 const buf1 = Buffer.alloc(10)
 console.log(buf1)
     // 从数据创建
+    // Buffer.from(str/any...)
 const buf2 = Buffer.from([0,1,10])
 console.log(buf2)
     // 直接创建
