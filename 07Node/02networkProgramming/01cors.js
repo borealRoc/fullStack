@@ -1,7 +1,7 @@
 const http = require('http')
 const fs = require('fs')
 
-// 实际开发解决跨域问题，不需要为每个接口去写，可以用 cors 的node模块解决
+// 实际开发解决跨域问题，不需要为每个接口去写，可以用 cors node模块解决
 http.createServer((req, res) => {
     const {url, method} = req
     if (method === 'GET' && url === '/index') {
