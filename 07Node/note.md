@@ -52,10 +52,33 @@
             - 拓展：签名是不可逆的，加密是可逆的
 2. koa
 # 五、网络编程
-1. http
+1. 跨域
+2. socket[两部分]
+    - node
+        ```javascript
+        const http = require('http')
+        const io = require('socket.io')
+        const httpServer = http.createServer()
+        httpServer.listen(8080)
+        const wsServer = io.listen(httpServer)
 
-2. https
-3. http2
-4. webSocket
+        wsServer.on('connection', socket => {
+            socket.on('disconnect', () => {})
+            socket.on('clientEve', (...args) => {})
+            socket.emit('serverEve', args)
+        })
+        ```
+    - 前端
+        ```html
+        <script src="http://localhost:8080/socket.io/socket.io.js"></script>
+        <script type="text/javascript">
+        const socket = io.connect('ws://localhost:8080/')
+
+        socket.on('connect', () => {})
+        socket.on('disconnect', () => {})
+        socket.emit('clientEve', ...args)
+        socket.on('serverEve', res => {})
+        </script>
+        ```
 
  
