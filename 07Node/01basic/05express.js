@@ -1,27 +1,29 @@
 const express = require('express')
 const app = express()
 app.listen(3000)
+
 // express一直都是从上往下走的
 // res可以发送任何格式的数据
-// 可以分段处理同一个接口
+
+
+// 服务器给浏览器发送数据
+// get请求
 app.get('/index', (req, res, next) => {
+    // 可以分段处理同一个接口
     console.log('test')
     next()
 })
 app.get('/index', (req, res, next) => {
+    // 可以分段处理同一个接口
     res.send({ message: 'get' })
 })
-
-
-
-// 处理post请求[不带next参数]
+// post请求[不带next参数]
 app.post('/index', (req, res) => {
     res.send({ message: 'post' })
 })
 
 
-
-// 处理数据
+// 服务器获取浏览器传过来的数据
 // get请求，直接req.query获取
 app.get('/get', (req, res, next) => {
     res.send(req.query);
@@ -48,7 +50,6 @@ app.post('/profile', (req, res) => {
     console.log(req.files)
     res.send(req.files)
 })
-
 
 
 // cookie操作
