@@ -14,7 +14,6 @@ class Application {
     listen() {
         http.createServer((req, res) => {
             const {pathname} = url.parse(req.url, true)
-            console.log(pathname)
             for (const route of router) {
                 if (route.path === pathname) {
                     route.handler(req, res)
