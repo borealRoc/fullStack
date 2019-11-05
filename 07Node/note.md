@@ -13,8 +13,20 @@
         - 读取：`buf.toString()`
         - 合并： `Buffer.concat(buf1, buf2...)`
     - fs: `fs.readFile((err, data) => {})`
-    - stream: `fs.createReadStream().pipe().fs.createWriteStream()`
     - http: `http.createServer((req, res)=>{}).listen(3000)`
+    - stream
+        - 文件流: `fs.createReadStream().pipe().fs.createWriteStream()`
+        - http请求： `fs.createReadStream(`www${req.url}`).pipe(res)`
+        - 压缩：
+            ```javascript
+                const zlib = require('zlib')
+                http.createServer((req, res) => {
+                    let rs = fs.createReadStream(`www${req.url}`);
+                    res.setHeader('content-encoding', 'gzip');
+                    let gz = zlib.createGzip();
+                    rs.pipe(gz).pipe(res);//浏览器最后会自己解压
+                })
+            ```
 3. 其它
     -  `npm i nodemon -g`: 在每次修改js文件需要重新执行才能生效，安装nodemon可以监视文件改动，自动重启
     - 调试
@@ -35,7 +47,7 @@
                 - 问题：session挟持[sessionID被盗取]
                 - 解决：缩短sessionID有效期[一般设置20分钟]，定时更新
         - cookie-parse
-            - 读取：req.cookies: 普通cookie, signedCookies: 签名过的cookie
+            - 读取：req.cookies: 普通cookie, req.signedCookies: 签名过的cookie
             - 写入: 
             ```javascript
             res.cookie('key', value, {
@@ -51,8 +63,20 @@
             - token其实只是一个32位的签名，它并没有加密
             - 拓展：签名是不可逆的，加密是可逆的
 2. koa
-# 五、网络编程
-1. 跨域
+# 三、网络编程
+1. 跨域CORS
+    - 简单请求: `res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000")`
+    - preflight请求: 
+    ```javascript
+        res.writeHead(200, {
+            "Access-Control-Allow-Origin": "http://localhost:3000",
+            "Access-Control-Allow-Headers": "X-Token,Content-Type",
+            "Access-Control-Allow-Methods": "GET,POST,PUT",
+            // 如果要携带cookie信息，则请求变为credential请求
+            "Access-Control-Allow-Credentials": "true"
+        })
+    ```
+    - 携带cookie: `res.setHeader("Access-Control-Allow-Credentials", "true")`
 2. socket[两部分]
     - node
         ```javascript
