@@ -104,5 +104,9 @@
         socket.on('serverEve', res => {})
         </script>
         ```
-
+# 四、持久化
+1. 文件系统读写数据库 —— node fs模块
+2. 关系型数据库 - mysql
+3. 文档型数据库 - mongodb
+4. 键值对数据库 - redis
  
