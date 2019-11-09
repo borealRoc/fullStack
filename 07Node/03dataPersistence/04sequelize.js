@@ -56,29 +56,46 @@ Fruit.sync({ force: true })
         )
     )
     .then(
-        () => {
-            // 查
-            Fruit.findAll().then(res => {
-                // 改
-                res[0].amount = '100kg'
-                res[0].save()
-                // 使用扩展方法
-                console.log('商品总价', res[0].totalPrice(20))
+        // Promise写法
+        // () => {
+        //     Fruit.findAll().then(res => {
+        //         // 改
+        //         res[0].amount = '100kg'
+        //         res[0].save()
+        //         // 使用扩展方法
+        //         console.log('商品总价', res[0].totalPrice(20))
 
-                // 查
-                // 根据ID查询
-                Fruit.findByPk(1).then(fruit => console.log('ID查询', fruit.get()))
-                // 条件查询
-                Fruit.findOne({ where: { name: "苹果" } }).then(fruit => console.log('条件查询', fruit.get()))
-                // 模糊查询: 查找单价在5块以下的水果
-                // const Op = Sequelize.Op
-                // Fruit.findAll({ wherer: {[Op.or]:[{price: { [Op.lt]:5 }}]}})
-                //     .then(fruits => { fruits.forEach(item => console.log('单价在5块以下的水果', item)) })
+        //         // 查
+        //         // 根据ID查询
+        //         Fruit.findByPk(1).then(fruit => console.log('ID查询', fruit.get()))
+        //         // 条件查询
+        //         Fruit.findOne({ where: { name: "苹果" } }).then(fruit => console.log('条件查询', fruit.get()))
+        //         // 模糊查询: 查找单价在5块以下的水果
+        //         // const Op = Sequelize.Op
+        //         // Fruit.findAll({ wherer: {[Op.or]:[{price: { [Op.lt]:5 }}]}})
+        //         //     .then(fruits => { fruits.forEach(item => console.log('单价在5块以下的水果', item)) })
                 
-                // 改的另一种方式
-                Fruit.update({ price: 8.88 }, { where: { id: 1 } })
-                // 删
-                Fruit.findOne({ where: { id: 1 } }).then(r => r.destroy());
-            }, err => console.log(err.message))
+        //         // 改的另一种方式
+        //         Fruit.update({ price: 8.88 }, { where: { id: 1 } })
+        //         // 删
+        //         // Fruit.findOne({ where: { id: 1 } }).then(r => r.destroy())
+        //     }, err => console.log(err.message))
+        // }
+        
+        // async + await写法
+        async () => {
+            let fruits = await Fruit.findAll()
+            fruits[0].amount = '200kg'
+            fruits[0].save()
+            console.log('商品总价', fruits[0].totalPrice(20))
+
+            let fruitID_1 = await Fruit.findByPk(1)
+            console.log('ID查询', fruitID_1.get())
+            let fruitApple = await Fruit.findOne({ where: { name: "苹果" } })
+            console.log('条件查询', fruitApple.get())
+
+            await Fruit.update({ price: 8.88 }, { where: { id: 1 } })
+            await Fruit.findOne({ where: { id: 1 } }).then(r => r.destroy())
         }
     )
+
