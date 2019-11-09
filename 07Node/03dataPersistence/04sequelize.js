@@ -51,9 +51,15 @@ Fruit.prototype.totalPrice = function (count) {
 Fruit.sync({ force: true })
     .then(
         // 增
-        () => Fruit.create(
-            { name: '苹果', price: 6.66, },
-        )
+        // () => Fruit.create(
+        //     { name: '苹果', price: 6.66, },
+        // )
+        // 批量插入
+        () => Fruit.bulkCreate([
+            { name: '苹果', price: 1.66, },
+            { name: '香蕉', price: 3.66, },
+            { name: '梨', price: 6.66, },
+        ])
     )
     .then(
         // Promise写法
