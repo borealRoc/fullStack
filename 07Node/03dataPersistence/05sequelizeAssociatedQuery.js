@@ -15,7 +15,7 @@ const Team = sequelize.define('team', { name: Sequelize.STRING }, {timestamps: f
 Player.belongsTo(Team); // 1端建立关系 
 Team.hasMany(Player); // N端建立关系
 
-// 同步 
+// 1对多 && 多对1
 sequelize.sync({ force: true })
     .then(
         async () => {
@@ -28,3 +28,4 @@ sequelize.sync({ force: true })
             const team = await Team.findOne({ where: { name: '火箭' }, include: [Player] })
             console.log('team',JSON.stringify(team, null, '\t'));
         })
+
