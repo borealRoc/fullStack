@@ -9,18 +9,16 @@ fs.readFile('./config.js', (err, data) => {
     if (err) console.log(err)
     else console.log('异步读取文件回调函数写法', data)
 })
-// 测试代码
-console.log('测试代码')
 
 
 // 异步读取promise写法
 const { promisify } = require('util')
 const readFile = promisify(fs.readFile)
-readFile('./config.js').then(data => console.log('异步读取文件promise写法', data))
+readFile('./config.js').then(data => console.log('异步读取文件util + promisify 写法', data))
 // v10.0
 // fs Promises API
 const { promises } = require('fs')
-promises.readFile('./config.js').then(data => console.log('fs Promises API写法', data))
+promises.readFile('./config.js').then(data => console.log('异步读取文件fs Promises API写法', data))
 
 
 const readFilePromise = promises.readFile('./config.js')
@@ -42,3 +40,7 @@ const asyncReadFile = async () => {
     console.log('异步读取文件async + await写法', data)
 }
 asyncReadFile()
+
+
+// 测试代码
+console.log('测试代码,我虽然放到了最后，但我比所有的异步操作都提前执行了')
