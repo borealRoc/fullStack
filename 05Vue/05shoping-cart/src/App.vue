@@ -2,8 +2,8 @@
   <div id="app">
     <h1>购物车案例</h1>
     <hr />
-    <div>
-      <h2>新增课程</h2>
+    <div class="left">
+      <h2 class="center">新增课程</h2>
       <div>
         <label for>课程名称：</label>
         <input type="text" v-model="courseItem.name" />
@@ -110,5 +110,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+.left {
+    text-align: left;
+}
+.center {
+    text-align: center;
 }
 </style>

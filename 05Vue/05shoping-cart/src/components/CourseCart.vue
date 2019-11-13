@@ -27,7 +27,7 @@
         </tr>
         <tr>
             <td>总计</td>
-            <td colspan="2">{{totalCount}}/{{carts.length}}</td>
+            <td colspan="2">{{totalCount}}/{{cartsLength}}</td>
             <td colspan="2">{{totalPrice}}</td>
         </tr>
       </tbody>
@@ -55,6 +55,9 @@ export default {
       }
   },
   computed: {
+      cartsLength() {
+          return this.carts.length
+      },
       totalCount() {
           return this.carts.filter(item => item.isActive === true).length 
       },
