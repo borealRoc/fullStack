@@ -4,7 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
-  // state相当于date
+  // state相当于data
   state: {
     count: 1,
     num: 2,

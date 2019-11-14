@@ -1,34 +1,31 @@
+// step1: 实现数据响应
 class XVue {
-    constructor(opts) {
-        this.$data = opts.data // 保存data选项
-        this.observe(this.$data) // 执行响应式
+    constructor(options) {
+        //缓存配置
+        this.$options = options
+        // Observer: 挟持监听data对象
+        this.$data = options.data
+        this.observe(this.$data)
     }
+    // 遍历$data对象所有的属性，监听每一个属性
     observe(data) {
-        if (!data || typeof data !== 'Object') {
-            return 
-        }
-        // 遍历data选项
+        if (!data || typeof data !== 'object') return
         Object.keys(data).forEach(key => {
-            // 为每一个data的每一项定义响应式
             this.defineReactive(data, key, data[key])
         })
     }
-    defineReactive(data, key, val) {
-        // 递归查找嵌套属性
-        this.observe(key)
-        // 为data对象定义属性
-        Object.defineProperty(data, key, {
-            enumerable: true,  //可枚举
-            configurable: true, // 可修改或删除
+    // 对监听到的$data对象的属性做响应式处理
+    defineReactive(obj, key, val) {
+        // 使用递归方式解决data数据嵌套问题
+        this.observe(val)
+        Object.defineProperty(obj, key,  {
             get() {
                 return val
             },
             set(newVal) {
-                if (newVal === val) {
-                    return 
-                }
+                if (newVal === val) return
                 val = newVal
-                console.log('数据发生了变化')
+                console.log(`${key}属性更新了:${val}`)
             }
         })
     }

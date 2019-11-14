@@ -8,26 +8,17 @@
 </head>
 <body>
     <script src="XVue.js"></script>
-    <script>
-        const app = new XVue({
-            data: {
-                name: 'xxx',
-                person: {name: 'Linda'},
-                persons: ['John']
+    <script type="text/javascript">
+    const app = new XVue({
+        data: {
+            name: 'xu',
+            person: {
+                age: 18
             }
-        })
-        console.log('name初始值', app.$data.name)
-        app.$data.name = 'xu'
-        console.log('name变化后的值', app.$data.name)
-
-        console.log('person[name]初始值', app.$data.person['name'])
-        app.$data.person.name = 'King'
-        console.log('person[name]变化后的值', app.$data.person['name'])
-
-        console.log('persons[0]初始值', app.$data.persons[0])
-        app.$data.persons[0] = 'Liu'
-        console.log('persons[0]变化后的值', app.$data.persons[0])
-        
+        }
+    })
+    app.$data.name = 'King'
+    app.$data.person.age = 17
     </script>
 </body>
 </html>

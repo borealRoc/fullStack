@@ -202,7 +202,7 @@
             - 访问'/',跳转到'/home',展示Home视图的内容
         - 别名：alias
             - {path: '/home', component: Home, alias: '/index'}
-            - 访问'/index',跳转到'/index'，展示Home视图的内容
+            - 访问'/home',跳转到'/home'，展示Home视图的内容；访问'/index',跳转到'/index'，展示Home视图的内容
 2. vue-router进阶语法
     - 2.1、导航守卫
         - 全局导航守卫
@@ -310,11 +310,32 @@
     - 模块[modules]
         - 基本用法
         ```javascript
+            // moduleA.js
             const moduleA = {stete: {}, getters: {}, mutations: {}, actions: {}}
+            export default {
+                namespaced:true,
+                state,
+                mutations,
+                actions
+            }
+            // moduleB.js
             const moduleB = {stete: {}, getters: {}, mutations: {}, actions: {}}
-            const store = new Vuex.store({
-                modules: {a: moduleA, b: modouleB}
+            export default {
+                namespaced:true,
+                state,
+                mutations,
+                actions
+            }
+            // index.js
+            export default new Vuex.Store({
+                modules:{
+                    count,
+                    number 
+                }
             })
+            //App.vue
+            {{$store.state.count.count}}
+            {{$store.state.number.number}}
         ```
         - 模块的局部状态
             - 模块的局部状态对象:
@@ -401,7 +422,7 @@
             - 通过vue-cli安装：`vue add cube-ui`
 3. 其它
     - 使用axios请求数据: `npm install axios`
-    - mock数据: Vue.config.js
+    - mock数据: Vue.config.js[修改vue/cli的webpack配置]
 
 
 
