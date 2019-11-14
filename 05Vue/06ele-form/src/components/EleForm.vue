@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form class="ele-form">
     <slot></slot>
   </form>
 </template>
@@ -25,4 +25,8 @@ export default {
 </script>
 
 <style scoped>
+.ele-form {
+    padding: 10px;
+    outline: solid 2px #111;
+}
 </style>
