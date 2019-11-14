@@ -6,7 +6,9 @@
     <p>FormInput负责双向数据绑定</p>
     <ele-form :model="model" :rules="rules" ref="loginForm">
       <ele-form-item label="用户名" prop="username">
-        <ele-input v-model="model.username"></ele-input>
+        <interfer>
+          <ele-input v-model="model.username"></ele-input>
+        </interfer>
       </ele-form-item>
       <ele-form-item label="确认密码" prop="password">
         <ele-input type="password" v-model="model.password"></ele-input>
@@ -19,13 +21,15 @@
 import EleInput from "./components/EleInput.vue";
 import EleFormItem from "./components/EleFormItem.vue";
 import EleForm from "./components/EleForm.vue";
+import Interfer from "./components/Interfer.vue";
 
 export default {
   name: "app",
   components: {
     EleInput,
     EleFormItem,
-    EleForm
+    EleForm,
+    Interfer
   },
   data() {
     return {
@@ -35,7 +39,10 @@ export default {
           { required: true, message: "请输入用户名" },
           { min: 6, max: 10, message: "请输入6~10的用户名" }
         ],
-        password: [{ required: true, message: "请输入密码" }]
+        password: [
+          { required: true, message: "请输入密码" },
+          { min: 6, max: 10, message: "请输入6~10的密码" }
+        ]
       }
     };
   }
