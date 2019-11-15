@@ -8,11 +8,10 @@ class XVue {
         this.observe(this.$data)
 
         // 模拟一下watcher创建
-        new Watcher();
-        // // 通过访问test属性触发get函数，添加依赖
-        this.$data.name;
-        new Watcher();
-        this.$data.person.age;
+        new Watcher()
+        this.$data.name
+        new Watcher()
+        this.$data.person.age
     }
     // 遍历$data对象所有的属性，监听每一个属性
     observe(data) {
@@ -30,20 +29,20 @@ class XVue {
 
         Object.defineProperty(obj, key, {
             get() {
-                Dep.target && dep.addDep(Dep.target);
+                Dep.target && dep.addDep(Dep.target)
                 return val
             },
             set(newVal) {
                 if (newVal === val) return
                 val = newVal
-                // console.log(`${key}属性更新了:${val}`)
                 dep.notify()
+                // console.log(`${key}属性更新了:${val}`)
             }
         })
     }
 }
 // step2: 依赖收集与追踪
-// Dep: 用来管理Watcher
+// Dep: 用来管理watcher
 class Dep {
     constructor() {
         this.deps = []
@@ -52,10 +51,10 @@ class Dep {
         this.deps.push(dep)
     }
     notify() {
-        this.deps.forEach(dep => dep.update())
+        this.deps.forEach(dep=> dep.update())
     }
 }
-// Watcher: 添加订阅者
+// watcher: 添加data属性订阅者
 class Watcher {
     constructor() {
         Dep.target = this
