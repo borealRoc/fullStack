@@ -107,5 +107,9 @@
 # 四、持久化
 1. 文件系统读写数据库 —— node fs模块
 2. 关系型数据库 - mysql
+    - 原生mysql驱动模块[增，删，改，查]
+    - ORM模块Sequelize[表关联]
 3. 文档型数据库 - mongodb
+    - 原生模块node-mongodb-native[分页实例]
+    - ODM模块mongoose
 4. 键值对数据库 - redis
