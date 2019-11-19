@@ -9,6 +9,17 @@ const store = new Vuex.Store({
         user: localStorage.getItem('user') || '',
         cart: JSON.parse(localStorage.getItem('cart')) || []
     },
+    getters: {
+        isLogin: state => !!state.token,
+        cartTotal: state => {
+            let num = 0;
+            state.cart.forEach(item => {
+                num += item.cartCount
+            })
+            return num;
+        },
+        sumTotal: state => state.cart.reduce((num, item) => num += item.price * item.cartCount, 0),
+    },
     mutations: {
         setToken(state, token) {
             state.token = token
@@ -39,19 +50,14 @@ const store = new Vuex.Store({
         }
     },
     actions: {
-
+        logout({commit}) {
+            localStorage.removeItem('token')
+            localStorage.removeItem('user')
+            commit('setToken', '')
+            commit('setUser', '')
+        }
     },
-    getters: {
-        isLogin: state => !!state.token,
-        cartTotal: state => {
-            let num = 0;
-            state.cart.forEach(item => {
-                num += item.cartCount
-            })
-            return num;
-        },
-        sumTotal: state => state.cart.reduce((num, item) => num += item.price * item.cartCount, 0),
-    }
+
 })
 
 // 订阅store变化

@@ -116,13 +116,14 @@ export default {
     },
     async logoutHandler(e) {
       e.preventDefault();
+      // 注销需要请求接口吗？
+      // 不请求接口
+      //   this.$store.dispatch("logout");
+      // 请求接口
       const res = await this.$http.get("/api/logout");
       const { code, token } = res.data;
       if (code === -1) {
-        localStorage.setItem("token", token);
-        this.$store.commit("setToken", token);
-        localStorage.removeItem("user");
-        this.$store.commit("setUser", "");
+        this.$store.dispatch("logout");
       } else {
         const toast = this.$createToast({
           time: 1000,

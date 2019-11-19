@@ -17,47 +17,52 @@ Router.prototype.goBack = function () {
 }
 
 const router = new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
-  routes: [
-    {
-      path: '/',
-      name: 'home',
-      component: Home
-    },
-    {
-      path: '/cart',
-      name: 'cart',
-      component: Cart,
-      meta: {
-        auth: true,
-      }
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-  ]
+    mode: 'history',
+    base: process.env.BASE_URL,
+    routes: [
+        {
+            path: '/',
+            redirect: '/home',
+        },
+        {
+            path: '/home',
+            name: 'home',
+            component: Home
+        },
+        {
+            path: '/cart',
+            name: 'cart',
+            component: Cart,
+            meta: {
+                auth: true,
+            }
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
+        },
+    ]
 })
 
+// 路由守卫
 router.beforeEach((to, from, next) => {
-  if (to.meta.auth) {
-  // 需要认证，检查令牌
-    if (store.state.token) {
-      // 令牌存在
-      next()
+    if (to.meta.auth) {
+        // 需要认证，检查令牌
+        if (store.state.token) {
+            // 令牌存在
+            next()
+        } else {
+            // 令牌不存在，跳转去登录页面
+            next({
+                path: '/login',
+                query: { redirect: to.path }
+            })
+        }
     } else {
-      // 令牌不存在，跳转去登录页面
-      next({
-        path: '/login',
-        query: {redirect: to.path}
-      })
+        // 不需要认证
+        next()
     }
-  } else {
-  // 不需要认证
-    next()
-  }
 })
 
 // 记录历史记录

@@ -62,7 +62,7 @@ export default {
       const $ballDot = this.$refs.ballDot;
       ballDotX = $ballDot.offsetLeft
       ballDotY = $ballDot.offsetTop
-      console.log('ballDotX,ballDotY',ballDotX, ballDotY)
+    //   console.log('ballDotX,ballDotY',ballDotX, ballDotY)
   },
   components: {
     courseList
