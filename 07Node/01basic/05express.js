@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 app.listen(3000)
 
-// express一直都是从上往下走的
+// express是从上往下走的
 // res可以发送任何格式的数据
 
 

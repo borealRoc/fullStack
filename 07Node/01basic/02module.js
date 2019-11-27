@@ -10,7 +10,7 @@ function showStatistics() {
     console.log(`内存占用率${mem}%`);
 
     cpuStat.usagePercent((err, percent) => {
-        console.log(`cpu占用率：${percent}`);
+        console.log(`cpu占用率：${percent}%`);
     });
 }
 // setInterval(showStatistics, 1000);

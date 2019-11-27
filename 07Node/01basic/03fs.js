@@ -14,7 +14,7 @@ fs.readFile('./config.js', (err, data) => {
 // 异步读取promise写法
 const { promisify } = require('util')
 const readFile = promisify(fs.readFile)
-readFile('./config.js').then(data => console.log('异步读取文件util + promisify 写法', data))
+readFile('./config.js').then(data => console.log('异步读取文件util模块的promisify写法', data))
 // v10.0
 // fs Promises API
 const { promises } = require('fs')
@@ -30,7 +30,7 @@ co(function* () {
 }).then(function (value) {
     console.log('异步读取文件generator写法', value)
 }, function (err) {
-    console.error('异步读取文件generator写法', err.stack)
+    console.error('异步读取文件generator写法出错', err.stack)
 })
 
 
