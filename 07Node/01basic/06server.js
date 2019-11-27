@@ -5,7 +5,7 @@ const fs = require('fs')
 http.createServer((req, res) => {
     const { url, method } = req
     // 静态页面访问
-    if (url && method === 'GET') {
+    if (url && url !== '/user' && method === 'GET') {
         // 解析文件的绝对路径
         // const absolutePath = path.resolve('./www/index.html')
         // /Users/xusp/Desktop/studySpace/FullStack/07Node/01basic/www/index.html
@@ -26,7 +26,7 @@ http.createServer((req, res) => {
             res.end()
         })
     // 接口编写
-    } else if (url === '/user' && method === 'POST') {
+    } else if (url === '/user' && method === 'GET') {
         res.statusCode = 200
         res.setHeader('Content-Type', 'application/json') //JSON格式
         res.write(JSON.stringify({name: 'xu', age: 17}))
