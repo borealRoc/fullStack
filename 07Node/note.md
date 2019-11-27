@@ -6,7 +6,7 @@
         - 导出: module.exports
         - 导入: require
 2. 核心API
-    - buffer: 八位字节组成的[类]数组，可以有效的在js中存储二进制数据的缓存区。用十六进制表示
+    - buffer: JavaScript 语言自身只有字符串数据类型，没有二进制数据类型。但在处理像TCP流或文件流时，必须使用到二进制数据。因此在 Node.js中，定义了一个 Buffer 类，该类用来创建一个专门存放二进制数据的缓存区
         - 分配内存: `buffer.alloc()`
         - 从数据创建: `buffer.from(str/any...)`
         - 写入：`buf.write()`
@@ -30,12 +30,20 @@
 3. 其它
     -  `npm i nodemon -g`: 在每次修改js文件需要重新执行才能生效，安装nodemon可以监视文件改动，自动重启
     - 调试
+    - node的特点
+        - 非阻塞I/O
+        - 事件驱动
+    - 并发处理[高性能]
+        - 多进程: C
+        - 多线程: Java
+        - [单进程单线程]异步I/O: JS
 # 二、框架
 1. express
     - 路由
         - `app.method('./', (req, res, next) => {})`
         - method: use, get, post
         - use会拦截所有请求，最先执行。所以use内部必须next()
+        - 托管静态文件: `app.use(express.static('www'))`
     - 中间件
         - body-parser: 处理post请求普通数据
         - multer: 处理post请求file数据
@@ -47,7 +55,9 @@
                 - 问题：session挟持[sessionID被盗取]
                 - 解决：缩短sessionID有效期[一般设置20分钟]，定时更新
         - cookie-parse
-            - 读取：req.cookies: 普通cookie, req.signedCookies: 签名过的cookie
+            - 读取：
+                - req.cookies: 普通cookie
+                - req.signedCookies: 签名过的cookie
             - 写入: 
             ```javascript
             res.cookie('key', value, {
