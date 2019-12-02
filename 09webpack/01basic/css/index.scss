@@ -1,0 +1,11 @@
+body {
+    background: #ea6542;
+    div {
+        display: flex;
+        .pic {
+            display: block;
+            width: 100px;
+            height: 100px;
+        }
+    }
+}

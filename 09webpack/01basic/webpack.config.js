@@ -15,23 +15,34 @@ module.exports = {
         //遇到不认识的模块就在这里找loader解决
         rules: [
             {
-                test: /\.(png|jpg|gif)$/,
-                use: [
-                    {
-                        // file-loader就是把模块，放在另外一个目录里，并且把位置返回给我们
-                        // 可用于图片，字体，视频，音频......
-                        // url-loader和file-loader类型，但它可以限定模块的体积，根据体积判断是否需要转换成base64,减少http请求
-                        // loader: 'file-loader',
-                        loader: "url-loader",
-                        options: {
-                            //name是打包前模块的名称，ext是打包前的模块格式
-                            name: "[name]_[hash].[ext]",
-                            outputPath: "images/",
-                            limit: 200000
-                        }
-                    },
-                    
-                ]
+                test: /\.(png|jpe?g|gif)$/,
+                use: {
+                    // file-loader就是把模块，放在另外一个目录里，并且把位置返回给我们
+                    // 可用于图片，字体，视频，音频......
+                    // url-loader和file-loader类型，file-loader能做的事情url-loader都能做，但它可以限定模块的体积，根据体积判断是否需要转换成base64,减少http请求
+                    // loader: 'file-loader',
+                    loader: "url-loader",
+                    options: {
+                        //name是打包前模块的名称，ext是打包前的模块格式git
+                        name: "[name]_[hash].[ext]",
+                        outputPath: "images/",
+                        limit: 200000
+                    }
+                },
+
+            },
+            {
+                test: /\.css$/,
+                // loader是有执行顺序，从后往前
+                // style-loader: 将 JS 字符串生成为 style 节点
+                // css-loader: 将 CSS 转化成 CommonJS 模块
+                // postcss-loader: [autoprefixer] 给 CSS3 的属性添加前缀
+                use: ["style-loader", "css-loader", "postcss-loader"]
+            },
+            {
+                test: /\.scss$/,
+                // sass-loader: 将 Sass 编译成 CSS
+                use: ["style-loader", "css-loader", "sass-loader"]
             }
         ]
     },

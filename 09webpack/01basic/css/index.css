@@ -1,0 +1,14 @@
+@import './reset.css';
+
+body {
+    background-color: rgba(0,0,0,0.2);
+}
+
+div {
+    background: #e00000;
+}
+
+.pic {
+    display: flex;
+    transform: translate(100px,100px);
+}
