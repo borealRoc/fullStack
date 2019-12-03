@@ -18,7 +18,7 @@
         - source-map：对于出错的代码能定位到源代码
         - 开发环境推荐配置：`cheap-module-eval-source-map` 
         - 线上环境推荐配置：`cheap-module-source-map` 
-    - devServer
+    - devServer: 启动静态服务器
         - proxy: 设置代理[解决跨域]
                           
 
