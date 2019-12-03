@@ -1,9 +1,10 @@
 import moduleA from "./modules/moduleA";
 import moduleB from "./modules/moduleB";
+import axios from "axios";
 moduleA();
 moduleB();
-function index () {
-  console.log("welcome to webpack");
+function index() {
+    console.log("welcome to webpack");
 }
 index();
 
@@ -17,4 +18,7 @@ img.classList.add("pic");
 var root = document.querySelector("#root");
 root.append(img);
 
+axios.get("/api/info").then(res => {
+    console.log(res);
+});
 
