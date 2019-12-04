@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const webpack = require("webpack");
 
 module.exports = {
     mode: "development",
@@ -21,11 +22,14 @@ module.exports = {
         open: true,
         port: "9000",
         // 跨域
-        proxy: {
-            "/api": {
-              target: "http://localhost:3000/"
-            }
-          }
+        // proxy: {
+        //     "/api": {
+        //         target: "http://localhost:3000/"
+        //     }
+        // },
+        // 热更新
+        hot: true,
+        hotOnly: true, 
     },
     module: {
         //webpack默认只认识js模块，那么遇到非js模块该怎么办？
@@ -54,14 +58,15 @@ module.exports = {
                 // css-loader: 将 CSS 转化成 CommonJS 模块[解释@import 和 url() ，会 import/require() 后再解析它们]
                 // style-loader: 将 JS 字符串生成为 style 节点
                 // postcss-loader: [autoprefixer插件] 给 CSS3 的属性添加前缀
-                use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"]
+                use: ["style-loader", "css-loader", "postcss-loader"],
+                // use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"]
             },
             {
                 test: /\.scss$/,
                 // sass-loader: compiles Sass to CSS
                 // less-loader: compiles Less to CSS
-                // use: [“style-loader”, "css-loader", "postcss-loader", "sass-loader"]
-                use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"]
+                use: [ "style-loader", "css-loader", "postcss-loader", "sass-loader"],
+                // use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"]
             }
         ],
     },
@@ -81,7 +86,7 @@ module.exports = {
         new MiniCssExtractPlugin({
             // 这里要生效，需要把上面的“style-loader”改成“MiniCssExtractPlugin.loader”
             filename: "[name].css"
-        })
-
+        }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
 };

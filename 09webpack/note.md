@@ -20,6 +20,11 @@
         - 线上环境推荐配置：`cheap-module-source-map` 
     - devServer: 启动静态服务器
         - proxy: 设置代理[解决跨域]
+        - HMR: 热模块替换
+            - hot:true, 对CSS的修改可以做到不刷新更新，对JS不可以
+            - hotOnly:true, 如果HMR不生效，浏览器也不自动刷新，就开启hotOnly
+            - module.hot.accept：原生webpack处理js模块HMR
+
                           
 
   

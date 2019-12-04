@@ -17,8 +17,8 @@ img.src = pic;
 img.classList.add("pic");
 var root = document.querySelector("#root");
 root.append(img);
-
-axios.get("/api/info").then(res => {
-    console.log(res);
-});
+console.log('---修改了js文件，测试热更新');
+// axios.get("/api/info").then(res => {
+//     console.log(res);
+// });
 
