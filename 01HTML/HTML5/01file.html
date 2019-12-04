@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>file的用法</title>
+</head>
+<body>
+    <input type="file" id="file"/>
+    <div class="test"></div>
+    <script>
+        window.onload = () => {
+            let _file = document.getElementById('file');
+            _file.onchange = function () {
+                console.dir(this)
+                // 获取文件
+                const fl = this.files[0]
+                // 创建文件对象
+                const flRead = new FileReader()
+                // 读取文件
+                flRead.readAsText(fl)
+                // 读取文件完成后
+                flRead.onload =function () {
+                    console.log(flRead)
+                    // 解析读取的文件的内容
+                    const result = flRead.result
+                    const style = document.createElement('style')
+                    style.innerHTML = result
+                    document.querySelector('head').appendChild(style)
+                }
+            }
+        }
+    </script>
+</body>
+</html>
