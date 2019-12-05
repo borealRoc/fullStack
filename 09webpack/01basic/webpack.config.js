@@ -19,14 +19,15 @@ module.exports = {
     devServer: {
         // 服务启动后，./build下面的文件没有了，因为devServer会把打包后的文件放到文件中，从而提升速度
         contentBase: "./build",
+        // 服务启好后，自动弹出浏览器
         open: true,
         port: "9000",
         // 跨域
-        // proxy: {
-        //     "/api": {
-        //         target: "http://localhost:3000/"
-        //     }
-        // },
+        proxy: {
+            "/api": {
+                target: "http://localhost:3000/"        
+            }
+        },
         // 热更新
         hot: true,
         hotOnly: true, 
@@ -40,11 +41,11 @@ module.exports = {
                 use: {
                     // file-loader就是把模块，放在另外一个目录里，并且把位置返回给我们
                     // 可用于图片，字体，视频，音频......
-                    // url-loader和file-loader类型，file-loader能做的事情url-loader都能做，但它可以限定模块的体积，根据体积判断是否需要转换成base64,减少http请求
+                    // url-loader和file-loader类似，file-loader能做的事情url-loader都能做，但它可以限定模块的体积，根据体积判断是否需要转换成base64,减少http请求
                     // loader: 'file-loader',
                     loader: "url-loader",
                     options: {
-                        //name是打包前模块的名称，ext是打包前的模块格式git
+                        //name是打包前模块的名称，ext是打包前的模块格式
                         name: "[name]_[hash].[ext]",
                         outputPath: "images/",
                         limit: 200 * 1024
