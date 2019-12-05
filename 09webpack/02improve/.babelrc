@@ -1,0 +1,22 @@
+{
+    // 当我们开发的是组件库，工具库这些场景的时候，polyfill就不适合了，因为polyfill是注入到全局变量，window下 的，会污染全局环境，所以推荐闭包方式:@babel/plugin-transform-runtime
+    "presets": [
+    [
+        "@babel/preset-env",
+        {
+          "useBuiltIns": "usage", //按需加载 实验性的功能
+          "corejs": 2
+        }
+      ]
+    ]
+    // usage 的行为类似 babel-transform-runtime，不会造成全局污染，因此也会不会对类似 Array.prototype.includes() 进行 polyfill
+    // "plugins": [
+    //     [
+    //         "@babel/plugin-transform-runtime",
+    //         {
+    //             "useBuiltIns": "usage",
+    //             "corejs": 2
+    //         }
+    //     ]
+    // ]
+}
