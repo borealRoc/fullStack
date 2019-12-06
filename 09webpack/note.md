@@ -24,6 +24,7 @@
             - hot:true, 对CSS的修改可以做到不刷新更新，对JS不可以
             - hotOnly:true, 如果HMR不生效，浏览器也不自动刷新，就开启hotOnly
             - module.hot.accept：原生webpack处理js模块HMR
+5. 拓展
     - babel: JavaScript编译器
         - babel-loader[编译es6、react]
             - `npm i babel-loader @babel/core @babel/preset-env -D`
@@ -36,6 +37,8 @@
             - 配置React打包环境[编译.jsx文件]
                 - `npm install --save-dev @babel/preset-react`
         - vue-loader[编译.vue文件]
+        - tree Shaking: 支持ES module的引入方式,并且能只编译引入的方法
+    - 
 
 
   
