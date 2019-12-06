@@ -24,7 +24,18 @@
             - hot:true, 对CSS的修改可以做到不刷新更新，对JS不可以
             - hotOnly:true, 如果HMR不生效，浏览器也不自动刷新，就开启hotOnly
             - module.hot.accept：原生webpack处理js模块HMR
-    - babel: 
-                          
+    - babel: JavaScript编译器
+        - babel-loader[编译es6、react]
+            - `npm i babel-loader @babel/core @babel/preset-env -D`
+                - babel-loader: webpack 与 babel的通信桥梁
+                - @babel/core: 把 js 代码分析成 ast ，方便各个插件分析语法进行相应的处理
+                - @babel/preset-env: es6转成es5
+            -  把一些高级特性[比如promise]也进行编译
+                - polyfill：以全局变量的方式注入进来的[比如windows.Promise]，它会造成全局对象的污染
+                - plugin-transform-runtime：babel-runtime为你的代码提供了一个沙盒环境，所以不会像babel-polyfill一样污染全局变量，因此适用于开发组件库。但是babel-runtime不能模拟实例方法，即内置对象原型上的方法[比如Array.prototype.concat]
+            - 配置React打包环境[编译.jsx文件]
+                - `npm install --save-dev @babel/preset-react`
+        - vue-loader[编译.vue文件]
+
 
   
