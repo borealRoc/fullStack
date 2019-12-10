@@ -21,15 +21,15 @@
     - devServer: 启动静态服务器
         - proxy: 设置代理[解决跨域]
         - HMR: 热模块替换
-            - hot:true, 对CSS的修改可以做到不刷新更新，对JS不可以
-            - hotOnly:true, 如果HMR不生效，浏览器也不自动刷新，就开启hotOnly
+            - hot:true, css可以做到HMR，修改JS还是会自动刷新浏览器
+            - hotOnly:true, CSS模块可以HMR，JS模块不可以HMR，也不会自动刷新浏览器
             - module.hot.accept：原生webpack处理js模块HMR
 5. 拓展
     - babel: JavaScript编译器
         - babel-loader[编译es6、react]
             - `npm i babel-loader @babel/core @babel/preset-env -D`
                 - babel-loader: webpack 与 babel的通信桥梁
-                - @babel/core: 把 js 代码分析成 ast ，方便各个插件分析语法进行相应的处理
+                - @babel/core: babel核心工具代码库
                 - @babel/preset-env: es6转成es5
             -  把一些高级特性[比如promise]也进行编译
                 - polyfill：以全局变量的方式注入进来的[比如windows.Promise]，它会造成全局对象的污染
