@@ -36,7 +36,6 @@
                 - plugin-transform-runtime：babel-runtime为你的代码提供了一个沙盒环境，所以不会像babel-polyfill一样污染全局变量，因此适用于开发组件库。但是babel-runtime不能模拟实例方法，即内置对象原型上的方法[比如Array.prototype.concat]
             - 配置React打包环境[编译.jsx文件]
                 - `npm install --save-dev @babel/preset-react`
-        - vue-loader[编译.vue文件]
         - tree Shaking: 支持ES module的引入方式,并且能只编译引入的方法
     - 
 
