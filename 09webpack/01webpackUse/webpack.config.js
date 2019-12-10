@@ -5,7 +5,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 const webpack = require("webpack")
 
 module.exports = {
-    mode: "development",
+    // mode: "development",
+    mode: 'production',
     //指定打包的入口文件
     entry: "./index.js",
     //指定打包后的资源位置
@@ -39,6 +40,10 @@ module.exports = {
         // 这两个属性CSS模块HMR的前提是不要用HotModuleReplacementPlugin？[暂时存疑]
         hot: true,
         hotOnly: true,
+    },
+    // tree shaking: 按需编译
+    optimization: {
+        usedExports: true
     },
     module: {
         //webpack默认只认识js模块，那么遇到非js模块该怎么办？
