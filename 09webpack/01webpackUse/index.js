@@ -24,5 +24,7 @@
 // import es6Bable from './modules/es6'
 // import reactBabel from './modules/reactBabel'
 
-import {add} from './modules/testTreeShaking'
-add(1,2)
+import {myAdd} from './modules/testTreeShaking'
+myAdd(1,2)
+
+// import testCodeSplitting from './modules/testCodeSplitting'

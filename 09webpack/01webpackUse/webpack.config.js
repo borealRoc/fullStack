@@ -13,7 +13,7 @@ module.exports = {
     output: {
         //公共路径设置
         //publicPath: "https://cdn.baidu.com",
-        path: path.resolve(__dirname, "./build"),
+        path: path.resolve(__dirname, "./dist"),
         filename: "index.js"
     },
     // 源代码与打包后的代码的映射关系
@@ -21,7 +21,7 @@ module.exports = {
     // 启用webpack的静态服务器
     devServer: {
         // 服务启动后，./build下面的文件没有了，因为devServer会把打包后的文件放到文件中，从而提升速度
-        contentBase: "./build",
+        contentBase: "./dist",
         // 服务启好后，自动弹出浏览器
         open: true,
         port: 8081,
