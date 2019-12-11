@@ -8,10 +8,14 @@ const devConfig = require("./webpack.dev")
 const prodConfig = require("./webpack.prod")
 
 const commonConfig = {
-    entry: "./index.js",
+    entry: {
+        // 手动进行代码分割
+        // lodash: "./modules/lodash.js",
+        index: "./index.js"
+    },
     output: {
         path: path.resolve(__dirname, "../dist"),
-        filename: "index.js"
+        filename: "[name].js"
     },
     module: {
         rules: [

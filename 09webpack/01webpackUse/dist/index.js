@@ -1,4 +1,54 @@
 /******/ (function(modules) { // webpackBootstrap
+/******/ 	// install a JSONP callback for chunk loading
+/******/ 	function webpackJsonpCallback(data) {
+/******/ 		var chunkIds = data[0];
+/******/ 		var moreModules = data[1];
+/******/ 		var executeModules = data[2];
+/******/
+/******/ 		// add "moreModules" to the modules object,
+/******/ 		// then flag all "chunkIds" as loaded and fire callback
+/******/ 		var moduleId, chunkId, i = 0, resolves = [];
+/******/ 		for(;i < chunkIds.length; i++) {
+/******/ 			chunkId = chunkIds[i];
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 				resolves.push(installedChunks[chunkId][0]);
+/******/ 			}
+/******/ 			installedChunks[chunkId] = 0;
+/******/ 		}
+/******/ 		for(moduleId in moreModules) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
+/******/ 				modules[moduleId] = moreModules[moduleId];
+/******/ 			}
+/******/ 		}
+/******/ 		if(parentJsonpFunction) parentJsonpFunction(data);
+/******/
+/******/ 		while(resolves.length) {
+/******/ 			resolves.shift()();
+/******/ 		}
+/******/
+/******/ 		// add entry modules from loaded chunk to deferred list
+/******/ 		deferredModules.push.apply(deferredModules, executeModules || []);
+/******/
+/******/ 		// run deferred modules when all chunks ready
+/******/ 		return checkDeferredModules();
+/******/ 	};
+/******/ 	function checkDeferredModules() {
+/******/ 		var result;
+/******/ 		for(var i = 0; i < deferredModules.length; i++) {
+/******/ 			var deferredModule = deferredModules[i];
+/******/ 			var fulfilled = true;
+/******/ 			for(var j = 1; j < deferredModule.length; j++) {
+/******/ 				var depId = deferredModule[j];
+/******/ 				if(installedChunks[depId] !== 0) fulfilled = false;
+/******/ 			}
+/******/ 			if(fulfilled) {
+/******/ 				deferredModules.splice(i--, 1);
+/******/ 				result = __webpack_require__(__webpack_require__.s = deferredModule[0]);
+/******/ 			}
+/******/ 		}
+/******/
+/******/ 		return result;
+/******/ 	}
 /******/ 	function hotDisposeChunk(chunkId) {
 /******/ 		delete installedChunks[chunkId];
 /******/ 	}
@@ -63,7 +113,7 @@
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "8b5d756ed160a5077fed";
+/******/ 	var hotCurrentHash = "a99f7ee218b744ed218c";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -258,7 +308,7 @@
 /******/ 				};
 /******/ 			});
 /******/ 			hotUpdate = {};
-/******/ 			var chunkId = "main";
+/******/ 			for(var chunkId in installedChunks)
 /******/ 			// eslint-disable-next-line no-lone-blocks
 /******/ 			{
 /******/ 				/*globals chunkId */
@@ -706,6 +756,15 @@
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
+/******/ 	// object to store loaded and loading chunks
+/******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 	// Promise = chunk loading, 0 = chunk loaded
+/******/ 	var installedChunks = {
+/******/ 		"index": 0
+/******/ 	};
+/******/
+/******/ 	var deferredModules = [];
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/
@@ -789,9 +848,18 @@
 /******/ 	// __webpack_hash__
 /******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
 /******/
+/******/ 	var jsonpArray = window["webpackJsonp"] = window["webpackJsonp"] || [];
+/******/ 	var oldJsonpFunction = jsonpArray.push.bind(jsonpArray);
+/******/ 	jsonpArray.push = webpackJsonpCallback;
+/******/ 	jsonpArray = jsonpArray.slice();
+/******/ 	for(var i = 0; i < jsonpArray.length; i++) webpackJsonpCallback(jsonpArray[i]);
+/******/ 	var parentJsonpFunction = oldJsonpFunction;
 /******/
-/******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire("./index.js")(__webpack_require__.s = "./index.js");
+/******/
+/******/ 	// add entry module to deferred list
+/******/ 	deferredModules.push(["./index.js","vendors~index"]);
+/******/ 	// run deferred modules when ready
+/******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -804,19 +872,19 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_testTreeShaking__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/testTreeShaking */ \"./modules/testTreeShaking.js\");\n// import testWebpack from './modules/testWebpack'\n// testWebpack()\n// import pic from './modules/testFileLoader'\n// import pic2 from './modules/testUrlLoaderLimit'\n// import './modules/testCss.scss'\n// import getInfo from './modules/testProxy'\n// getInfo()\n// // JS模块手动HMR\n// if (module.hot) {\n//     console.log('module.hot')\n//     module.hot.accept('./modules/testProxy', () => {\n//         console.log('module.hot.accept')\n//         document.body.removeChild(document.getElementById('root'))\n//         getInfo()\n//     })\n// }\n// 179kb：没引入@babel/polyfill\n// 889kb：引入@babel/polyfill\n// 289kb：按需引入@babel/polyfill\n// 226kb: 使用\"@babel/plugin-transform-runtime\"\n// import \"@babel/polyfill\"   \n// import es6Bable from './modules/es6'\n// import reactBabel from './modules/reactBabel'\n\nObject(_modules_testTreeShaking__WEBPACK_IMPORTED_MODULE_0__[\"myAdd\"])(1, 2); // import testCodeSplitting from './modules/testCodeSplitting'//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9pbmRleC5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL2luZGV4LmpzPzQxZjUiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gaW1wb3J0IHRlc3RXZWJwYWNrIGZyb20gJy4vbW9kdWxlcy90ZXN0V2VicGFjaydcbi8vIHRlc3RXZWJwYWNrKClcbi8vIGltcG9ydCBwaWMgZnJvbSAnLi9tb2R1bGVzL3Rlc3RGaWxlTG9hZGVyJ1xuLy8gaW1wb3J0IHBpYzIgZnJvbSAnLi9tb2R1bGVzL3Rlc3RVcmxMb2FkZXJMaW1pdCdcbi8vIGltcG9ydCAnLi9tb2R1bGVzL3Rlc3RDc3Muc2NzcydcblxuLy8gaW1wb3J0IGdldEluZm8gZnJvbSAnLi9tb2R1bGVzL3Rlc3RQcm94eSdcbi8vIGdldEluZm8oKVxuLy8gLy8gSlPmqKHlnZfmiYvliqhITVJcbi8vIGlmIChtb2R1bGUuaG90KSB7XG4vLyAgICAgY29uc29sZS5sb2coJ21vZHVsZS5ob3QnKVxuLy8gICAgIG1vZHVsZS5ob3QuYWNjZXB0KCcuL21vZHVsZXMvdGVzdFByb3h5JywgKCkgPT4ge1xuLy8gICAgICAgICBjb25zb2xlLmxvZygnbW9kdWxlLmhvdC5hY2NlcHQnKVxuLy8gICAgICAgICBkb2N1bWVudC5ib2R5LnJlbW92ZUNoaWxkKGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyb290JykpXG4vLyAgICAgICAgIGdldEluZm8oKVxuLy8gICAgIH0pXG4vLyB9XG5cbi8vIDE3OWti77ya5rKh5byV5YWlQGJhYmVsL3BvbHlmaWxsXG4vLyA4ODlrYu+8muW8leWFpUBiYWJlbC9wb2x5ZmlsbFxuLy8gMjg5a2LvvJrmjInpnIDlvJXlhaVAYmFiZWwvcG9seWZpbGxcbi8vIDIyNmtiOiDkvb/nlKhcIkBiYWJlbC9wbHVnaW4tdHJhbnNmb3JtLXJ1bnRpbWVcIlxuLy8gaW1wb3J0IFwiQGJhYmVsL3BvbHlmaWxsXCIgICBcbi8vIGltcG9ydCBlczZCYWJsZSBmcm9tICcuL21vZHVsZXMvZXM2J1xuLy8gaW1wb3J0IHJlYWN0QmFiZWwgZnJvbSAnLi9tb2R1bGVzL3JlYWN0QmFiZWwnXG5cbmltcG9ydCB7bXlBZGR9IGZyb20gJy4vbW9kdWxlcy90ZXN0VHJlZVNoYWtpbmcnXG5teUFkZCgxLDIpXG5cbi8vIGltcG9ydCB0ZXN0Q29kZVNwbGl0dGluZyBmcm9tICcuL21vZHVsZXMvdGVzdENvZGVTcGxpdHRpbmcnIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./index.js\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_testCodeSplitting__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/testCodeSplitting */ \"./modules/testCodeSplitting.js\");\n// import testWebpack from './modules/testWebpack'\n// testWebpack()\n// import pic from './modules/testFileLoader'\n// import pic2 from './modules/testUrlLoaderLimit'\n// import './modules/testCss.scss'\n// import getInfo from './modules/testProxy'\n// getInfo()\n// // JS模块手动HMR\n// if (module.hot) {\n//     console.log('module.hot')\n//     module.hot.accept('./modules/testProxy', () => {\n//         console.log('module.hot.accept')\n//         document.body.removeChild(document.getElementById('root'))\n//         getInfo()\n//     })\n// }\n// 179kb：没引入@babel/polyfill\n// 889kb：引入@babel/polyfill\n// 289kb：按需引入@babel/polyfill\n// 226kb: 使用\"@babel/plugin-transform-runtime\"\n// import \"@babel/polyfill\"   \n// import es6Bable from './modules/es6'\n// import reactBabel from './modules/reactBabel'\n// import {myAdd} from './modules/testTreeShaking'\n// myAdd(1,2)\n// 1.39Mb: 没使用代码分割\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9pbmRleC5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL2luZGV4LmpzPzQxZjUiXSwic291cmNlc0NvbnRlbnQiOlsiLy8gaW1wb3J0IHRlc3RXZWJwYWNrIGZyb20gJy4vbW9kdWxlcy90ZXN0V2VicGFjaydcbi8vIHRlc3RXZWJwYWNrKClcbi8vIGltcG9ydCBwaWMgZnJvbSAnLi9tb2R1bGVzL3Rlc3RGaWxlTG9hZGVyJ1xuLy8gaW1wb3J0IHBpYzIgZnJvbSAnLi9tb2R1bGVzL3Rlc3RVcmxMb2FkZXJMaW1pdCdcbi8vIGltcG9ydCAnLi9tb2R1bGVzL3Rlc3RDc3Muc2NzcydcblxuLy8gaW1wb3J0IGdldEluZm8gZnJvbSAnLi9tb2R1bGVzL3Rlc3RQcm94eSdcbi8vIGdldEluZm8oKVxuLy8gLy8gSlPmqKHlnZfmiYvliqhITVJcbi8vIGlmIChtb2R1bGUuaG90KSB7XG4vLyAgICAgY29uc29sZS5sb2coJ21vZHVsZS5ob3QnKVxuLy8gICAgIG1vZHVsZS5ob3QuYWNjZXB0KCcuL21vZHVsZXMvdGVzdFByb3h5JywgKCkgPT4ge1xuLy8gICAgICAgICBjb25zb2xlLmxvZygnbW9kdWxlLmhvdC5hY2NlcHQnKVxuLy8gICAgICAgICBkb2N1bWVudC5ib2R5LnJlbW92ZUNoaWxkKGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdyb290JykpXG4vLyAgICAgICAgIGdldEluZm8oKVxuLy8gICAgIH0pXG4vLyB9XG5cbi8vIDE3OWti77ya5rKh5byV5YWlQGJhYmVsL3BvbHlmaWxsXG4vLyA4ODlrYu+8muW8leWFpUBiYWJlbC9wb2x5ZmlsbFxuLy8gMjg5a2LvvJrmjInpnIDlvJXlhaVAYmFiZWwvcG9seWZpbGxcbi8vIDIyNmtiOiDkvb/nlKhcIkBiYWJlbC9wbHVnaW4tdHJhbnNmb3JtLXJ1bnRpbWVcIlxuLy8gaW1wb3J0IFwiQGJhYmVsL3BvbHlmaWxsXCIgICBcbi8vIGltcG9ydCBlczZCYWJsZSBmcm9tICcuL21vZHVsZXMvZXM2J1xuLy8gaW1wb3J0IHJlYWN0QmFiZWwgZnJvbSAnLi9tb2R1bGVzL3JlYWN0QmFiZWwnXG5cbi8vIGltcG9ydCB7bXlBZGR9IGZyb20gJy4vbW9kdWxlcy90ZXN0VHJlZVNoYWtpbmcnXG4vLyBteUFkZCgxLDIpXG5cbi8vIDEuMzlNYjog5rKh5L2/55So5Luj56CB5YiG5YmyXG5cbmltcG9ydCB0ZXN0Q29kZVNwbGl0dGluZyBmcm9tICcuL21vZHVsZXMvdGVzdENvZGVTcGxpdHRpbmcnIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFFQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUVBO0FBQ0E7QUFFQTsiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./index.js\n");
 
 /***/ }),
 
-/***/ "./modules/testTreeShaking.js":
-/*!************************************!*\
-  !*** ./modules/testTreeShaking.js ***!
-  \************************************/
-/*! exports provided: myAdd, myMinus */
+/***/ "./modules/testCodeSplitting.js":
+/*!**************************************!*\
+  !*** ./modules/testCodeSplitting.js ***!
+  \**************************************/
+/*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"myAdd\", function() { return myAdd; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"myMinus\", function() { return myMinus; });\nvar myAdd = function myAdd(a, b) {\n  console.log('myAdd', a + b);\n};\nvar myMinus = function myMinus(a, b) {\n  console.log('myMinus', a - b);\n};//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9tb2R1bGVzL3Rlc3RUcmVlU2hha2luZy5qcy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL21vZHVsZXMvdGVzdFRyZWVTaGFraW5nLmpzPzhlYmYiXSwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNvbnN0IG15QWRkID0gKGEsIGIpID0+IHtcbiAgICBjb25zb2xlLmxvZygnbXlBZGQnLGEgKyBiKTtcbn1cblxuZXhwb3J0IGNvbnN0IG15TWludXMgPSAoYSwgYikgPT4ge1xuICAgIGNvbnNvbGUubG9nKCdteU1pbnVzJywgYSAtIGIpO1xufSJdLCJtYXBwaW5ncyI6IkFBQUE7QUFBQTtBQUFBO0FBQUE7QUFDQTtBQUNBO0FBRUE7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./modules/testTreeShaking.js\n");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ \"./node_modules/lodash/lodash.js\");\n/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);\n\nconsole.log(lodash__WEBPACK_IMPORTED_MODULE_0___default.a.join(['AAA', 'BBB', 'CCC', '****']));//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiLi9tb2R1bGVzL3Rlc3RDb2RlU3BsaXR0aW5nLmpzLmpzIiwic291cmNlcyI6WyJ3ZWJwYWNrOi8vLy4vbW9kdWxlcy90ZXN0Q29kZVNwbGl0dGluZy5qcz8wNDg5Il0sInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBfIGZyb20gXCJsb2Rhc2hcIlxuY29uc29sZS5sb2coXy5qb2luKFsnQUFBJywgJ0JCQicsICdDQ0MnLCAnKioqKiddKSkiXSwibWFwcGluZ3MiOiJBQUFBO0FBQUE7QUFBQTtBQUFBO0FBQ0EiLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./modules/testCodeSplitting.js\n");
 
 /***/ })
 

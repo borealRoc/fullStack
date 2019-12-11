@@ -36,8 +36,16 @@
                 - plugin-transform-runtime：babel-runtime为你的代码提供了一个沙盒环境，所以不会像babel-polyfill一样污染全局变量，因此适用于开发组件库。但是babel-runtime不能模拟实例方法，即内置对象原型上的方法[比如Array.prototype.concat]
             - 配置React打包环境[编译.jsx文件]
                 - `npm install --save-dev @babel/preset-react`
-        - tree Shaking: 支持ES module的引入方式,并且能只编译引入的方法
-    - 
+    - 性能优化
+        - tree Shaking
+            - 检测import的文件，按引用，使用编译
+            - 同时在package.json设置`"sideEffects": ["*.css"]`, 表示不检测css文件的import
+        - development vs Production模式区分打包
+        - 代码分割
+            - 使用场景：如我们引入一个第三方的工具库，体积为1mb，而我们的业务逻辑代码也有1mb，那么打包出来的体积大小会在2mb。
+            - 导致问题：体积大，加载时间长业务逻辑会变化
+            - 解决思路：第三方库和业务代码分开打包，浏览器加载JS文件是非阻塞的，所以同时加载两个1mb的文件性能优于加载一个1mb的文件
+                - 手动实现：多入口，第三方库和业务代码分开打包
+                - webpack自动实现：一个入口，使用`optimization: {splitChunks: {chunks: "all"}}`
 
-
-  
+    

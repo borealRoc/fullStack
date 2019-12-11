@@ -24,7 +24,9 @@
 // import es6Bable from './modules/es6'
 // import reactBabel from './modules/reactBabel'
 
-import {myAdd} from './modules/testTreeShaking'
-myAdd(1,2)
+// import {myAdd} from './modules/testTreeShaking'
+// myAdd(1,2)
 
-// import testCodeSplitting from './modules/testCodeSplitting'
+// 1.39Mb: 没使用代码分割
+
+import testCodeSplitting from './modules/testCodeSplitting'

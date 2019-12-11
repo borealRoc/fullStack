@@ -17,6 +17,12 @@ const devConfig = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()
-    ]
+    ],
+    optimization: {
+        // webpack自动实现代码分割
+        splitChunks: {
+            chunks: "all"
+        }
+    },
 }
 module.exports = devConfig
