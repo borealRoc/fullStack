@@ -40,7 +40,7 @@
         - tree Shaking
             - 检测import的文件，按引用，使用编译
             - 同时在package.json设置`"sideEffects": ["*.css"]`, 表示不检测css文件的import
-        - development vs Production模式区分打包
+        - development和Production模式区分打包
         - 代码分割
             - 使用场景：如我们引入一个第三方的工具库，体积为1mb，而我们的业务逻辑代码也有1mb，那么打包出来的体积大小会在2mb。
             - 导致问题：体积大，加载时间长业务逻辑会变化
