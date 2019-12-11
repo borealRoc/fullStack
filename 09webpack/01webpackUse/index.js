@@ -27,6 +27,6 @@
 // import {myAdd} from './modules/testTreeShaking'
 // myAdd(1,2)
 
-// 1.39Mb: 没使用代码分割
-
+// 1.39Mb: 没使用代码分割index.js大小
+// 32.7kb： 
 import testCodeSplitting from './modules/testCodeSplitting'
