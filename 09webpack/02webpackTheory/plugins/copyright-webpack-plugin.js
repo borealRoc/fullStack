@@ -5,11 +5,8 @@ class CopyrightWebpackPlugin {
     }
     //compiler:webpack实  
     apply(compiler) {
-        // compile: 同步
-        compiler.hooks.compile.tap("CopyrightWebpackPlugin", compilation => {
-            console.log('插件的同步方法开始执行');
-        })
-        // emit: 异步
+        // hooks.emit 定义在某个时刻
+        // 异步写法
         compiler.hooks.emit.tapAsync(
             "CopyrightWebpackPlugin",
             (compilation, cb) => {
@@ -20,10 +17,14 @@ class CopyrightWebpackPlugin {
                     size: () => {
                         return 1024
                     }
-                };
+                }
                 cb()
             }
-        );
+        )
+        // 同步写法
+        compiler.hooks.compile.tap("CopyrightWebpackPlugin", compilation => {
+            console.log('插件的同步方法开始执行')
+        })
     }
 }
 module.exports = CopyrightWebpackPlugin

@@ -1,4 +1,4 @@
-# 一、 webpack基础
+# 一、 webpack基础及使用
 1. 安装[推荐局部安装]
     - `npm i webpack webpack-cli -D`
     - 安装指定版本: `npm install webpack@x.xx webpack-cli -D`
@@ -47,5 +47,16 @@
             - 解决思路：第三方库和业务代码分开打包，浏览器加载JS文件是非阻塞的，所以同时加载两个1mb的文件性能优于加载一个1mb的文件
                 - 手动实现：多入口，第三方库和业务代码分开打包
                 - webpack自动实现：一个入口，使用`optimization: {splitChunks: {chunks: "all"}}`
-
-    
+            - 代码利用率：把异步代码抽离出来
+                - 需要的时候再加载异步代码：`npm install --save-dev @babel/plugin-syntax-dynamic-import`
+                - 网络有空闲时自动加载异步代码[模板注释]: `/* webpackPrefetch: true */`
+# 二、 webpack原理
+1. 如何编写loader[一个函数]
+    - source: 源文件返回值
+    - this.query: loader参数，或使用loader-utils插件
+    - this.async(): 处理loader异步事件
+    - this.callback(): 在loader里返回多个值
+2. 如何编写plugins[一个类]
+    - plugin是一个类，里面包含一个apply函数，接受一个参数[compiler],表示webpack实例
+    - constructor(opts): 在插件里获取参数
+    - hooks.emit: 定义在某个时刻
