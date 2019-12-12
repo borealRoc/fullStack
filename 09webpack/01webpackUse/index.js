@@ -21,8 +21,8 @@
 // 289kb：按需引入@babel/polyfill
 // 226kb: 使用"@babel/plugin-transform-runtime"
 // import "@babel/polyfill"   
-// import es6Bable from './modules/es6'
-// import reactBabel from './modules/reactBabel'
+import es6Bable from './modules/es6'
+import reactBabel from './modules/reactBabel'
 
 // import {myAdd} from './modules/testTreeShaking'
 // myAdd(1,2)
@@ -30,3 +30,5 @@
 // 1.39Mb: 没使用代码分割index.js大小
 // 32.7kb： 
 import testCodeSplitting from './modules/testCodeSplitting'
+
+import asyncClick from './modules/async'
