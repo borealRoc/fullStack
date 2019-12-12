@@ -6,7 +6,7 @@ module.exports = function (source) {
     setTimeout(() => {
         const result =  source.replace('world', opts.name)
         asyncHandler(null, result)
-    },3000)
+    },50)
 }
 // this.callback(
 //     err: Error | null,
