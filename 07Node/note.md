@@ -48,7 +48,7 @@
         - body-parser: 处理post请求普通数据
         - multer: 处理post请求file数据
         - cookie && session
-            - cookie: 存储在浏览器，请求服务器时，会顺便发给服务器
+            - cookie: 存储在浏览器，请求服务器时，会附在请求头发到服务器
                 - 问题：不安全。用户可以篡改
                 - 解决：设置httpOnly; 对cookie进行签名[浏览器的cookie容量只有4kb，签名会让cookie变长变大]
             - session: 存储在服务器，不是独立存在，基于cookie[token:存储在cookie里面的sessionID]
@@ -65,7 +65,7 @@
                 path:   //cookie所在的目录
                 maxAge: //cookie过期时间
                 httpOnly: true //通过js无法读取cookie信息
-                secture: true //示浏览器仅通过 HTTPS 连接传回 cookie
+                secture: true //表示浏览器仅通过 HTTPS 连接传回 cookie
                 signed: true //对value进行签名[s:value.签名]
             })
             ```
