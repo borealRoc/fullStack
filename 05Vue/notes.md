@@ -40,7 +40,8 @@
                 - this.$bus.$on("eventName", arg);
             - 依赖注入: provide && inject
             - Vuex
-    - 2.2.3 动态组件: 当在这些组件之间切换的时候，你有时会想保持这些组件的状态，以避免反复重渲染导致的性能问题  
+    - 2.2.3 动态组件: 当在这些组件之间切换的时候，你有时会想保持这些组件的状态，以避免反复重渲染导致的性能问题
+        - `<keep-alive>...</keep-alive>`  
     <img src="knowledgePic/9.png"/>  
     - 2.2.4 异步组件: 在大型应用中，我们可能需要将应用分割成小一些的代码块，并且只在需要的时候才从服务器加载一个模块。
     - 2.3 处理边界情况
@@ -300,7 +301,7 @@
         actions () {
             addNumAsync({commit},n) {
                 setTimeout(()=>{
-                    commit('addNum',n);
+                    commit('addCount',n);
                 },1000)
             }
         }
@@ -329,20 +330,20 @@
             // index.js
             export default new Vuex.Store({
                 modules:{
-                    count,
-                    number 
+                    A: moduleA,
+                    B: moduleB
                 }
             })
             //App.vue
-            {{$store.state.count.count}}
-            {{$store.state.number.number}}
+            {{$store.state.A.count}}
+            {{$store.state.B.count}}
         ```
         - 模块的局部状态
             - 模块的局部状态对象:
                 - mutations && getters[第一个参数]: state
                 - actions: context.state
             - 根节点状态
-                - getters[第三个参数]: rootState
+                - getters: context.rootState
                 - actions: context.rootState
 # 四、使用vue全家桶构建电商项目
 - 开发思路
@@ -407,7 +408,9 @@
             - forEach: 遍历数组每一项，对每一项进行操作
             - reduce: 数组中的每个值（从左到右）开始缩减，最终计算为一个值
             - Array.from: 把类数组转化成数组
-    - ES6模块化: `import Vue from 'vue'`
+    - ES6模块化
+        - 导出: `export ...`
+        - 导入：`import Vue from 'vue'`
     - ES6异步方案[Promise]: axios.get("/api/goods").then(res => {})
     - ES7异步方案[async + await]
 2. Vue UI框架

@@ -56,7 +56,7 @@ const router = new Router({
       // },
 
       // 函数模式：同时传静态值与基于路由的值
-      props: (route) => ({ 
+      props: route => ({ 
         msg: route.params.msg,
         foo: route.query.foo,
         staticProp: 'staticPropVal',
