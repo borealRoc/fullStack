@@ -20,7 +20,7 @@ module.exports = {
     devtool: "cheap-module-eval-source-map",
     // 启用webpack的静态服务器
     devServer: {
-        // 服务启动后，./build下面的文件没有了，因为devServer会把打包后的文件放到文件中，从而提升速度
+        // 服务启动后，./dist下面的文件没有了，因为devServer会把打包后的文件放到文件中，从而提升速度
         contentBase: "./dist",
         // 服务启好后，自动弹出浏览器
         open: true,
@@ -32,7 +32,7 @@ module.exports = {
             }
         },
         // 刷新分为两种：
-        // 一种是页面刷新，不保留页面状态，就是简单粗暴，直接window.location.reload()；
+        // 一种是页面刷新，不保留页面状态，直接window.location.reload()；
         // 另一种是基于 WDS（Webpack-dev-server）的模块热替换[HMR]，只需要局部刷新页面上发生变化的模块，同时可以保留当前的页面状态，比如复选框的选中状态、输入框的输入等。
         // 原本的devServer在修改文件[css/js]后，会自动刷新浏览器进行更新，属于前者
         // 只加hot: ture，修改css可以做到HMR，修改JS还是会自动刷新浏览器

@@ -23,7 +23,8 @@
         - HMR: 热模块替换
             - hot:true, css可以做到HMR，修改JS还是会自动刷新浏览器
             - hotOnly:true, CSS模块可以HMR，JS模块不可以HMR，也不会自动刷新浏览器
-            - module.hot.accept：原生webpack处理js模块HMR
+            - module.hot.accept：原生webpack手动处理js模块HMR
+            - webpack官方没有办法自动处理js模块HMR，但一些框架可以通过一些loarder实现[比如：react-hot-loader]
 5. 拓展
     - babel: JavaScript编译器
         - babel-loader[编译es6、react]
@@ -59,4 +60,4 @@
 2. 如何编写plugins[一个类]
     - plugin是一个类，里面包含一个apply函数，接受一个参数[compiler],表示webpack实例
     - constructor(opts): 在插件里获取参数
-    - hooks.emit: 定义在某个时刻
+    - hooks.emit: 定义在某个时刻触发
