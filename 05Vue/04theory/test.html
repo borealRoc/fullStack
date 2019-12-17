@@ -8,46 +8,24 @@
     <title>测试自己开发的类Vue框架</title>
 </head>
 <div id="app">
-    <!-- 插值绑定 -->
-    <p>{{name}}</p>
-    <!-- 指令解析 -->
-    <p x-text="name"></p>
-    <p>{{age}}</p>
-    <p>
-        {{doubleAge}}
-    </p>
-    <!-- 双向绑定 -->
-    <!-- <input type="text" x-model="name" /> -->
-    <!-- 事件处理 -->
-    <!-- <button @click="changeName">呵呵</button> -->
-    <!-- html内容解析 -->
-    <!-- <div x-html="html"></div> -->
 </div>
 
 <body>
     <script src="compile.js"></script>
     <script src="XVue.js"></script>
     <script>
-        const kaikeba = new XVue({
-            el: "#app",
+        const app = new XVue({
             data: {
-                name: "I am test.",
-                age: 12,
-                html: "<button>这是一个按钮</button>"
+                person: {
+                    name: 'xu',
+                },
+                age: 17
             },
-            created() {
-                console.log("开始啦")
-                setTimeout(() => {
-                    this.name = "我是测试"
-                }, 1500)
-            },
-            methods: {
-                changeName() {
-                    this.name = "哈喽，开课吧"
-                    this.age = 1
-                }
-            }
         });
+        console.log('name', app.$data.person.name)
+        // app.$data.person.name = 'Liu'
+        console.log('age', app.$data.age)
+        app.$data.age = 18
     </script>
 </body>
 
