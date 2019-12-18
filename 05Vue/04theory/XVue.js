@@ -2,18 +2,34 @@
 class XVue {
     constructor(opts) {
         this.$data = opts.data
+        this.$el = opts.el
         // 2. 挟持监听data对象
         this.observer(this.$data)
 
-        // 新建一个Watcher观察者对象，这时候Dep.target会指向这个Watcher对象
-        new Watcher()
-        // console.log('模拟触发age的getter', this.$data.age)
+        new Compile(this.$el, this)
+
+        // 执行created
+        if (opts.created) {
+            // 绑定this到vue实例
+            opts.created.call(this)
+        }
+    }
+    proxyData(key) {
+        Object.defineProperty(this, key, {
+            get(){
+              return this.$data[key]
+            },
+            set(newVal){
+              this.$data[key] = newVal;
+            }
+        })
     }
     observer(data) {
         if (!data || typeof data !== 'object') return
         // 2.1 挟持监听data对象的所有属性 
         Object.keys(data).forEach(key => {
             this.defineReactive(data, key, data[key])
+            this.proxyData(key)
         })
     }
     defineReactive(dataObj, dataKey, dataVal) {
@@ -31,7 +47,10 @@ class XVue {
                 return dataVal
             },
             set(newVal) {
-                if (newVal === dataVal) return
+                if (newVal === dataVal) {
+                    return
+                }
+                dataVal = newVal
                 dep.notify()
             }
         })
@@ -52,10 +71,18 @@ class Dep {
 }
 // 3.2 一个watcher对应了某个属性在视图层中被引用了一次
 class Watcher {
-    constructor() {
+    constructor(vm, key, cb) {
+        this.vm = vm
+        this.key = key
+        this.cb = cb
+
+        // 将当前watcher实例指定到Dep静态属性target
         Dep.target = this
+        // 触发getter，添加依赖
+        this.vm[this.key]
+        Dep.target = null
     }
     update() {
-        console.log('视图更新了');
+        this.cb.call(this.vm, this.vm[this.key])
     }
 }

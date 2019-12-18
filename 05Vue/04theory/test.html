@@ -7,25 +7,37 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>测试自己开发的类Vue框架</title>
 </head>
-<div id="app">
-</div>
 
 <body>
-    <script src="compile.js"></script>
-    <script src="XVue.js"></script>
+    <div id="app">
+        <h1>{{name}}</h1>
+        <h2 x-text="age"></h2>
+        <h3 x-html="html"></h3>
+        <input type="text" k-model="name" />
+        <button @click="changeName">呵呵</button>
+    </div>
+    <script src='./compile.js'></script>
+    <script src='./XVue.js'></script>
     <script>
         const app = new XVue({
+            el: '#app',
             data: {
-                person: {
-                    name: 'xu',
-                },
-                age: 17
+                name: "我是name属性",
+                age: 12,
+                html: '<button>这是一个按钮</button>'
             },
-        });
-        console.log('name', app.$data.person.name)
-        // app.$data.person.name = 'Liu'
-        console.log('age', app.$data.age)
-        app.$data.age = 18
+            created() {
+                setTimeout(() => {
+                    this.name = 'name属性发生变化了，视图更新'
+                }, 1500)
+            },
+            // methods: {
+            //     changeName() {
+            //         this.name = '哈喽，开课吧'
+            //         this.age = 1
+            //     }
+            // }
+        })
     </script>
 </body>
 
