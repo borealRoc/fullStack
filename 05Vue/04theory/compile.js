@@ -28,11 +28,26 @@ class Compile {
         Array.from(childNodes).forEach(node => {
             // 4.1 判断节点类型
             if (this.isElement(node)) {
-                // 4.1.1 元素节点
-                console.log('元素', node)
+                // 4.1.1 元素节点,查找x-,@,
+                const nodeAttrs = node.attributes;
+                Array.from(nodeAttrs).forEach(attr => {
+                    const attrName = attr.name; //属性名
+                    const attrVal = attr.value; // 属性值
+                    if (this.isDirective(attrName)) {
+                        // 指令 x-text, x-model
+                        // text, model
+                        const dir = attrName.substring(2)
+                        this[dir] && this[dir](node, this.$vm, attrVal)
+                    }
+                    if (this.isEvent(attrName)) {
+                        // 事件 
+                        const dir = attrName.substring(1)
+                        this.eventHandler(node, this.$vm, attrVal, dir)
+                    }
+                })
             } else if (this.isInterpolation(node)) {
-               // 4.1.2 插值节点
-                this.compileText(node)
+                // 4.1.2 插值节点
+                this.compileInterpolation(node)
             }
             // 递归子节点
             if (node.childNodes && node.childNodes.length > 0) {
@@ -49,12 +64,41 @@ class Compile {
     isInterpolation(node) {
         return node.nodeType === 3 && /\{\{(.*)\}\}/.test(node.textContent)
     }
+    // 5.3 指令
+    isDirective(attr) {
+        return attr.indexOf('x-') === 0
+    }
+    // 5.4 事件
+    isEvent(attr) {
+        return attr.indexOf('@') === 0
+    }
     // 6. 不同类型节点的各自编译方法
     // 6.1 编译插值文本
-    compileText(node) {
+    compileInterpolation(node) {
         this.update(node, this.$vm, RegExp.$1, 'text')
     }
-    // 7. 公共的更新方法
+    text(node, vm, dataVal) {
+        this.update(node, vm, dataVal, 'text')
+    }
+    html(node, vm, dataVal) {
+        this.update(node, vm, dataVal, "html")
+    }
+    model(node, vm, dataVal) {
+        // 指定input的value属性
+        this.update(node, vm, dataVal, "model")
+        // 视图对模型响应:双向绑定
+        node.addEventListener('input', e => {
+            vm[dataVal] = e.target.value
+        })
+    }
+    eventHandler(node, vm, dataVal, dir) {
+        // @click="onClick"
+        let fn = vm.$opts.methods && vm.$opts.methods[dataVal]
+        if (dir && fn) {
+            node.addEventListener(dir, fn.bind(vm));
+        }
+    }
+    // 7. 不同类型节点的更新渲染方法
     update(node, vm, val, dir) {
         const updaterFn = this[dir + 'Updater']
         // 初始化
@@ -64,8 +108,13 @@ class Compile {
             updaterFn && updaterFn(node, newVal)
         })
     }
-    // 8. 不同类型节点的更新渲染方法
     textUpdater(node, val) {
         node.textContent = val
+    }
+    htmlUpdater(node, val) {
+        node.innerHTML = val
+    }
+    modelUpdater(node, val) {
+        node.value = val
     }
 }

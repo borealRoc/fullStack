@@ -1,6 +1,7 @@
 // 1. 创建XVue类
 class XVue {
     constructor(opts) {
+        this.$opts = opts
         this.$data = opts.data
         this.$el = opts.el
         // 2. 挟持监听data对象

@@ -13,7 +13,7 @@
         <h1>{{name}}</h1>
         <h2 x-text="age"></h2>
         <h3 x-html="html"></h3>
-        <input type="text" k-model="name" />
+        <input type="text" x-model="name" />
         <button @click="changeName">呵呵</button>
     </div>
     <script src='./compile.js'></script>
@@ -24,19 +24,21 @@
             data: {
                 name: "我是name属性",
                 age: 12,
-                html: '<button>这是一个按钮</button>'
+                html: '<button @click="changeAge">这是一个按钮</button>'
             },
             created() {
                 setTimeout(() => {
                     this.name = 'name属性发生变化了，视图更新'
                 }, 1500)
             },
-            // methods: {
-            //     changeName() {
-            //         this.name = '哈喽，开课吧'
-            //         this.age = 1
-            //     }
-            // }
+            methods: {
+                changeName() {
+                    this.name = 'name属性又变化了'
+                },
+                changeAge() {
+                    this.age ++
+                }
+            }
         })
     </script>
 </body>
