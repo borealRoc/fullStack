@@ -397,7 +397,22 @@
     - Dependency && Watcher: 依赖收集与追踪
 - 编译模板
 - 将实例挂载到 DOM 并在数据变化时更新 DOM 
-# 六、补充
+# 六、服务端渲染
+1. CSR vs SSR
+    - 传统方式: 服务端渲染所有页面
+    - SPA: 客户端渲染
+        - 缺点
+            - 首屏渲染性能：必须得等js加载完毕，并且执行完毕，才能渲染出首屏
+            - SEO： 爬虫只能拿到一个div，认为页面是空的，不利于seo
+    - SSR: 后端渲染出完整的首屏的dom结构返回，前端拿到的内容带上首屏， 后续的页面操作，再用单页的路由跳转和渲染
+2. SSR框架：nuxt.js
+# 七、TypeScript
+1. ES5 vs ES6 vs TypeScript  
+<img src="knowledgePic/ts.png"/>
+
+# 八、单元测试
+1. 在vue中，推荐用Mocha+chai 或者jest
+# 九、补充
 1. ES6相关
     - ES6对象、数组的扩展
         - 对象的扩展运算符 ...good,
@@ -426,20 +441,6 @@
 3. 其它
     - 使用axios请求数据: `npm install axios`
     - mock数据: Vue.config.js[修改vue/cli的webpack配置]
-# 七、服务端渲染
-1. CSR vs SSR
-    - 传统方式: 服务端渲染所有页面
-    - SPA: 客户端渲染
-        - 缺点
-            - 首屏渲染性能：必须得等js加载完毕，并且执行完毕，才能渲染出首屏
-            - SEO： 爬虫只能拿到一个div，认为页面是空的，不利于seo
-    - SSR: 后端渲染出完整的首屏的dom结构返回，前端拿到的内容带上首屏， 后续的页面操作，再用单页的路由跳转和渲染
-2. SSR框架：nuxt.js
-# 八、TypeScript
-1. ES5 vs ES6 vs TypeScript  
-<img src="knowledgePic/tsts.png"/>
-# 九、单元测试
-1. 在vue中，推荐用Mocha+chai 或者jest
 
 
 
