@@ -435,6 +435,12 @@
             - SEO： 爬虫只能拿到一个div，认为页面是空的，不利于seo
     - SSR: 后端渲染出完整的首屏的dom结构返回，前端拿到的内容带上首屏， 后续的页面操作，再用单页的路由跳转和渲染
 2. SSR框架：nuxt.js
+# 八、TypeScript
+1. ES5 vs ES6 vs TypeScript  
+<img src="knowledgePic/tsts.png"/>
+# 九、单元测试
+1. 在vue中，推荐用Mocha+chai 或者jest
+
 
 
 
