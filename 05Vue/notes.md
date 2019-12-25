@@ -409,6 +409,7 @@
 # 七、TypeScript
 1. ES5 vs ES6 vs TypeScript  
 <img src="knowledgePic/ts.png"/>
+
 2. 基本语法
     - 类型注解：string, number, boolean, any, void
     - 函数
