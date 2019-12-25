@@ -77,7 +77,7 @@ export default class HelloWorld extends Vue {
     this.listMes = "";
     return feature; // 返回值作为事件参数
   }
-  
+
   // 生命周期
   async created() {
     const result = await getData<FeatureInterface>();
@@ -127,7 +127,6 @@ function sayHi(person: any): any {
 }
 console.log(sayHi({ name: "xu" }));
 console.log(sayHi("--xu--"));
-
 // 3. 类
 // 3.1 面向对象
 // 通过extends实现继承
@@ -188,6 +187,7 @@ interface Person {
   lastName: string;
   sayHello(): string; // 要求有方法
 }
+
 const greeting2 = (person: Person) => {
   return person.sayHello();
 };
@@ -199,6 +199,8 @@ const user2 = {
   }
 };
 console.log("greeting2(user2)", greeting2(user2));
+
+
 // 4.2 类实现接口
 class Greeter implements Person {
   constructor(public firstName = "", public lastName = "") {}
@@ -207,6 +209,7 @@ class Greeter implements Person {
   }
 }
 const user3 = new Greeter("^_^", "$_$");
+
 console.log("user3.sayHello()", user3.sayHello());
 console.log("greeting2(user3)", greeting2(user3));
 

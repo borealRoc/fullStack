@@ -409,7 +409,27 @@
 # 七、TypeScript
 1. ES5 vs ES6 vs TypeScript  
 <img src="knowledgePic/ts.png"/>
-
+2. 基本语法
+    - 类型注解：string, number, boolean, any, void
+    - 函数
+        - 参数与返回值类型注解
+        - 函数中参数如果声明了，就是必选参数
+        - 函数重载：多个同名函数，通过参数数量或者类型不同或者返回值不同
+    - 类
+        - 面向对象
+            - 通过extends实现继承
+            - 使用[public, private, protected]等访问修饰符实现封装
+            - 通过方法覆盖实现多态
+        - 通过get和set暴露私有属性
+        - 使用类作为数据类型的约束
+    - 接口
+        - 约束数据结构
+        - 使用类类实现接口
+    - 泛型
+        - 在定义函数，接口或类的时候，不预先指定具体的类型， 而在使用的时候再指定类型的一种特性
+    - 装饰器
+        - 装饰器实际上是工厂函数，传入一个对象，输出处理后的新对象
+        - ts-vue常用的装饰器：@Component, @Prop, @Watch, @Emit...
 # 八、单元测试
 1. 在vue中，推荐用Mocha+chai 或者jest
 # 九、补充
