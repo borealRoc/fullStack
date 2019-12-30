@@ -2,27 +2,20 @@
   <div class="container">
     <div>
       <logo />
-      <h1 class="title">
-        07ssr
-      </h1>
-      <h2 class="subtitle">
-        My bedazzling Nuxt.js project
-      </h2>
-      <div>
-          <nuxt-link to="/user">用户</nuxt-link>
-      </div>
+      <h1 class="title">SSR及Nuxt.js的使用</h1>
+      <el-button @click="$router.push({name: 'basic'})">Nuxt基础语法</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import Logo from "~/components/Logo.vue";
 
 export default {
   components: {
     Logo
   }
-}
+};
 </script>
 
 <style>
@@ -36,8 +29,8 @@ export default {
 }
 
 .title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
