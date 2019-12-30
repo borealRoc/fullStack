@@ -399,16 +399,29 @@
 - 将实例挂载到 DOM 并在数据变化时更新 DOM 
 # 六、服务端渲染
 1. CSR vs SSR
-    - 传统方式: 服务端渲染所有页面
+    - 传统方式[JSP]: 服务端渲染所有页面
     - SPA: 客户端渲染
         - 缺点
             - 首屏渲染性能：必须得等js加载完毕，并且执行完毕，才能渲染出首屏
-            - SEO： 爬虫只能拿到一个div，认为页面是空的，不利于seo
+            - SEO： 爬虫只能拿到一个div[鼠标右键查看网页源代码]，认为页面是空的，不利于seo
     - SSR: 后端渲染出完整的首屏的dom结构返回，前端拿到的内容带上首屏， 后续的页面操作，再用单页的路由跳转和渲染
 2. SSR框架：nuxt.js
+    - nuxt服务端渲染流程  
+    <img src="knowledgePic/nuxt.png"/>  
+    - 构建项目：`npx create-nuxt-app <项目名>`
+    - nuxt项目目录结构
+        - assets: 用于组织未编译的静态资源如 LESS、SASS 或 JavaScript
+        - components: 用于组织应用的 Vue.js 组件。Nuxt.js 不会扩展增强该目录下 Vue.js 组件，即这些组件不会像页面组件那样有 asyncData 方法的特性。
+        - layouts: 用于组织应用的布局组件
+        - middleware: 中间件
+        - pages: 用于组织应用的路由及视图。Nuxt.js 框架读取该目录下所有的 .vue 文件并自动生成对应的路由配置。
+        - plugins: 用于组织那些需要在 根vue.js应用 实例化之前需要运行的 Javascript 插件。
+        - server: 服务器文件
+        - static: 静态文件目录 static 用于存放应用的静态文件[比如favicon.ico]，此类文件不会被 Nuxt.js 调用 Webpack 进行构建编译处理。 服务器启动的时候，该目录下的文件会映射至应用的根路径 / 下。举个例子: /static/robots.txt 映射至 /robots.txt
+        - store: 用于组织应用的 Vuex 状态树 文件。 Nuxt.js 框架集成了 Vuex 状态树 的相关功能配置，在 store 目录下创建一个 index.js 文件可激活这些配置
 # 七、TypeScript
 1. ES5 vs ES6 vs TypeScript  
-<img src="knowledgePic/ts.png"/>
+<img src="knowledgePic/ts.png"/>  
 
 2. 基本语法
     - 类型注解：string, number, boolean, any, void
