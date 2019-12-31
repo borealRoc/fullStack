@@ -33,7 +33,8 @@
   },
   "rules": {
     "no-console": "off",
-    "no-unused-vars": "off"
+    "no-unused-vars": "off",
+    "experimentalDecorators": "true"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.12.1",

@@ -419,6 +419,13 @@
         - server: 服务器文件
         - static: 静态文件目录 static 用于存放应用的静态文件[比如favicon.ico]，此类文件不会被 Nuxt.js 调用 Webpack 进行构建编译处理。 服务器启动的时候，该目录下的文件会映射至应用的根路径 / 下。举个例子: /static/robots.txt 映射至 /robots.txt
         - store: 用于组织应用的 Vuex 状态树 文件。 Nuxt.js 框架集成了 Vuex 状态树 的相关功能配置，在 store 目录下创建一个 index.js 文件可激活这些配置
+    - 路由拦截：可以在plugins文件夹中写一个JS，通过context参数获取app.router参数来操作
+    - 页面模板: `layout: ${layouts文件夹下的一个文件}` 
+    - asyncData
+        - 你可能想要在服务器端获取并渲染数据。Nuxt.js添加了asyncData方法使得你能够在渲染组件之前异步获取数据。
+        - asyncData方法会在组件（限于页面组件）每次加载之前被调用。它可以在服务端或路由更新之前被调用。在这个方法被调用的时候，第一个参数被设定为当前页面的上下文对象，你可以利用 asyncData方法来获取数据并返回给当前组件。
+   - 整合axios
+   - 整合Vuex    
 # 七、TypeScript
 1. ES5 vs ES6 vs TypeScript  
 <img src="knowledgePic/ts.png"/>  
