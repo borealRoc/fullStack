@@ -4,6 +4,7 @@
       <logo />
       <h1 class="title">SSR及Nuxt.js的使用</h1>
       <el-button @click="$router.push({name: 'basic'})">Nuxt基础语法</el-button>
+      <el-button @click="$router.push({name: 'data'})">异步数据获取</el-button>
     </div>
   </div>
 </template>

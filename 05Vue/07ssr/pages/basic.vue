@@ -27,12 +27,17 @@
 export default {
   head: {
     title: "基本语法"
-  }
+  },
+  layout: 'basic',
 };
 </script>
 
 <style scoped>
+h2 {
+    margin: 10px 0;
+}
 li {
   margin-bottom: 10px;
+  text-align: left;
 }
 </style>
