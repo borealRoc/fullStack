@@ -425,7 +425,10 @@
         - 你可能想要在服务器端获取并渲染数据。Nuxt.js添加了asyncData方法使得你能够在渲染组件之前异步获取数据。
         - asyncData方法会在组件（限于页面组件）每次加载之前被调用。它可以在服务端或路由更新之前被调用。在这个方法被调用的时候，第一个参数被设定为当前页面的上下文对象，你可以利用 asyncData方法来获取数据并返回给当前组件。
    - 整合axios
-   - 整合Vuex    
+   - 整合Vuex
+   - nuxt.js原理解析
+3. vue-ssr原理浅析  
+    <img src="knowledgePic/vue_ssr_theory.png"/>
 # 七、TypeScript
 1. ES5 vs ES6 vs TypeScript  
 <img src="knowledgePic/ts.png"/>  
