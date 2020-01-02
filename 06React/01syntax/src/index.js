@@ -8,19 +8,19 @@ import Lifecycle from './Lifecycle'
 import Cart from './Cart'
 import Message from './components/Message';
 // import Composition from './components/Composition';
-import Hoc from './components/Hoc';
+// import Hoc from './components/Hoc';
 import ContextSample from './components/ContextSample';
 
 
 
 const $root = document.getElementById('root')
 // ReactDOM.render(<App/>, $root)
-// ReactDOM.render(<Lifecycle/>, $root)
+ReactDOM.render(<Lifecycle/>, $root)
 // ReactDOM.render(<Cart title='React购物车'/>, $root)
 // ReactDOM.render(<Message/>, $root)
 // ReactDOM.render(<Composition/>, $root)
 // ReactDOM.render(<Hoc stage='React'/>, $root)
-ReactDOM.render(<ContextSample/>, $root)
+// ReactDOM.render(<ContextSample/>, $root)
 
 // 动态渲染
 // React 只更新它需要更新的部分

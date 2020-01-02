@@ -3,6 +3,7 @@ import logo from './logo.png'
 import jsxImg from './jsx.png'
 import domImg from './dom.png'
 import './App.css'
+import Cart from './Cart'
 //手动引入antd组件
 import Button from 'antd/es/button';
 // import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
@@ -16,10 +17,11 @@ let Welcome = props => {
     return <strong>这是一个{props.txt}</strong>
 }
 
+// 类组件
 export default class extends Component {
 
-    formatName(name) {
-        return name.firstName + name.lastName
+    formatName(user) {
+        return user.firstName + user.lastName
     }
 
     // 当组件是有状态的，需要构造函数
@@ -38,12 +40,15 @@ export default class extends Component {
     }
 
     componentDidMount() {
+        // this.setState(obj)
+        // this.setState(fn)
         this.timeId = setInterval(() => {
             // 更新状态
             this.setState({
                 time: new Date()
             })
             // 注意1：不能直接改状态
+            // 像下面这样写，如果状态有改变，不发主动触发更新render函数
             // this.state.date = new Date();//错误
         }, 1000)
         // 注意2：setState()是异步的
@@ -99,9 +104,13 @@ export default class extends Component {
                         <p>5.6、{this.state.componentDidUpdate}</p>
                     </li>
                     <li>
-                        <h2>6. antd组件</h2>
-                        <p>6.1、手动引入<Button type="danger">Danger</Button></p>
-                        <p>6.2、按需引入<Input size="small" placeholder="small size" /></p>
+                        <h2>6. 组件通讯</h2>
+                        <Cart title='React购物车'/>
+                    </li>
+                    <li>
+                        <h2>7. antd组件</h2>
+                        <p>7.1、手动引入<Button type="danger">Danger</Button></p>
+                        <p>7.2、按需引入<Input size="small" placeholder="small size" /></p>
                     </li>
                 </ul>
             </div>

@@ -3,6 +3,7 @@ import './App.css'
 
 // 父组件把数据和事件传给子组件
 let ShowCart = props => {
+        const totalPrice = 0;
         return (
             <table>
                 <thead>
@@ -103,12 +104,14 @@ export default class Cart extends Component {
 
     render() {
         const title = this.props.title ? <h1>{this.props.title}</h1> : null
-        const goods = this.state.goods.map(item => <li key={item.id}>{item.text}<button onClick={()=>this.addToCart(item)}>加购</button></li>)
+        const goods = this.state.goods.map(item => <li key={item.id}><span>{item.text}</span><button onClick={()=>this.addToCart(item)}>加购</button></li>)
 
         return (
-            <div>
+            <div className="cart-ctn">
                 {/* 条件语句 */}
-                {title}
+                    {/* {title} */}
+                    {/* 或者这么写 */}
+                    {this.props.title && <h1 className="cart-tit">{this.props.title}</h1>}
                 {/* 双向绑定 */}
                 <div>
                     {/* 回调绑定this的方法三 */}
@@ -116,7 +119,7 @@ export default class Cart extends Component {
                     <button onClick={this.addGood}>添加商品</button>
                 </div>
                 {/* 列表循环 */}
-                <ul>{goods}</ul>
+                <ul className="cart-lists">{goods}</ul>
                 {/* 父子组件通讯 */}
                 {/* 传递函数用于子组件把状态通知父组件 */}
                 <ShowCart data={this.state.cart} addCount={this.addCount} delCount={this.delCount}/>
