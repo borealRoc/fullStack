@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 
-// const Course = props => {
-//     return (
-//         <div>{props.stage} -- {props.name}</div>
-//     )
-// }
+const NomalCourse = props => {
+    return (
+        <div>{props.stage} -- {props.name}</div>
+    )
+}
 
 // 高阶组件是一个函数
 const WithName = Comp => {
@@ -30,9 +30,9 @@ const WithLog = Comp => {
 }
 
 // 高阶组件 
-// export default WithName(Course) 
+// export default WithName(NomalCourse) 
 // 高阶组件的链式调用
-// export default WithLog(WithName(Course))
+// export default WithLog(WithName(NomalCourse))
 // 高阶组件装饰器写法
 @WithLog
 @WithName

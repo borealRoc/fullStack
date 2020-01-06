@@ -7,7 +7,7 @@ module.exports = function override(config, env) {
         config
     );
 
-    // 添加装饰器能力
+    // 把装饰器写法编译成ES5
     config = injectBabelPlugin(
         ["@babel/plugin-proposal-decorators", { legacy: true }],
         config

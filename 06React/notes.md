@@ -57,8 +57,16 @@
         })
         console.log('因为setState()是异步的,所以我这里取到的值是错误的', this.state.count)
         ```
-        - State 的更新会被合并?  
-        <img src="./knowledgePic/1.png">
+        - State 的更新会被合并
+        ```javascript
+        this.state = {
+            A: 1,
+            B: 2,
+        }
+        this.setState({A: 3})
+        this.setState({B: 4})
+        //以上两个操作最终会合并，使得A=3,B=4
+        ```
 5. 事件处理
     - 事件名采用驼峰写法，如`onClick={handler}`
     - 不能通过返回 false 的方式阻止默认行为, 必须显式的使用 preventDefault
@@ -68,7 +76,7 @@
         - 方法3：`handleClick = () => {console.log('this is:', this);}`
         - 方法3问题在于每次渲染 LoggingButton 时都会创建不同的回调函数。在大多数情况下，这没什么问题，但如果该回调函数作为 prop 传入子组件时，这些组件可能会进行额外的重新渲染。我们通常建议在构造器中绑定或使用 class fields 语法来避免这类性能问题。
 6. 条件渲染
-    - if语句或三元预算符
+    - 三元表达式
 7. 列表 & Key
     - `const goods = this.state.goods.map(item => <li key={item.id}>{item.text}<button onClick={()=>this.addToCart(item)}>加购</button></li>)`
     - 元素的 key 只有放在就近的数组上下文中才有意义：一个好的经验法则是，在 map() 方法中的元素需要设置 key 属性
@@ -110,11 +118,11 @@
     - 比如：小组件负责渲染数据，中组件负责处理逻辑，大组件负责展示视图
 4. 高阶组件（HOC）
     - 高阶组件是一个函数
-    - 重写组件生命周期
+    - 可以重写组件生命周期
     - 装饰器 + 高阶组件写法
         - 装饰器使用前提
             - 安装babel插件：`npm install --save-dev babel-plugin-transform-decorators-legacy`
-            - 加一点配置：`["@babel/plugin-proposal-decorators", { legacy: true }]`
+            - 加一点配置[config-overrides.js]：`["@babel/plugin-proposal-decorators", { legacy: true }]`
 # 四、React全家桶
 # 五、其它
 1. 命令行
