@@ -123,6 +123,12 @@
         - 装饰器使用前提
             - 安装babel插件：`npm install --save-dev babel-plugin-transform-decorators-legacy`
             - 加一点配置[config-overrides.js]：`["@babel/plugin-proposal-decorators", { legacy: true }]`
+5. Hook: 在不编写 class 的情况下使用 state 以及其他的 React 特性
+    - 状态钩子：State Hook
+        - useState
+    - 副作用钩子：Effect Hook
+        - 它跟class组件中的componentDidMount,componentDidUpdate,componentWillUnmount具有相同的功能，只不过被合并成了一个API
+        - useEffect
 # 四、React全家桶
 # 五、其它
 1. 命令行
