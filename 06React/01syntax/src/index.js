@@ -7,6 +7,7 @@ import pureComponent from './components/pureComponent'
 import Hoc from './components/Hoc'
 import Composition from './components/Composition'
 import ContextSample from './components/ContextSample'
+import Hook from './components/Hook'
 
 
 
@@ -20,7 +21,9 @@ const $root = document.getElementById('root')
 // 高阶组件
 // ReactDOM.render(<Hoc stage='React' />, $root)
 // 组件复合
-ReactDOM.render(<Composition/>, $root)
+// ReactDOM.render(<Composition/>, $root)
+// Hook
+ReactDOM.render(<Hook/>, $root)
 // 组件跨层级通信 - 上下文
 // ReactDOM.render(<ContextSample/>, $root)
 
