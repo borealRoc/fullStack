@@ -124,11 +124,14 @@
             - 安装babel插件：`npm install --save-dev babel-plugin-transform-decorators-legacy`
             - 加一点配置[config-overrides.js]：`["@babel/plugin-proposal-decorators", { legacy: true }]`
 5. Hook: 在不编写 class 的情况下使用 state 以及其他的 React 特性
-    - 状态钩子：State Hook
-        - useState
-    - 副作用钩子：Effect Hook
+    - 状态钩子：State Hook[useState]
+    - 副作用钩子：Effect Hook[useEffect]
         - 它跟class组件中的componentDidMount,componentDidUpdate,componentWillUnmount具有相同的功能，只不过被合并成了一个API
-        - useEffect
+    - 自定义钩子
+        - 自定义hook是一个函数，名称用“use"开头，函数内部可以调用其他钩子
+        - 自定义hook方便在任何地方直接使用
+    - 其它hook
+        - useContext, useReducer, useCallback, useMeno...
 # 四、React全家桶
 # 五、其它
 1. 命令行
