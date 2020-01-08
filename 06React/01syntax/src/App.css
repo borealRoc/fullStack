@@ -32,3 +32,6 @@ th, td {
 .cart-lists  li span {
     flex: 1;
 }
+.ant-layout {
+    margin-bottom: 20px;
+}

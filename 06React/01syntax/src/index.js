@@ -6,10 +6,8 @@ import Cart from './Cart'
 import pureComponent from './components/pureComponent'
 import Hoc from './components/Hoc'
 import Composition from './components/Composition'
-import ContextSample from './components/ContextSample'
 import Hook from './components/Hook'
-
-
+import Context from './components/Context'
 
 const $root = document.getElementById('root')
 // 核心API
@@ -23,9 +21,9 @@ const $root = document.getElementById('root')
 // 组件复合
 // ReactDOM.render(<Composition/>, $root)
 // Hook
-ReactDOM.render(<Hook/>, $root)
+// ReactDOM.render(<Hook/>, $root)
 // 组件跨层级通信 - 上下文
-// ReactDOM.render(<ContextSample/>, $root)
+ReactDOM.render(<Context/>, $root)
 
 // 动态渲染
 // React 只更新它需要更新的部分
