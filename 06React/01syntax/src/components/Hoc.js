@@ -8,9 +8,9 @@ const NomalCourse = props => {
 
 // 高阶组件是一个函数
 const WithName = Comp => {
-    // 重写组件生命周期
     console.log('WithName')
     class InterComp extends Component {
+        // 重写组件生命周期
         componentDidMount() {
             console.log('组件挂载')
         }
@@ -34,6 +34,7 @@ const WithLog = Comp => {
 // 高阶组件的链式调用
 // export default WithLog(WithName(NomalCourse))
 // 高阶组件装饰器写法
+// 就近执行
 @WithLog
 @WithName
 class Course extends Component {

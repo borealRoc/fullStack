@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-import Lifecycle from './Lifecycle'
-import Cart from './Cart'
+import Lifecycle from './components/Lifecycle'
+import Cart from './components/Cart'
 import pureComponent from './components/pureComponent'
 import Hoc from './components/Hoc'
 import Composition from './components/Composition'
@@ -19,11 +19,11 @@ const $root = document.getElementById('root')
 // 高阶组件
 // ReactDOM.render(<Hoc stage='React' />, $root)
 // 组件复合
-// ReactDOM.render(<Composition/>, $root)
+ReactDOM.render(<Composition/>, $root)
 // Hook
 // ReactDOM.render(<Hook/>, $root)
 // 组件跨层级通信 - 上下文
-ReactDOM.render(<Context/>, $root)
+// ReactDOM.render(<Context/>, $root)
 
 // 动态渲染
 // React 只更新它需要更新的部分

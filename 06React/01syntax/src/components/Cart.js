@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import './App.css'
 
 // 父组件把数据和事件传给子组件
 let ShowCart = props => {
-        const totalPrice = 0;
         return (
             <table>
                 <thead>

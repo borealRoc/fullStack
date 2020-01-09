@@ -3,7 +3,7 @@ import logo from './logo.png'
 import jsxImg from './jsx.png'
 import domImg from './dom.png'
 import './App.css'
-import Cart from './Cart'
+import Cart from './components/Cart'
 //手动引入antd组件
 import Button from 'antd/es/button';
 // import 'antd/dist/antd.css'; // or 'antd/dist/antd.less'
@@ -48,7 +48,7 @@ export default class extends Component {
                 time: new Date()
             })
             // 注意1：不能直接改状态
-            // 像下面这样写，如果状态有改变，不发主动触发更新render函数
+            // 像下面这样写，如果状态有改变，不会主动触发更新render函数
             // this.state.date = new Date();//错误
         }, 1000)
         // 注意2：setState()是异步的

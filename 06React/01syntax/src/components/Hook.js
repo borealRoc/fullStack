@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
 
 const useAge = () => {
     const [age, setAge] = useState(0)
@@ -32,7 +32,6 @@ export default function Hook() {
 
     return (
         <div className="hook-demo">
-            <p>自定义钩子:{age? age: '...loading'}</p>
             <span>计数器：</span>
             <Button onClick={() => addCount(count + 1)}>{count}</Button>
             <p>您选择的水果为：{fruit}</p>
@@ -45,6 +44,7 @@ export default function Hook() {
                     </li>
                 ))}
             </ul>
+            <p>自定义钩子:{age? age: '...loading'}</p>
         </div>
     )
 }

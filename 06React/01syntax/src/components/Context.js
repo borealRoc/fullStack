@@ -38,7 +38,7 @@ function Child2() {
 
 class Child3 extends Component {
     // 设置静态属性通知编译器获取上下文中数据并赋值给this.context
-    // contextType手机写死的
+    // contextType是写死的
     static contextType = FormContext
     render() {
         return (
@@ -52,10 +52,10 @@ class Child3 extends Component {
 }
 
 // 基本用法
-export default class Context extends Component {
+class NormalContext extends Component {
     render() {
         return (
-            <div className="parents-com">
+            <div className="normal-context">
                 {/* 3.提供数据，必须使用value属性 */}
                 <Provider value={store}>
                     {/* chlld组件被层层嵌套，设置干扰 */}
@@ -77,7 +77,7 @@ export default class Context extends Component {
                     <Layout>
                         <Content>
                             {/* 消费方法3：contextType */}
-                            <Child3/>
+                            <Child3 />
                         </Content>
                     </Layout>
                 </Provider>
@@ -87,32 +87,47 @@ export default class Context extends Component {
 }
 
 // 高阶函数+装饰器写法
-// const WithProvider = Comp => props => (
-//     <FormProvider value={store}>
-//         <Comp {...props} />
-//     </FormProvider>
-// )
-// const WithConsumer = Comp => props => (
-//     <FormConsumer>
-//         { value => <Comp {...props} value={value}/> }
-//     </FormConsumer>
-// )
-// @WithConsumer
-// class Inner extends Component {
-//     render() {
-//         return (
-//             <h1 onClick={()=>this.props.value.sayName()}>{this.props.value.name}</h1>
-//         )
-//     }
-// }
-// @WithProvider
-// class NewContextSample extends Component {
-//     render() {
-//         return (
-//             <div>
-//                 <Inner/>
-//             </div>
-//         )
-//     }
-// }
-// export default NewContextSample
+const WithProvider = Comp => props => (
+    <Provider value={store}>
+        <Comp {...props} />
+    </Provider>
+)
+const WithConsumer = Comp => props => (
+    <Consumer>
+        {value => <Comp {...props} value={value} />}
+    </Consumer>
+)
+@WithConsumer
+class Inner extends Component {
+    render() {
+        return (
+            <Paragraph onClick={() => this.props.value.sayName()}>我能获取来自祖先的属性：{this.props.value.name}</Paragraph>
+        )
+    }
+}
+@WithProvider
+class DecoratorContext extends Component {
+    render() {
+        return (
+            <div className="decorator-context">
+                <Layout>
+                    <Content>
+                        <Title level={2}>获取上下文方式四：高阶函数+装饰器写法</Title>
+                        <Inner />
+                    </Content>
+                </Layout>
+            </div>
+        )
+    }
+}
+
+export default class Context extends Component {
+    render() {
+        return (
+            <div className="context-wrap">
+                <NormalContext />
+                <DecoratorContext />
+            </div>
+        )
+    }
+}
