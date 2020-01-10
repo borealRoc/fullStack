@@ -8,6 +8,7 @@ import Hoc from './components/Hoc'
 import Composition from './components/Composition'
 import Hook from './components/Hook'
 import Context from './components/Context'
+import WrappedNormalLoginForm from './components/antdForm'
 
 const $root = document.getElementById('root')
 // 核心API
@@ -17,13 +18,15 @@ const $root = document.getElementById('root')
 // 纯组件
 // ReactDOM.render(<pureComponent/>, $root)
 // 高阶组件
-// ReactDOM.render(<Hoc stage='React' />, $root)
+// ReactDOM.render(<Hoc stage='React'/>, $root)
 // 组件复合
-ReactDOM.render(<Composition/>, $root)
+// ReactDOM.render(<Composition/>, $root)
 // Hook
 // ReactDOM.render(<Hook/>, $root)
 // 组件跨层级通信 - 上下文
 // ReactDOM.render(<Context/>, $root)
+// antd表单使用
+ReactDOM.render(<WrappedNormalLoginForm/>, $root)
 
 // 动态渲染
 // React 只更新它需要更新的部分

@@ -1,37 +1,60 @@
 ul {
     list-style: none;
 }
+
 .logo {
     width: 48px;
 }
+
 h1 {
     color: #e00000;
     text-align: center;
 }
-th, td {
+
+th,
+td {
     min-width: 100px;
     text-align: center;
 }
+
 .cart-ctn {
     padding: 10px;
     background-color: #f2f2f2;
 }
+
 .cart-tit {
     text-align: left;
 }
+
 .cart-lists {
     margin: 10px 0;
-    padding-left: 0;;
+    padding-left: 0;
+    ;
 }
-.cart-lists  li {
+
+.cart-lists li {
     width: 200px;
     display: flex;
     height: 40px;
     align-items: center;
 }
-.cart-lists  li span {
+
+.cart-lists li span {
     flex: 1;
 }
+
 .ant-layout {
     margin-bottom: 20px;
+}
+
+.login-form {
+    max-width: 300px;
+}
+
+.login-form-forgot {
+    float: right;
+}
+
+.login-form-button {
+    width: 100%;
 }
