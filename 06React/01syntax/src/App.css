@@ -48,13 +48,11 @@ td {
 }
 
 .login-form {
+    padding: 50px 0;
     max-width: 300px;
+    margin: 0 auto;
+}
+.login-item {
+    margin-bottom: 20px;
 }
 
-.login-form-forgot {
-    float: right;
-}
-
-.login-form-button {
-    width: 100%;
-}
