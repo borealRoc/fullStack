@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+// import App from './App'
+import store from './store'
 // import Lifecycle from './components/Lifecycle'
 // import Cart from './components/Cart'
 // import pureComponent from './components/pureComponent'
@@ -9,7 +10,10 @@ import App from './App'
 // import Hook from './components/Hook'
 // import Context from './components/Context'
 // import WrappedNormalLoginForm from './components/AntdForm'
-import LoginForm from './components/CopyAntdForm'
+// import LoginForm from './components/CopyAntdForm'
+// import ReduxBasicUse from './reduxPages/ReduxBasicUse'
+import ReactReduxUse from './reduxPages/ReactReduxUse'
+import { Provider } from 'react-redux'
 
 const $root = document.getElementById('root')
 // 核心API
@@ -29,7 +33,17 @@ const $root = document.getElementById('root')
 // antd表单使用
 // ReactDOM.render(<WrappedNormalLoginForm/>, $root)
 // 模仿antd的Form表单设计一个LoginForm组件
-ReactDOM.render(<LoginForm/>, $root)
+// ReactDOM.render(<LoginForm/>, $root)
+// redux的基本使用：需要手动订阅，跟踪状态，这样state有变化时才能更新渲染视图
+// ReactDOM.render(<ReduxBasicUse/>, $root)
+// store.subscribe(() =>
+//   ReactDOM.render(<ReduxBasicUse/>, $root)
+// )
+// react整合redux，简化使用难度，需要react-redux的支持
+ReactDOM.render(<Provider store={store}>
+    <ReactReduxUse />
+</Provider>, $root)
+
 
 // 动态渲染
 // React 只更新它需要更新的部分
