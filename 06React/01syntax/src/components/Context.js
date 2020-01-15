@@ -48,7 +48,6 @@ class Child3 extends Component {
             </div>
         )
     }
-
 }
 
 // 基本用法
