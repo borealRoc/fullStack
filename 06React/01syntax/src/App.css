@@ -56,3 +56,13 @@ td {
     margin-bottom: 20px;
 }
 
+.ant-list-item {
+    padding-left: 20px;
+}
+.sec-ant-list {
+    padding-left: 40px;
+    background-color: #fff;
+}
+.route-part {
+    background-color: #f2f2f2;
+}

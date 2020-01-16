@@ -72,7 +72,7 @@ export default class Message extends Component {
     }
 
     componentDidMount() {
-        setInterval(() => {
+        this.timeId  = setInterval(() => {
             this.setState({
                 mes: [
                     { body: 'React is very good', author: 'Facebook', },
@@ -81,7 +81,9 @@ export default class Message extends Component {
             })
         }, 2000)
     }
-
+    componentWillUnmount() {
+        clearInterval(this.timeId)
+    }
     render() {
         return (
             <div>
