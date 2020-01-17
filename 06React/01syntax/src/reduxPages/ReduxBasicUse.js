@@ -1,5 +1,5 @@
 import React from 'react'
-import store from '../store'
+import store from '../store/index'
 import { Button } from 'antd'
 
 export default function ReduxBasicUse() {

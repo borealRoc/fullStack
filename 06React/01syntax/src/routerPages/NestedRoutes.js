@@ -10,6 +10,7 @@ export default function NestedRoutes() {
             <List className="link-part">
                 <List.Item className="sec-ant-list"><Link to="/NestedRoutes/hook">5.1 React钩子Hook</Link></List.Item>
                 <List.Item className="sec-ant-list"><Link to="/NestedRoutes/Context">5.2 Context上下文</Link></List.Item>
+                <List.Item><Link to="/NestedRoutes/test">6.重定向</Link></List.Item>
             </List>
             <Switch>
                 <Route path="/NestedRoutes/hook" component={Hook}></Route>

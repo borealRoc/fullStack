@@ -131,6 +131,10 @@
     - 其它hook
         - useContext, useReducer, useCallback, useMeno...
 # 四、React全家桶
+1. redux
+    - redux原理
+    - react-redux: react整合redux，简化使用难度
+    - 异步支持：redux-thunk
 # 五、其它
 1. 命令行
     - 删除一个文件夹下面所有的文件

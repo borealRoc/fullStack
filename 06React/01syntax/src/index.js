@@ -1,11 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import Context from './components/Context'
 // import WrappedNormalLoginForm from './components/AntdForm'
 // import LoginForm from './components/CopyAntdForm'
 // import ReduxBasicUse from './reduxPages/ReduxBasicUse'
 // import ReactReduxUse from './reduxPages/ReactReduxUse'
-import ReactBasicUse from './routerPages/ReactBasicUse'
+import BasicRoutes from './routerPages/BasicRoutes'
 
 const $root = document.getElementById('root')
 // 核心API
@@ -34,7 +33,7 @@ const $root = document.getElementById('root')
 // react整合redux，简化使用难度，需要react-redux的支持
 // ReactDOM.render(<ReactReduxUse/>, $root)
 // react-router基本用法
-ReactDOM.render(<ReactBasicUse/>, $root)
+ReactDOM.render(<BasicRoutes/>, $root)
 
 
 // 动态渲染
