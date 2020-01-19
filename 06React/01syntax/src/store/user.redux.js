@@ -9,12 +9,12 @@ export const UserRedux = (state = initial, action) => {
             return {
                 isLogin: false,
                 isLoading: true
-            };
+            } 
         case "login":
             return {
                 isLogin: true,
                 isLoading: false
-            };
+            }
         default:
             return state
     }
