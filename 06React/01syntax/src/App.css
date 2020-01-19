@@ -52,6 +52,7 @@ td {
     max-width: 300px;
     margin: 0 auto;
 }
+
 .login-item {
     margin-bottom: 20px;
 }
@@ -59,10 +60,17 @@ td {
 .ant-list-item {
     padding-left: 20px;
 }
+
 .sec-ant-list {
     padding-left: 40px;
     background-color: #fff;
 }
+
 .route-part {
+    padding: 20px;
     background-color: #f2f2f2;
+}
+
+.login-comp {
+    text-align: center;
 }

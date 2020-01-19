@@ -14,7 +14,7 @@ class Lifecycle extends Component {
             componentWillUpdate: 'componentWillUpdate: 组件将要更新',
             componentDidUpdate: 'componentDidUpdate: 组件已经更新',
         }
-        console.log('1、构造函数',this.state.msg)
+        console.log('1、构造函数', this.state.msg)
     }
 
     // 新版本已被废弃
@@ -72,17 +72,20 @@ export default class extends Component {
         this.state = {
             someProp: '父属性一开始的属性'
         }
-        setTimeout(() => {
+        this.timeId = setTimeout(() => {
             this.setState({
                 someProp: '父属性发生改变'
             })
-        },2000)
+        }, 2000)
         console.log(this.state.someProp);
+    }
+    componentWillUnmount() {
+        clearTimeout(this.timeId)
     }
 
     render() {
         return (
-            <Lifecycle prop = {this.state.someProp}/>
+            <Lifecycle prop={this.state.someProp} />
         )
     }
 }

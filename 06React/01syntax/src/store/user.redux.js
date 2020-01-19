@@ -16,7 +16,7 @@ export const UserRedux = (state = initial, action) => {
                 isLoading: false
             };
         default:
-            return state;
+            return state
     }
 }
 
