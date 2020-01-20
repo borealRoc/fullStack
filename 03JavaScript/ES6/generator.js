@@ -51,7 +51,7 @@ function *g4 () {
 }
 const gen4 = g4()
 console.log(gen4.next()) //{ value: 'g4-1', done: false }
-console.log(gen4.next('g4-aa')) //g4-aa { value: 'g-2', done: false }
+console.log(gen4.next('g4-aa')) //g4-aa { value: 'g4-2', done: false }
 console.log(gen4.next('g4-bb')) //g4-bb { value: 'g4-return', done: true }
 
 // 结合Promise使用
