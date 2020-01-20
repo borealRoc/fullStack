@@ -2,14 +2,16 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 // import WrappedNormalLoginForm from './components/AntdForm'
 // import LoginForm from './components/CopyAntdForm'
-import ReduxBasicUse from './reduxPages/ReduxBasicUse'
-import ReactReduxUse from './reduxPages/ReactReduxUse'
-import ReactRouterComp from './routerPages/BasicRoutes'
-import store from './store/index'
+// import ReduxBasicUse from './reduxPages/ReduxBasicUse'
+// import ReactReduxUse from './reduxPages/ReactReduxUse'
+// import ReactRouterComp from './routerPages/BasicRoutes'
+// import store from './store/index'
+
+import App from './App'
 
 const $root = document.getElementById('root')
 // 核心API
-// ReactDOM.render(<App/>, $root)
+ReactDOM.render(<App/>, $root)
 // 生命周期
 // ReactDOM.render(<Lifecycle/>, $root)
 // 纯组件
@@ -32,7 +34,7 @@ const $root = document.getElementById('root')
 //   ReactDOM.render(<ReduxBasicUse/>, $root)
 // )
 // react整合redux，简化使用难度，需要react-redux的支持
-ReactDOM.render(<ReactReduxUse/>, $root)
+// ReactDOM.render(<ReactReduxUse/>, $root)
 // react-router基本用法
 // ReactDOM.render(<ReactRouterComp/>, $root)
 

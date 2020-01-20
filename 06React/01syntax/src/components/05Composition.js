@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../myBtn.css'
+import '../style/myBtn.css'
 
 function Radio({ children, ...rest }) {
     return (
@@ -54,14 +54,14 @@ function Dialog(props) {
 
 // WelcomeDialog: 负责逻辑业务
 function WelcomeDailog(props) {
-    const header = (<h1 className="my-h1">欢迎你</h1>)
+    const header = (<h3 className="my-h1">欢迎你</h3>)
     const footer = (<button onClick={() => { alert('React is very good') }} className="my-btn">确认</button>)
     return (
         <Dialog header={header} footer={footer} color='#ccc' type='p'>
-            <h2>感谢使用React</h2>
+            <h4>感谢使用React</h4>
             <p>感谢使用Vue</p>
             <div className="my-mvvm">
-                <h3>你最喜欢的框架是？</h3>
+                <h4>你最喜欢的框架是？</h4>
                 <RadioGroup name="mvvm">
                     <Radio value="react">react</Radio>
                     <Radio value="vue">vue</Radio>

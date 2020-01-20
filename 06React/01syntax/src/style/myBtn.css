@@ -19,6 +19,8 @@
     margin: 0;
     padding: 10px;
     border-bottom: solid 1px #ccc;
+    text-align: center;
+    color: #e00000;
 }
 .my-btn {
     width: 100%;
