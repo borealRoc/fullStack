@@ -25,7 +25,7 @@ http.createServer((req, res) => {
     } else if (method === 'OPTIONS' && url === '/user') {
         // preflight请求，需要响应浏览器发出的options请求(预检请求)，并根据情况设置响应头
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": "http://localhost:3000",
+            "Access-Control-Allow-Origin": "http://localhost:3000", //如果允许所有：'*'
             "Access-Control-Allow-Headers": "X-Token,Content-Type",
             "Access-Control-Allow-Methods": "GET,POST,PUT",
             // 如果要携带cookie信息，则请求变为credential请求
