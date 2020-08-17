@@ -40,7 +40,7 @@
 # 二、框架
 1. express
     - 路由
-        - `app.method('./', (req, res, next) => {})`
+        - `app.method('/api', (req, res, next) => {})`
         - method: use, get, post
         - use会拦截所有请求，最先执行。所以use内部必须next()
         - 托管静态文件: `app.use(express.static('www'))`

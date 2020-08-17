@@ -14,7 +14,7 @@ const GoodLists = props => {
         <ul className="cart-good-lists">
             {
                 props.goods.map(goodItem => <li className='my-good-list' key={goodItem.id}>
-                    <span>{goodItem.text}</span>
+                    <span>&yen;{goodItem.text}</span>
                     <button onClick={() => props.addGoodToAccount(goodItem)}>加购</button>
                 </li>)
             }
